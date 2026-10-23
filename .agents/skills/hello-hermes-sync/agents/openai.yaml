@@ -1,0 +1,4 @@
+interface:
+  display_name: "跟上官方最新"
+  short_description: "核对 Hermes 官方稳定变更，更新手册图文并验证，交付可审阅的维护 PR"
+  default_prompt: "使用 $hello-hermes-sync 跟上官方最新，完成已发布手册的核对、图文修订和验证，并交付维护 PR。"

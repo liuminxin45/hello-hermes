@@ -1,0 +1,122 @@
+[
+  {
+    "id": "01-comparison",
+    "file": "/images/ch01/three-approaches.webp",
+    "prompt": "Create an original Chinese educational infographic for hello-hermes chapter 1. Landscape 3:2, high resolution, calm textbook diagram, perfectly flat warm off-white #fdfdfb background, ink #172033, blue #1d4ed8 and pale blue #eaf1ff as only accent, thin consistent strokes, soft 10px corners, generous empty space, precise clean Chinese sans-serif typography. NO gradients, NO 3D, NO robots, NO mascots, NO decorative dots, NO branding. This is the SERIES STYLE REFERENCE; visuals must be extremely legible. Main title exactly: '同一个任务，三种完成方式'. Three horizontal rows, reading left to right with clear arrowheads, each row one mechanism. Row 1 header '聊天回答'; nodes '问题' → '模型' → '回答'; small caption '外部信息由人补充'. Row 2 header '固定工作流'; nodes '检索' → '提取' → '汇总'; small caption '程序预先安排步骤'. Row 3 header 'Agent'; nodes '目标' → '判断下一步' → '调用工具' → '观察结果'; a clear return arrow from '观察结果' back to '判断下一步', then a separate exit arrow from '判断下一步' to '交付结果'. Small caption '根据结果调整行动'. Ensure the return and exit arrows do NOT intersect text. All nodes have equal stroke width, no extra unexplained nodes or facts. No other text. Large labels, readable on a web page. Flat schematic educational art, not a screenshot.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "01-loop",
+    "file": "/images/ch01/action-loop.webp",
+    "prompt": "Create the second original Chinese textbook infographic for hello-hermes. Use the attached image ONLY as the series STYLE REFERENCE: match its off-white #fdfdfb paper, dark ink #172033 text, blue #1d4ed8 accent, pale blue fills, clean Chinese sans-serif, flat thin consistent strokes and rounded rectangles. DO NOT reuse its three-row content. New infographic in landscape 3:2. Exact title: '一次行动，怎样进入下一轮'. Use a spacious clockwise loop of FOUR nodes with directional arrowheads, in this order: top-left '整理已有信息', top-right '决定下一步', bottom-right '执行工具', bottom-left '接收真实结果', then back to top-left. Under each node one short smaller label respectively: '问题、约束、历史结果', '继续查证，或准备回答', '检索、读网页、写文件', '成功、失败、缺失信息'. From '决定下一步' draw a separate exit arrow toward a side node '交付或说明限制'; label that exit arrow exactly '信息足够或达到边界'. Keep that exit far away from loop arrows, no line crossings. Add a small footer note exactly: '工具结果是下一轮的依据，不是成功的保证'. No other text, no extra nodes. Arrows must accurately show feedback. No gradients, 3D, robots, decorative art, watermark or logos. Make every label large, crisp and correctly spelled. This is a conceptual teaching diagram, not a real execution trace.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "01-responsibilities",
+    "file": "/images/ch01/responsibilities.webp",
+    "prompt": "Create an original Chinese educational infographic for hello-hermes, matching the attached STYLE REFERENCE (off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue fill, flat rounded boxes, large clean Chinese sans-serif). Landscape 3:2, generous whitespace. Exact title '模型、运行程序、工具，各自负责什么'. Three large vertical columns. Left column header '模型', short content '读取当前信息' and '提出下一步行动'. Middle column header '运行程序', content '准备上下文' and '检查权限与预算' and '执行与记录'. Right column header '工具', content '访问真实环境' and '返回结果或错误'. A thick blue arrow from model to runtime labeled '调用请求', an arrow runtime to tools labeled '执行', a lower return arrow tools to runtime labeled '真实结果', a return arrow runtime to model labeled '带回下一轮'. Only arrows that express these four relationships. At bottom a clearly separated small text box with exactly '可靠交付还需要：来源核对、结果验证、权限边界'. Do not imply the model itself executes commands; do not add a trained brain, chain-of-thought or invented architecture. No extra text or logos, no 3D, no gradient. Exact spelling of all Chinese labels.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "02-system",
+    "file": "/images/shared/system.webp",
+    "prompt": "Edit this diagram. Preserve all text, boxes, layout, colors and the feedback loop from 带回结果 to 模型判断. Correct ONLY the horizontal connector between 模型判断 and 最终交付: it must be a SINGLE right-facing arrow FROM 模型判断 TO 最终交付. Remove the left-facing arrowhead at the 模型判断 end. Final delivery must not point back into the model. Everything else unchanged.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "03-stop",
+    "file": "/images/shared/stop.webp",
+    "prompt": "Create a corrected Chinese textbook infographic. Match the attached style reference (off-white, dark ink, blue, pale blue fills, flat rounded rectangles, large clean Chinese type). Title exactly '停下来，也是一种正确结果'. Landscape 3:2. A left box '收到工具结果' points right to middle box '继续判断'. From middle box, three arrows lead to three separate outcome boxes arranged vertically at right: top '证据足够：交付', middle '信息不足：继续查证', bottom '达到边界：说明限制'. CRITICAL: draw NO return arrow anywhere. All three outcome boxes have NO outgoing arrows. This simplified diagram intentionally omits the continuation loop; the surrounding prose explains it. Footer exactly '工具成功、循环结束、任务完成，是三件事'. No other elements or text. No ambiguity, no crossing lines, no gradient, no 3D.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "04-tools",
+    "file": "/images/shared/tools.webp",
+    "prompt": "Original Chinese educational infographic for hello-hermes, landscape 3:2. Match attached image ONLY as STYLE REFERENCE: off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue fills, flat rounded boxes, precise arrows, large clean Chinese sans-serif, generous whitespace. Exact title '一次工具调用的完整路径'. A readable left-to-right sequence: '模型提出请求' → '程序检查' → '工具执行' → '返回结果'. Below four aligned short captions: '工具名与参数', '格式、权限、范围', '访问文件或网络', '数据或错误'. A return arrow below goes from '返回结果' back to '模型提出请求' with label '带入下一轮'. Footer '请求看起来正确，不代表执行已经成功'. No extra text. No gradients, 3D, mascot, logos or invented facts. Labels must be correctly spelled and arrows must not cross text.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "05-context",
+    "file": "/images/shared/context.webp",
+    "prompt": "Original Chinese educational infographic for hello-hermes, landscape 3:2. Match attached image ONLY as STYLE REFERENCE: off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue fills, flat clean rounded boxes, large accurate Chinese sans-serif labels, generous whitespace. Exact title '保存过，不等于这次读得到'. Two large separated regions. Left title '保存的材料', three stacked folders labeled '历史会话' '项目文件' '精选记忆'. Right title '当前模型请求', three stacked rectangles labeled '任务与约束' '选中的相关材料' '最近的行动结果'. One single arrow LEFT to RIGHT labeled '按需选择'. Footer exactly '模型只能依据本次请求实际带入的信息判断'. No other arrows. No extra text, no gradients, no 3D, no robots, no logos. All relationships must be accurate; never add any arrows or claims not specified.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "05-compression",
+    "file": "/images/shared/compression.webp",
+    "prompt": "Original Chinese educational infographic for hello-hermes, landscape 3:2. Match attached image ONLY as STYLE REFERENCE: off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue fills, flat clean rounded boxes, large accurate Chinese sans-serif labels, generous whitespace. Exact title '压缩历史，要留下什么'. Two large columns labeled '压缩前' and '压缩后'. Left has four blocks '重复检索结果' '任务约束' '已确认的事实与来源' '未解决的问题'. Right has three blocks '任务约束' '事实、来源与定位线索' '待办与不确定性'. A single arrow left to right labeled '精简与摘要'. Bottom note '摘要可能丢失细节，重要来源仍需能找回'. No suggestion that compression is lossless. No extra text, no gradients, no 3D, no robots, no logos. All relationships must be accurate; never add any arrows or claims not specified.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "06-memory",
+    "file": "/images/shared/memory.webp",
+    "prompt": "Original Chinese educational infographic for hello-hermes, landscape 3:2. Match attached image ONLY as STYLE REFERENCE: off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue fills, flat clean rounded boxes, large accurate Chinese sans-serif labels, generous whitespace. Exact title '三种信息，三种用途'. Three clear equal columns, no arrows. Header '当前上下文', text '支持这一轮判断' and '受窗口限制'. Header '精选记忆', text '保留事实与偏好' and '需要更新与纠错'. Header '历史会话', text '保留过去的过程' and '相关时再检索'. Footer exactly '保存、检索、带入当前请求，是不同环节'. No extra text, no gradients, no 3D, no robots, no logos. All relationships must be accurate; never add any arrows or claims not specified.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "07-skills",
+    "file": "/images/shared/skills.webp",
+    "prompt": "Original Chinese educational infographic for hello-hermes, landscape 3:2. Match attached image ONLY as STYLE REFERENCE: off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue fills, flat clean rounded boxes, large accurate Chinese sans-serif labels, generous whitespace. Exact title '把一次经验变成可复用方法'. Five generous boxes in sequence: '执行与反馈' → '提炼适用方法' → '保存技能' → '下次按需加载' → '再次验证'. Footer exactly '方法文档可以改进，模型权重没有因此被训练'. Use no looping connector and no biological brain. Small blue highlight on 保存技能. No extra text, no gradients, no 3D, no robots, no logos. All relationships must be accurate; never add any arrows or claims not specified.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "08-models",
+    "file": "/images/shared/models.webp",
+    "prompt": "Original Chinese educational infographic for hello-hermes, landscape 3:2. Match attached image ONLY as STYLE REFERENCE: off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue fills, flat clean rounded boxes, large accurate Chinese sans-serif labels, generous whitespace. Exact title '换模型，要核对三层'. Three horizontal layers with clear labels: '模型能力：理解、判断、工具选择'; '访问与适配：认证、协议、字段差异'; '运行程序：上下文、工具执行、预算'. No arrows. Beside bottom simple bracket text '共同影响一次任务'. Footer '接口兼容，不代表行为和成本相同'. No extra text, no gradients, no 3D, no robots, no logos. All relationships must be accurate; never add any arrows or claims not specified.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "09-boundaries",
+    "file": "/images/shared/boundaries.webp",
+    "prompt": "Original Chinese educational infographic for hello-hermes, landscape 3:2. Match attached image ONLY as STYLE REFERENCE: off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue fills, flat clean rounded boxes, large accurate Chinese sans-serif labels, generous whitespace. Exact title '共享能力，隔离持久状态'. Two side-by-side fully separate containers. Left header '工作 Profile', containing '工作配置' '工作记忆' '工作会话'. Right header '个人 Profile', containing '个人配置' '个人记忆' '个人会话'. No arrows between containers. Above both a standalone label '同一套 Agent 运行能力'. Footer exactly 'Profile 的目录边界，不等于操作系统沙箱'. No extra text, no gradients, no 3D, no robots, no logos. All relationships must be accurate; never add any arrows or claims not specified.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "10-schedule",
+    "file": "/images/shared/schedule.webp",
+    "prompt": "Original Chinese educational infographic for hello-hermes, landscape 3:2. Match attached image ONLY as STYLE REFERENCE: off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue fills, flat clean rounded boxes, large accurate Chinese sans-serif labels, generous whitespace. Exact title '到点触发，只是任务的开始'. One clear left-to-right chain of four boxes: '触发条件' → '执行任务' → '保存结果' → '投递结果'. Beneath execution label '成功或失败'; beneath saving label '留下可追踪记录'; beneath delivery label '接收方与渠道'. Footer exactly '触发成功、执行成功、投递成功，需要分别确认'. No extra text, no gradients, no 3D, no robots, no logos. All relationships must be accurate; never add any arrows or claims not specified.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "11-delegation",
+    "file": "/images/shared/delegation.webp",
+    "prompt": "Original Chinese educational infographic for hello-hermes, landscape 3:2. Match attached image ONLY as STYLE REFERENCE: off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue fills, flat clean rounded boxes, large accurate Chinese sans-serif labels, generous whitespace. Exact title '委托出去，责任仍要收回来'. A simple fork-and-join graph. Left node '父任务：目标与约束'. Two separate arrows to upper middle '子任务 A：发布资料' and lower middle '子任务 B：源码依据'. Both arrows enter right node '父任务：核对与汇总'. No arrow between A and B. A bottom strip labeled exactly '需要付出：上下文传递、等待、结果核实'. White space between fork arrows. No extra text, no gradients, no 3D, no robots, no logos. All relationships must be accurate; never add any arrows or claims not specified.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "12-trust",
+    "file": "/images/shared/trust.webp",
+    "prompt": "Original Chinese educational infographic for hello-hermes, landscape 3:2. Match attached image ONLY as STYLE REFERENCE: off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue fills, flat clean rounded boxes, large accurate Chinese sans-serif labels, generous whitespace. Exact title '材料不能替你授权'. Three distinct vertical zones with no arrows. Left zone header '可信任务', short lines '用户目标' '明确约束'. Middle zone header '外部材料', short lines '网页、文件、工具返回' '作为待核查数据'. Right zone header '执行权限', short lines '身份与授权' '文件、网络、操作范围'. A clear divider between middle and right, with exact label '不能越过的边界'. Footer '读到一条命令，不代表获得执行许可'. No extra text, no gradients, no 3D, no robots, no logos. All relationships must be accurate; never add any arrows or claims not specified.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "13-verification",
+    "file": "/images/shared/verification.webp",
+    "prompt": "Original Chinese educational infographic for hello-hermes, landscape 3:2. Match attached image ONLY as STYLE REFERENCE: off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue fills, flat clean rounded boxes, large accurate Chinese sans-serif labels, generous whitespace. Exact title '从结论追回证据'. Three columns. First header '结论', blocks '版本发生变化' '机制已经改变'. Second header '证据', blocks '固定版本与原始记录' '对应源码与测试'. Third header '交付检查', blocks '来源是否支持表述' '范围与限制是否说明'. Arrows only left to right between columns. Footer exactly '表达流畅、工具成功，都不能代替结果核实'. No scores, charts or fake measured values. No extra text, no gradients, no 3D, no robots, no logos. All relationships must be accurate; never add any arrows or claims not specified.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "14-comparison",
+    "file": "/images/shared/comparison.webp",
+    "prompt": "Edit the attached infographic. Keep EVERYTHING identical except one factual label. In the TOP-LEFT box under '多种任务入口', REPLACE the entire smaller line '聊天问答、固定工作流、Agent 等' with EXACTLY 'CLI、Gateway、ACP 等'. This is the only change. Preserve all other labels, all arrows, typography, colors, boxes, footer, title, layout. Do not introduce any additional text.",
+    "reproductionSpec": "Two columns show official architecture reading perspectives. Hermes: CLI/Gateway/ACP entry points -> AIAgent action orchestration -> tools/context/state. OpenClaw: clients/message channels -> Gateway control/routing -> sessions/agent runtime/tools. Both have loops, sessions, memory and skills. Do not imply exclusivity. Use the standard style reference.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-23"
+  }
+]

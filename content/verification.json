@@ -1,0 +1,365 @@
+{
+  "schemaVersion": 1,
+  "chapters": {
+    "10": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/user-guide/features/cron.md",
+            "cron"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    },
+    "11": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/user-guide/features/delegation.md",
+            "tools/delegate_tool.py"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    },
+    "12": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/user-guide/security.md",
+            "tools/approval.py"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    },
+    "13": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/developer-guide/agent-loop.md",
+            "tests"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    },
+    "14": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/developer-guide/architecture.md",
+            "website/docs/user-guide/features/memory.md",
+            "website/docs/user-guide/features/curator.md"
+          ]
+        },
+        "openclaw": {
+          "repository": "openclaw/openclaw",
+          "label": "OpenClaw",
+          "tag": "v2026.10.6",
+          "commit": "fe06181dc5ecc01cf8904abbfc26925925efefbc",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "docs/concepts/architecture.md",
+            "docs/concepts/agent-loop.md",
+            "docs/concepts/memory.md",
+            "docs/tools/skills.md",
+            "docs/concepts/multi-agent.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    },
+    "01": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/developer-guide/architecture.md",
+            "agent/conversation_loop.py"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    },
+    "02": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/developer-guide/architecture.md",
+            "run_agent.py",
+            "hermes_state.py"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    },
+    "03": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/developer-guide/agent-loop.md",
+            "agent/iteration_budget.py",
+            "agent/interrupt_control.py"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    },
+    "04": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/developer-guide/tools-runtime.md",
+            "website/docs/user-guide/features/mcp.md",
+            "tools/registry.py"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    },
+    "05": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/developer-guide/context-compression-and-caching.md",
+            "agent/context_engine.py",
+            "agent/prompt_builder.py"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    },
+    "06": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/user-guide/features/memory.md",
+            "agent/memory_manager.py",
+            "website/docs/user-guide/profiles.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    },
+    "07": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/user-guide/features/skills.md",
+            "website/docs/user-guide/features/curator.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    },
+    "08": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/developer-guide/provider-runtime.md",
+            "hermes_cli/runtime_provider.py",
+            "agent/auxiliary_client.py"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    },
+    "09": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-23",
+          "paths": [
+            "website/docs/user-guide/profiles.md",
+            "website/docs/user-guide/bot-mode.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": []
+    }
+  },
+  "figures": [
+    {
+      "file": "/images/ch01/three-approaches.webp",
+      "promptId": "01-comparison",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/ch01/action-loop.webp",
+      "promptId": "01-loop",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/ch01/responsibilities.webp",
+      "promptId": "01-responsibilities",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/system.webp",
+      "promptId": "02-system",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/stop.webp",
+      "promptId": "03-stop",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/tools.webp",
+      "promptId": "04-tools",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/context.webp",
+      "promptId": "05-context",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/compression.webp",
+      "promptId": "05-compression",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/memory.webp",
+      "promptId": "06-memory",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/skills.webp",
+      "promptId": "07-skills",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/models.webp",
+      "promptId": "08-models",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/boundaries.webp",
+      "promptId": "09-boundaries",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/schedule.webp",
+      "promptId": "10-schedule",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/delegation.webp",
+      "promptId": "11-delegation",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/trust.webp",
+      "promptId": "12-trust",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/verification.webp",
+      "promptId": "13-verification",
+      "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/shared/comparison.webp",
+      "promptId": "14-comparison",
+      "reviewedAt": "2026-10-23"
+    }
+  ]
+}
