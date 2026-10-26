@@ -45,7 +45,7 @@ function pageRevision(root, source) {
 }
 export function pageCatalog(root) {
   const catalog = readJson(resolve(root, 'content/chapters.json'))
-  const unpublished = new Set(catalog.filter(c => c.status !== 'published').map(c => `chapters/${c.slug}.md`))
+  const unpublished = new Set(catalog.filter(c => c.status !== 'published').map(c => `${c.path || `chapters/${c.slug}`}.md`))
   const walk = dir => readdirSync(dir, { withFileTypes: true }).flatMap(e => e.name.startsWith('.') || e.name === 'public' ? [] : e.isDirectory() ? walk(resolve(dir, e.name)) : e.name.endsWith('.md') ? [resolve(dir, e.name)] : [])
   return walk(resolve(root, 'docs')).filter(file => !unpublished.has(relative(resolve(root, 'docs'), file).split(sep).join('/'))).map(file => {
     const source = readFileSync(file, 'utf8'), sourcePath = relative(root, file).split(sep).join('/'), id = sourcePath.slice(5, -3)

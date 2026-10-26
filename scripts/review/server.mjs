@@ -48,7 +48,7 @@ export async function createReviewServer({ root, port = 0, instanceId = randomUU
       let file
       if (assets[path]) file = resolve(runtime, assets[path])
       else {
-        if (path === '/') { res.writeHead(302, { Location: '/hello-hermes/chapters/03-agent-loop.html' }); return res.end() }
+        if (path === '/') { res.writeHead(302, { Location: '/hello-hermes/preface.html' }); return res.end() }
         if (!path.startsWith('/hello-hermes/') || path.includes('\0') || path.includes('\\')) throw new ReviewError('未找到页面。', 404)
         file = resolve(dist, path.slice('/hello-hermes/'.length) || 'index.html')
         if (existsSync(file) && statSync(file).isDirectory()) file = resolve(file, 'index.html')

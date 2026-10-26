@@ -1,0 +1,128 @@
+[
+  {
+    "id": "01",
+    "part": "建立认识",
+    "title": "从聊天到行动",
+    "question": "模型、工作流与 Agent 有什么区别？",
+    "slug": "01-from-chat-to-action",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  },
+  {
+    "id": "02",
+    "part": "建立认识",
+    "title": "一条任务在 Hermes 中怎样流转",
+    "question": "各个模块分别负责什么？",
+    "slug": "02-a-task-through-hermes",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  },
+  {
+    "id": "03",
+    "part": "核心机制",
+    "title": "下一步做什么，什么时候停",
+    "question": "循环、反馈、预算和终止如何配合？",
+    "slug": "03-agent-loop",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  },
+  {
+    "id": "04",
+    "part": "核心机制",
+    "title": "模型怎样把决定变成行动",
+    "question": "工具调用、MCP 与 Plugins 各解决什么问题？",
+    "slug": "04-tools-and-protocols",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  },
+  {
+    "id": "05",
+    "part": "核心机制",
+    "title": "上下文有限，应该留下什么",
+    "question": "如何选择、压缩和缓存信息？",
+    "slug": "05-context",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  },
+  {
+    "id": "06",
+    "part": "核心机制",
+    "title": "换一段对话，怎样记得你",
+    "question": "记忆、历史检索和用户信息如何工作？",
+    "slug": "06-memory",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  },
+  {
+    "id": "07",
+    "part": "核心机制",
+    "title": "做过一次，下次为什么可能更熟练",
+    "question": "Skills 如何积累和改进，为什么这不同于模型训练？",
+    "slug": "07-learning-and-skills",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  },
+  {
+    "id": "08",
+    "part": "运行与协作",
+    "title": "换一个模型，会改变什么",
+    "question": "能力、协议、速度与成本如何取舍？",
+    "slug": "08-models-and-tradeoffs",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  },
+  {
+    "id": "09",
+    "part": "运行与协作",
+    "title": "不同入口怎样管理状态",
+    "question": "CLI、Gateway、会话、Profile 与 Bot 如何关联？",
+    "slug": "09-sessions-and-gateways",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  },
+  {
+    "id": "10",
+    "part": "运行与协作",
+    "title": "没有新消息，任务怎样继续",
+    "question": "定时任务、后台执行、中断和恢复如何工作？",
+    "slug": "10-background-tasks",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  },
+  {
+    "id": "11",
+    "part": "运行与协作",
+    "title": "多一个 Agent，会更好吗",
+    "question": "委托怎样分工，协作又增加哪些成本？",
+    "slug": "11-delegation",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  },
+  {
+    "id": "12",
+    "part": "判断与比较",
+    "title": "应该给 Agent 多大权限",
+    "question": "授权、执行环境和数据边界怎样划定？",
+    "slug": "12-trust-boundaries",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  },
+  {
+    "id": "13",
+    "part": "判断与比较",
+    "title": "怎样判断任务真的完成",
+    "question": "如何核实结果、证据、失败和成本？",
+    "slug": "13-evaluation",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  },
+  {
+    "id": "14",
+    "part": "判断与比较",
+    "title": "Hermes 与 OpenClaw 的设计差异",
+    "question": "相同任务和版本条件下，各自有哪些选择与代价？",
+    "slug": "14-hermes-and-openclaw",
+    "status": "published",
+    "publishedAt": "2026-10-23"
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "repository": "NousResearch/hermes-agent",
+  "tag": "v0.22.5",
+  "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+  "files": [
+    {
+      "path": "hermes_constants.py",
+      "sha256": "870ad9935a62968636d6a14d160c0269dfbefd8091ab3cb71be78b30bef6360f"
+    },
+    {
+      "path": "agent/__init__.py",
+      "sha256": "21cdce89e9ffdb847634bf498b087410cd191a1e375db43928735846fb7ddc86"
+    },
+    {
+      "path": "agent/jiter_preload.py",
+      "sha256": "bb66461d6e52e54dd2368ad021304d74676824924c45df80f0a3e769c9e5fff3"
+    },
+    {
+      "path": "agent/secret_scope.py",
+      "sha256": "dce64ce99a6966836108e202e1db41c4be97bd3dad41a79e357f39b8d7e90dec"
+    },
+    {
+      "path": "tools/registry.py",
+      "sha256": "48c3875138ac9e1875349ed2900d6940f51dfff050d655d6fb17a1dafe30f5e7"
+    }
+  ]
+}

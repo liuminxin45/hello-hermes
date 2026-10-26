@@ -5,16 +5,23 @@ import { fileURLToPath } from 'node:url'
 export const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 export const readJson = path => JSON.parse(readFileSync(resolve(root, path), 'utf8'))
 export const publishedChapters = catalog => catalog.filter(chapter => chapter.status === 'published')
+export const chapterPath = chapter => chapter.path || `chapters/${chapter.slug}`
 
 export function validateCatalog(catalog, verification, read = path => readFileSync(resolve(root, path), 'utf8'), exists = path => existsSync(resolve(root, path))) {
-  const errors = [], ids = new Set(), slugs = new Set()
+  const errors = [], ids = new Set(), slugs = new Set(), byId = new Map(catalog.map(chapter => [chapter.id, chapter]))
   for (const chapter of catalog) {
     if (ids.has(chapter.id) || slugs.has(chapter.slug)) errors.push(`duplicate chapter: ${chapter.id}`)
     ids.add(chapter.id); slugs.add(chapter.slug)
     if (!/^\d{2}$/.test(chapter.id) || !/^[a-z0-9-]+$/.test(chapter.slug)) errors.push(`invalid chapter identity: ${chapter.id}`)
     if (!['planned', 'draft', 'published'].includes(chapter.status)) errors.push(`invalid status: ${chapter.id}`)
+    if (chapter.path && (!/^[a-z0-9/-]+$/.test(chapter.path) || chapter.path.startsWith('/') || chapter.path.includes('..'))) errors.push(`invalid chapter path: ${chapter.id}`)
+    if (chapter.path?.startsWith('learn/') && (!chapter.outcome || !chapter.artifact)) errors.push(`missing learning outcome or case artifact: ${chapter.id}`)
+    for (const prerequisite of chapter.prerequisites || []) {
+      if (!byId.has(prerequisite) || prerequisite >= chapter.id) errors.push(`invalid prerequisite: ${chapter.id} -> ${prerequisite}`)
+      if (chapter.status === 'published' && byId.get(prerequisite)?.status !== 'published') errors.push(`unpublished prerequisite: ${chapter.id} -> ${prerequisite}`)
+    }
     if (chapter.status !== 'published') continue
-    const path = `docs/chapters/${chapter.slug}.md`
+    const path = `docs/${chapterPath(chapter)}.md`
     if (!exists(path)) { errors.push(`missing chapter: ${path}`); continue }
     const text = read(path), record = verification.chapters?.[chapter.id]
     if (!chapter.publishedAt || !/^\d{4}-\d{2}-\d{2}$/.test(chapter.publishedAt)) errors.push(`missing publication date: ${chapter.id}`)

@@ -136,5 +136,37 @@
     "styleReference": "assets/reference/three-approaches.png",
     "generator": "codex-built-in-imagegen",
     "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "course-system-map",
+    "file": "/images/course/system-map.webp",
+    "prompt": "Use case: scientific-educational. Original Chinese textbook infographic for hello-hermes. Input image is a STYLE REFERENCE ONLY. Match warm off-white #fdfdfb, ink #172033, blue #1d4ed8 and pale fill #eaf1ff; flat thin rounded borders, large clean Chinese sans-serif typography, generous whitespace. Landscape 3:2, high resolution. No gradients, logos, robots, code, source citations or decorative icons. Text and arrows must be exact.\nTitle “先分清责任，再理解 Hermes”.\nA textbook responsibility map, NOT a literal deployment diagram. Four spacious stacked horizontal bands; no arrows anywhere in this figure. Each band has a bold left label and clear boxes on its right.\nBand 1 left “人与入口”; right boxes “提出目标与约束” and “接收消息与交付结果”.\nBand 2 left “核心运行”; right boxes “准备模型输入” “调用模型” “调度工具与处理反馈”.\nBand 3 left “模型与执行”; right boxes “模型服务：提出行动或答复” and “工具与环境：实际执行”.\nBand 4 left “保存的材料”; right boxes “会话历史” “精选记忆” “可复用技能”.\nAt bottom one slim pale-blue strip with exact text “贯穿运行的约束：权限、预算、中断与记录”.\nSubtitle “教学视图：职责可以协作，不表示源码严格分为四层”.\nDo not add connecting arrows or imply persistent memory is loaded after execution. The next figure supplies the time sequence. Exact text only.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "course-task-sequence",
+    "file": "/images/course/task-sequence.webp",
+    "prompt": "Use case: scientific-educational. Original Chinese textbook infographic for hello-hermes. Input image is a STYLE REFERENCE ONLY. Match warm off-white #fdfdfb, ink #172033, blue #1d4ed8 and pale fill #eaf1ff; flat thin rounded borders, large clean Chinese sans-serif typography, generous whitespace. Landscape 3:2, high resolution. No gradients, logos, robots, code, source citations or decorative icons. Text and arrows must be exact.\nTitle “一次任务怎样走过系统”.\nSubtitle “教学示意：多轮执行只画出其中一次工具往返”.\nSix timeline rows, ordered vertically top to bottom, each with an aligned action and outcome. Big numbered circles 1 to 6 on far left connected by down arrows.\nRow 1 “用户与入口” → “目标进入对应会话”.\nRow 2 “运行程序” → “整理本轮输入，发送给模型”.\nRow 3 “模型服务” → “返回工具调用请求”.\nRow 4 “运行程序与工具” → “执行动作，取得结果或错误”.\nRow 5 “运行程序” → “记录结果，准备下一轮”.\nRow 6 “模型与入口” → “形成最终答复，交付给用户”.\nAll row arrows point right. Downward numbered timeline means chronological order only. Footer “第 5 步可以再次进入第 2 步；图中省略重复轮次”. No loop arrow, no line crossings. Do not imply model text itself executes actions.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "course-request-input",
+    "file": "/images/course/request-input.webp",
+    "prompt": "Use case: scientific-educational. Original Chinese textbook infographic for hello-hermes. Input image is a STYLE REFERENCE ONLY. Match warm off-white #fdfdfb, ink #172033, blue #1d4ed8 and pale fill #eaf1ff; flat thin rounded borders, large clean Chinese sans-serif typography, generous whitespace. Landscape 3:2, high resolution. No gradients, logos, robots, code, source citations or decorative icons. Text and arrows must be exact.\nTitle “模型这一轮实际看到了什么”.\nThree large panels arranged horizontally, each with large labels, separated with whitespace; arrows go only from left to middle to right.\nLeft panel header “保存在系统中的材料”; rows “历史会话与文件” “用户偏好与方法” “当前工具与配置”.\nMiddle panel header “运行程序选择和组织”; rows “持续适用的说明” “本次目标与约束” “相关历史与工具结果” “可用工具的调用说明”.\nRight panel header “本次模型请求”; rows “只包含实际带入的信息” “模型据此提出行动或答复”.\nFooter “磁盘上有，不等于本轮读到；调用说明也可能作为独立工具字段发送”.\nSubtitle “教学视图：不同模型接口的具体格式可以不同”.\nNo direct arrow from saved materials to the model bypassing the middle. No suggestions that every history file is injected in full. No extra words.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "course-tool-runtime",
+    "file": "/images/course/tool-runtime.webp",
+    "prompt": "Use case: scientific-educational. Original Chinese textbook infographic for hello-hermes. Input image is a STYLE REFERENCE ONLY. Match warm off-white #fdfdfb, ink #172033, blue #1d4ed8 and pale fill #eaf1ff; flat thin rounded borders, large clean Chinese sans-serif typography, generous whitespace. Landscape 3:2, high resolution. No gradients, logos, robots, code, source citations or decorative icons. Text and arrows must be exact.\nTitle “一个工具请求，经过哪些环节”.\nUse a two-row composition; top row is preparation before model choice, bottom row is after the model has returned a call request. Do NOT connect the right end of top row to the left end of bottom with a diagonal.\nTop row heading “准备本轮可用能力”; three boxes left to right: “登记工具” → “检查配置与可用性” → “形成模型可见的工具说明”.\nBottom row heading “模型已返回调用请求”; four boxes left to right: “核对名称与参数” → “找到对应执行者” → “执行并封装结果” → “带回后续判断”.\nFooter “登记过、看得见、被调用、执行成功，是不同状态”.\nSubtext under top heading “名称、输入约定、执行者、可用条件”.\nAll arrows only point right within their own row. This is a conceptual responsibility chain, not a claim that every permission check lives inside the registry. No extra text.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
   }
 ]

@@ -1,12 +1,14 @@
 # hello-hermes
 
-**从 Hermes 理解 Agent**：一本面向懂大模型、初学 Agent 的中文图解手册。用一份技术简报的形成过程，解释行动循环、工具、上下文、记忆、技能、协作及设计取舍，并对照 OpenClaw。
+**从 Hermes 理解 Agent**：一本从会用聊天 AI 出发，逐步走向系统关系和设计取舍的中文图解手册。围绕每周消息简报，逐步增加工具、上下文、状态、记忆、技能、调度和协作，最终分析一个新需求。
 
-[在线阅读](https://liuminxin45.github.io/hello-hermes/) · [第一章](https://liuminxin45.github.io/hello-hermes/chapters/01-from-chat-to-action.html) · [全书路线](https://liuminxin45.github.io/hello-hermes/roadmap.html)
+[在线阅读](https://liuminxin45.github.io/hello-hermes/) · [新版第一章](https://liuminxin45.github.io/hello-hermes/learn/01-one-complete-task.html) · [学习路线](https://liuminxin45.github.io/hello-hermes/roadmap.html) · [旧版档案](https://liuminxin45.github.io/hello-hermes/legacy.html)
 
 ## 阅读方式
 
-正文不要求安装 Hermes 或编写代码。十四章从概念逐步进入机制与判断，每章提供图解、关键知识点、理解题及官方依据。教学示意和实际验证明确区分。写法参考 Hello Agents，文字和配图独立制作。
+正文不要求理解 API、安装 Hermes 或编程。新版按“全景 → 单次任务 → 信息与状态 → 完整运行 → 可靠性 → 综合迁移”逐批发布。正文不提供源码跳转，核对依据保留在内部。教学示意、受控模块观察与完整模型运行明确区分。
+
+本批发布新版 01–04，增加统一地图、模型输入与工具职责链，以及真实注册表受控观察。17 章主线和 OpenClaw 对照专题的进度见 `content/chapters.json`；旧十四章保持原文件和 URL，不混入新版导航或搜索。
 
 ## 开发
 
@@ -20,6 +22,8 @@ npm run docs:build
 ```
 
 GitHub Pages 使用 `/hello-hermes/` 子路径；`main` 的通过检查的提交自动部署，PR 只执行校验。
+
+公共构建会扫描并拒绝本地批注运行代码、接口与私有数据。审阅界面只由本地服务注入，GitHub Pages 只提供阅读。
 
 ## 在 Codex 中维护
 
@@ -43,6 +47,6 @@ npm run review
 
 ## 版本与许可
 
-首版依据 Hermes v0.22.5；OpenClaw 对照依据 v2026.10.6。每章保存独立核对记录，官方最新版与已核实版本分别记录。具体来源和验证边界见[版本与来源](docs/sources.md)。
+新版本批依据 Hermes v0.22.5，维护者于 2026-10-26 查询稳定发布并重新核对相关内容。受控观察只执行固定版本的同步注册表路径，没有模型调用。旧版 OpenClaw v2026.10.6 对照保留在历史记录，新版专题另行审核。具体范围见[版本与来源](docs/sources.md)。
 
 本项目是独立社区学习材料，非相关项目官方文档。正文和原创图解 [CC BY-SA 4.0](LICENSE-CONTENT.md)，站点代码、维护脚本及 skill [MIT](LICENSE)。

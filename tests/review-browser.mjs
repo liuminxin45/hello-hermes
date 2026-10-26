@@ -17,7 +17,7 @@ for (const directory of [resolve(project, 'node_modules'), process.env.HELLO_HER
 if (!playwright) throw new Error('浏览器检查需要可用的 Playwright。可通过 HELLO_HERMES_TEST_NODE_MODULES 指向已安装的 node_modules；后台运行本身不需要此依赖。')
 const fixture = resolve('.cache', `review-browser-${Date.now()}`)
 mkdirSync(fixture, { recursive: true })
-for (const part of ['docs', 'content', 'editorial', 'scripts', 'tests', 'package.json']) cpSync(part, resolve(fixture, part), { recursive: true, filter: path => !path.includes('.vitepress\\cache') && !path.includes('.vitepress/cache') })
+for (const part of ['docs', 'content', 'editorial', 'examples', 'scripts', 'tests', 'package.json']) cpSync(part, resolve(fixture, part), { recursive: true, filter: path => !path.includes('.vitepress\\cache') && !path.includes('.vitepress/cache') })
 symlinkSync(resolve(project, 'node_modules'), resolve(fixture, 'node_modules'), process.platform === 'win32' ? 'junction' : 'dir')
 writeManifest(fixture)
 const running = await createReviewServer({ root: fixture })
@@ -25,7 +25,9 @@ const { chromium } = playwright, browser = await chromium.launch({ headless: tru
 const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, acceptDownloads: true, permissions: ['clipboard-read', 'clipboard-write'] })
 const page = await context.newPage(), errors = [], checks = []
 page.on('pageerror', error => errors.push(error.message))
-const url = running.origin + '/hello-hermes/chapters/03-agent-loop.html'
+const lesson = JSON.parse(readFileSync(resolve(project, 'content/chapters.json'), 'utf8')).find(c => c.id === '03')
+const lessonPath = lesson.path || `chapters/${lesson.slug}`
+const url = running.origin + `/hello-hermes/${lessonPath}.html`
 const screenshots = resolve(fixture, 'screenshots'); mkdirSync(screenshots)
 async function ready(p = page, address = url) { await p.goto(address, { waitUntil: 'networkidle' }); await p.locator('#hr-status').filter({ hasText: '选中文字' }).waitFor() }
 async function select(p = page) {
@@ -136,10 +138,10 @@ try {
   checks.push('mobile light/dark overflow and usable panel')
 
   const result = beginReview(fixture), batch = readJson(result.path)
-  const source = resolve(fixture, 'docs/chapters/03-agent-loop.md'), original = readFileSync(source, 'utf8')
+  const source = resolve(fixture, `docs/${lessonPath}.md`), original = readFileSync(source, 'utf8')
   assert.ok(original.includes(firstQuote), 'The selected plain text must be present in the Markdown fixture')
   writeFileSync(source, original.replace(firstQuote, '修订后的案例开头'))
-  batch.decisions = batch.targets.map((a, i) => ({ id: a.id, outcome: i === 0 ? 'addressed' : 'blocked', summary: i === 0 ? '根据意见调整示例表述。' : '', evidence: i === 0 ? ['docs/chapters/03-agent-loop.md'] : [] }))
+  batch.decisions = batch.targets.map((a, i) => ({ id: a.id, outcome: i === 0 ? 'addressed' : 'blocked', summary: i === 0 ? '根据意见调整示例表述。' : '', evidence: i === 0 ? [`docs/${lessonPath}.md`] : [] }))
   atomicJson(result.path, batch)
   command(['validate', '--batch', result.path])
   const resolved = JSON.parse(command(['resolve', '--batch', result.path]))
@@ -152,7 +154,7 @@ try {
   await page.getByRole('button', { name: '定位原文', exact: true }).first().click()
   await page.locator('#hr-panel-message').filter({ hasText: '原文已变化' }).waitFor()
   checks.push('end-to-end snapshot, source edit, CLI validate/resolve, retained history and no anchor drift')
-  assert.ok(!readFileSync(resolve(fixture, 'docs/.vitepress/dist/chapters/03-agent-loop.html'), 'utf8').includes('/__review/client.mjs'))
+  assert.ok(!readFileSync(resolve(fixture, `docs/.vitepress/dist/${lessonPath}.html`), 'utf8').includes('/__review/client.mjs'))
   const opened = command(['start']), same = command(['start']), address = command(['status']).trim()
   assert.ok(opened.includes(address)); assert.ok(same.includes(address))
   command(['stop']); assert.ok(command(['status']).includes('未运行'))

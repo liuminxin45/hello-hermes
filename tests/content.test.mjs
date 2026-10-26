@@ -21,16 +21,46 @@ test('content gate rejects missing images and pending reviews instead of publish
 })
 
 test('internal evidence keeps verification and review notes mandatory without reader-facing citations', () => {
-  const catalog = readJson('content/chapters.json').filter(chapter => chapter.id === '03')
+  const catalog = readJson('content/chapters.json').filter(chapter => chapter.id === '03').map(chapter => ({ ...chapter, prerequisites: [] }))
   const verification = structuredClone(readJson('content/verification.json'))
   assert.deepEqual(validateCatalog(catalog, verification), [])
   delete verification.chapters['03'].upstreams
   assert.ok(validateCatalog(catalog, verification).some(error => error.includes('missing verification')))
-  assert.ok(validateCatalog(catalog, readJson('content/verification.json'), undefined, path => !path.endsWith('2026-10-26-ch03.md')).some(error => error.includes('missing internal review notes')))
+  assert.ok(validateCatalog(catalog, readJson('content/verification.json'), undefined, path => !path.endsWith('2026-10-26-curriculum-batch-1.md')).some(error => error.includes('missing internal review notes')))
+})
+
+test('legacy pages retain their original verification while the new course uses independent paths', () => {
+  const legacy = readJson('content/archive/chapters-v1.json')
+  assert.deepEqual(validateCatalog(legacy, readJson('content/archive/verification-v1.json')), [])
+  const current = readJson('content/chapters.json')
+  assert.ok(current.every(c => c.path.startsWith('learn/')))
+  assert.equal(legacy.find(c => c.id === '03').slug, '03-agent-loop')
+  assert.equal(current.find(c => c.id === '03').slug, '03-model-input')
+})
+
+test('a new lesson cannot publish ahead of a prerequisite or without a case artifact', () => {
+  const catalog = structuredClone(readJson('content/chapters.json'))
+  catalog.find(c => c.id === '02').status = 'planned'
+  delete catalog.find(c => c.id === '03').artifact
+  const errors = validateCatalog(catalog, readJson('content/verification.json'))
+  assert.ok(errors.some(e => e.includes('unpublished prerequisite')))
+  assert.ok(errors.some(e => e.includes('missing learning outcome or case artifact')))
+})
+
+test('controlled observation records actual module execution without claiming a model run', () => {
+  const report = readJson('docs/public/observations/tool-registry.json')
+  const source = readJson('examples/news-brief/registry-source-lock.json')
+  assert.equal(report.kind, 'controlled-official-module-execution')
+  assert.equal(report.modelCalls, 0)
+  assert.deepEqual(report.upstream, source)
+  assert.equal(source.commit, readJson('content/verification.json').chapters['04'].upstreams.hermes.commit)
+  assert.ok(source.files.every(f => /^[a-f0-9]{64}$/.test(f.sha256)))
+  assert.deepEqual(report.visible, ['read_material'])
+  assert.ok(report.steps[1].result.error && report.steps[2].result.error)
 })
 
 test('public evidence remains required by default and internal chapters cannot restore the citation banner', () => {
-  const catalog = readJson('content/chapters.json').filter(chapter => chapter.id === '03')
+  const catalog = readJson('content/chapters.json').filter(chapter => chapter.id === '03').map(chapter => ({ ...chapter, prerequisites: [] }))
   const verification = readJson('content/verification.json')
   const read = path => readFileSync(resolve(root, path), 'utf8')
   const publicErrors = validateCatalog(catalog, verification, path => read(path).replace(/^evidenceDisplay: internal\r?\n/m, ''))

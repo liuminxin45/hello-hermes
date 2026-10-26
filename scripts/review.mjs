@@ -8,6 +8,11 @@ import { readStore, readJson, localPath, atomicJson, inputDigest, writeManifest,
 const args = process.argv.slice(2), command = args[0] || 'start'
 const option = name => args.includes(name) ? args[args.indexOf(name) + 1] : undefined
 const root = resolve(option('--root') || resolve(dirname(fileURLToPath(import.meta.url)), '..'))
+function readingPath() {
+  const catalog = readJson(resolve(root, 'content/chapters.json'))
+  const chapter = catalog.find(c => c.id === '03' && c.status === 'published') || catalog.find(c => c.status === 'published')
+  return chapter ? `/hello-hermes/${chapter.path || `chapters/${chapter.slug}`}.html` : '/hello-hermes/preface.html'
+}
 function run(script) {
   const result = spawnSync(process.execPath, ['--run', script], { cwd: root, stdio: 'inherit', windowsHide: true })
   if (result.error || result.status !== 0) throw new ReviewError(`${script} 检查失败，未记录为通过。`)
@@ -25,7 +30,7 @@ async function status() {
 }
 async function main() {
   if (command === 'build') { build(); return console.log('本地审阅页面已更新；已打开的页面请刷新。') }
-  if (command === 'status') { const s = await status(); return console.log(s ? `${s.origin}/hello-hermes/chapters/03-agent-loop.html` : '本地审阅后台未运行。') }
+  if (command === 'status') { const s = await status(); return console.log(s ? `${s.origin}${readingPath()}` : '本地审阅后台未运行。') }
   if (command === 'stop') {
     const s = await status(); if (!s) return console.log('没有正在运行的本项目后台。')
     const res = await fetch(s.origin + '/__review/api/shutdown', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Review-Token': s.token }, body: '{}' })
@@ -33,7 +38,7 @@ async function main() {
     return console.log('本地审阅后台已停止，批注仍保留。')
   }
   if (command === 'start') {
-    const old = await status(); if (old) return console.log(`已在运行：${old.origin}/hello-hermes/chapters/03-agent-loop.html`)
+    const old = await status(); if (old) return console.log(`已在运行：${old.origin}${readingPath()}`)
     mkdirSync(localPath(root), { recursive: true })
     let lock
     try { lock = openSync(localPath(root, 'start.lock'), 'wx'); writeFileSync(lock, JSON.stringify({ pid: process.pid, at: new Date().toISOString() })) } catch { throw new ReviewError('后台正在启动；请稍后查询 status。若启动进程异常退出，请检查 .review/start.lock。') }
@@ -62,7 +67,7 @@ async function main() {
       if (!running && preferred && !option('--port')) running = await launch(0)
       if (!running) throw new ReviewError('后台未能启动，请查看 .review/server.log；未停止其他服务。')
       atomicJson(localPath(root, 'last-port.json'), { port: running.port })
-      return console.log(`本地审阅：${running.origin}/hello-hermes/chapters/03-agent-loop.html\n选中文字添加批注；批注保存在 .review/annotations.json。`)
+      return console.log(`本地审阅：${running.origin}${readingPath()}\n选中文字添加批注；批注保存在 .review/annotations.json。`)
     } finally { if (lock !== undefined) { closeSync(lock); unlinkSync(localPath(root, 'start.lock')) } }
   }
   if (command === 'list') {

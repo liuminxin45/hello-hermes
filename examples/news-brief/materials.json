@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "nature": "fictional-teaching-materials",
+  "week": "教学周 W1",
+  "notice": "所有产品、公告和变化均为本书自编教学材料，不代表真实新闻或产品能力。",
+  "task": "从提供的材料中整理三条候选 AI 消息；去重、区分已确认与未确认，只形成草稿，不发送。材料不足三条时说明不足。",
+  "items": [
+    { "id": "A", "source": "教学公告 A", "type": "first-party-example", "event": "笔记工具甲新增纯文本导出", "text": "本周新增纯文本导出。暂不支持导出图片，已有笔记保持原样。" },
+    { "id": "B", "source": "教学转述 B", "type": "secondary-example", "event": "笔记工具甲新增纯文本导出", "text": "据说这项导出更新可以完整迁移所有笔记，图片也没有问题。没有提供进一步依据。" },
+    { "id": "C", "source": "教学公告 C", "type": "first-party-example", "event": "语音工具乙新增标点修正", "text": "文字整理新增标点修正。此更新没有宣布识别准确率提升，也没有给出性能测量。" }
+  ],
+  "expectedObservations": ["A 与 B 指向同一事件。", "B 的图片导出说法与 A 冲突，不能当作已确认。", "只有两件不同事件，不能为了凑三条而编造第三件。", "没有向外发送的授权。"]
+}
