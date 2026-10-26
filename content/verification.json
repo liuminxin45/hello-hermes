@@ -87,6 +87,100 @@
           "modelCalls": 0
         }
       ]
+    },
+    "05": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/developer-guide/agent-loop.md",
+            "agent/conversation_loop.py",
+            "agent/turn_iteration_prep.py",
+            "agent/turn_final_response.py"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-2.md"
+    },
+    "06": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/developer-guide/context-compression-and-caching.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-reading",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-2.md"
+    },
+    "07": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/developer-guide/session-storage.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-reading",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-2.md"
+    },
+    "08": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/user-guide/features/memory.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-reading",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-2.md"
+    },
+    "09": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/user-guide/features/skills.md",
+            "website/docs/user-guide/features/curator.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-reading",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-2.md"
     }
   },
   "figures": [
@@ -203,6 +297,16 @@
     {
       "file": "/images/course/tool-runtime.webp",
       "promptId": "course-tool-runtime",
+      "reviewedAt": "2026-10-26"
+    },
+    {
+      "file": "/images/course/brief-loop.webp",
+      "promptId": "course-brief-loop",
+      "reviewedAt": "2026-10-26"
+    },
+    {
+      "file": "/images/course/session-runs.webp",
+      "promptId": "course-session-runs",
       "reviewedAt": "2026-10-26"
     }
   ]

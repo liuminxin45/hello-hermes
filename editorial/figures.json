@@ -168,5 +168,21 @@
     "styleReference": "assets/reference/three-approaches.png",
     "generator": "codex-built-in-imagegen",
     "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "course-brief-loop",
+    "file": "/images/course/brief-loop.webp",
+    "prompt": "Use case: scientific-educational. Chinese textbook infographic for hello-hermes. The attached image is a STYLE REFERENCE ONLY. Match off-white #fdfdfb, ink #172033, blue #1d4ed8, pale #eaf1ff, thin rounded boxes, large crisp Chinese sans-serif type, spacious flat design. Landscape 3:2. No code, source links, decorative icons, gradients, logos or robots.\nTitle “有了反馈，下一步才会改变”.\nSubtitle “固定材料的教学示意，不是真实模型日志”.\nFive timeline rows with large numbers 1 through 5 at far left connected by downward arrows. Each row has action at left and returned information at right; one arrow within row points right.\n1: “读取公告 A” → “纯文本可导出，图片暂不支持”.\n2: “读取转述 B” → “同一事件，图片说法与 A 冲突”.\n3: “回到已有原文核对” → “保留 A 的限制，不采信夸大说法”.\n4: “读取公告 C” → “取得第二件事，没有第三件”.\n5: “形成有边界的草稿” → “交付两条，说明数量不足”.\nFooter “每步要能说明：解决哪个未知，结果如何改变后续行动”.\nNo backward arrows; do not imply reading C creates a third distinct event.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "course-session-runs",
+    "file": "/images/course/session-runs.webp",
+    "prompt": "Use case: scientific-educational. Chinese textbook infographic for hello-hermes. The attached image is a STYLE REFERENCE ONLY. Match off-white #fdfdfb, ink #172033, blue #1d4ed8, pale #eaf1ff, thin rounded boxes, large crisp Chinese sans-serif type, spacious flat design. Landscape 3:2. No code, source links, decorative icons, gradients, logos or robots.\nTitle “同一会话，可以有多次运行”.\nA large pale-blue enclosing container titled “会话：持续的一段历史”.\nInside it three evenly spaced adjacent rounded panels labeled “运行一” “运行二” “运行三”.\nPanel 1 text “整理消息草稿” then “多轮模型与工具往返” then “交付两条”.\nPanel 2 text “用户要求改短” then “读取已有草稿” then “交付修订”.\nPanel 3 text “用户追问依据” then “找回对应材料” then “解释条件”.\nEach panel connects by one downward arrow to its own distinct record card below the enclosing container, labeled respectively “运行一的输入与结果” “运行二的输入与结果” “运行三的输入与结果”.\nBelow the record cards one long white storage box label “持久记录：按会话归属保存，供后续恢复与查询”.\nNo arrows between the three runs; they share conversation context but are distinct executions. Footer “窗口关闭、进程重启、运行结束、会话重置，需要分别判断”.\nSubtitle “教学视图，不表示每条记录都是一个独立文件”.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
   }
 ]
