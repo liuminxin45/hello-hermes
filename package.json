@@ -11,7 +11,10 @@
     "check": "node scripts/check-content.mjs",
     "check:links": "node scripts/check-links.mjs",
     "test": "node --test tests/*.test.mjs",
-    "sync:check": "node scripts/check-upstream.mjs"
+    "sync:check": "node scripts/check-upstream.mjs",
+    "review": "node scripts/review.mjs start",
+    "review:list": "node scripts/review.mjs list",
+    "review:test:browser": "node tests/review-browser.mjs"
   },
   "devDependencies": {
     "vitepress": "1.6.4",

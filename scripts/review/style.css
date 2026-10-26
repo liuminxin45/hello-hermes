@@ -1,0 +1,26 @@
+body.hh-review-local .VPDoc{padding-bottom:100px}
+#hh-review-root{--hr-bg:var(--vp-c-bg,#fdfdfb);--hr-soft:var(--vp-c-bg-soft,#f1f4f9);--hr-text:var(--vp-c-text-1,#172033);--hr-muted:var(--vp-c-text-2,#556070);--hr-border:var(--vp-c-divider,#d5dce6);--hr-blue:var(--vp-c-brand-1,#1d4ed8);color:var(--hr-text);font:15px/1.65 var(--vp-font-family-base,system-ui)}
+#hh-review-root *{box-sizing:border-box}#hh-review-root [hidden]{display:none!important}
+#hh-review-root button,.hr-figure-add{min-height:44px;padding:8px 12px;border:1px solid var(--hr-border,var(--vp-c-divider));border-radius:7px;background:var(--hr-bg,var(--vp-c-bg));color:inherit;font:inherit;cursor:pointer;line-height:1.5}
+#hh-review-root button:hover,.hr-figure-add:hover{background:var(--hr-soft,var(--vp-c-bg-soft))}#hh-review-root button:disabled{cursor:wait;opacity:.6}
+#hh-review-root :focus-visible,.hr-figure-add:focus-visible{outline:2px solid var(--hr-blue,var(--vp-c-brand-1));outline-offset:3px}
+.hr-bar{position:fixed;right:20px;bottom:18px;z-index:45;display:flex;align-items:center;gap:12px;padding:8px 12px;border:1px solid var(--hr-border);border-radius:10px;background:var(--hr-bg);box-shadow:0 4px 20px #17203314;max-width:calc(100vw - 32px)}
+.hr-local{font-size:13px;color:var(--hr-muted)}#hr-status{font-size:12px;color:var(--hr-muted);max-width:260px;overflow-wrap:anywhere}
+#hr-selection{position:fixed;z-index:50;background:var(--hr-blue)!important;color:var(--hr-bg)!important;box-shadow:0 4px 16px #17203325}
+#hh-review-root dialog{color:var(--hr-text);background:var(--hr-bg);border:1px solid var(--hr-border);font:inherit;overscroll-behavior:contain}
+#hh-review-root dialog::backdrop{background:rgba(8,12,20,.42)}
+#hh-review-root header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px}
+#hh-review-root h2{font-size:22px;line-height:1.4;margin:0;font-weight:650}#hh-review-root h3{font-size:16px;margin:16px 0 8px}#hh-review-root p{margin:8px 0;overflow-wrap:anywhere}#hh-review-root header p{font-size:13px;color:var(--hr-muted);margin-bottom:0}
+.hr-panel{margin:0 0 0 auto;width:min(460px,100vw);height:100dvh;max-height:100dvh;max-width:100vw;padding:24px;border-radius:0;overflow:auto}
+.hr-panel-actions{display:flex;flex-wrap:wrap;gap:8px}.hr-panel-actions button{font-size:13px!important}
+.hr-filters{display:flex;gap:12px;margin:22px 0 12px}.hr-filters label{flex:1;font-size:13px;color:var(--hr-muted)}#hh-review-root select{display:block;width:100%;min-height:44px;margin-top:4px;padding:8px;border:1px solid var(--hr-border);border-radius:6px;background:var(--hr-bg);color:var(--hr-text);font:inherit}
+.hr-hint{font-size:13px;color:var(--hr-muted)}.hr-card{border-top:1px solid var(--hr-border);padding:20px 0}.hr-card-meta{font-size:12px;color:var(--hr-muted)}
+#hh-review-root blockquote{margin:12px 0;padding:8px 12px;border-left:3px solid var(--hr-blue);background:var(--hr-soft);font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:200px;overflow:auto}
+.hr-comment-text{white-space:pre-wrap}.hr-card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.hr-card-actions button{font-size:13px!important}.hr-history{font-size:12px;white-space:pre-wrap;color:var(--hr-muted)}#hh-review-root summary{cursor:pointer;min-height:44px;display:flex;align-items:center;color:var(--hr-muted);font-size:13px}
+.hr-resolution{border-left:2px solid var(--hr-blue);padding-left:12px;font-size:14px}.hr-empty{padding:20px 0}.hr-draft{padding:12px;margin:12px 0;background:var(--hr-soft);border:1px solid var(--hr-border);border-radius:8px}.hr-draft button+button{margin-left:8px}
+.hr-editor{width:min(600px,calc(100vw - 24px));max-height:90dvh;border-radius:12px;padding:24px;overflow:auto}#hh-review-root label[for=hr-comment]{display:block;margin:18px 0 8px;font-weight:600}
+#hr-comment{width:100%;min-height:140px;resize:vertical;padding:12px;border:1px solid var(--hr-border);border-radius:7px;background:var(--hr-bg);color:var(--hr-text);font:inherit;line-height:1.7}
+#hh-review-root footer{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px}.hr-primary{background:var(--hr-blue)!important;color:var(--hr-bg)!important}
+#hr-form-error:empty,#hr-panel-message:empty{display:none}#hr-form-error,#hr-panel-message{padding:10px 12px;border:1px solid var(--hr-border);border-radius:6px;background:var(--hr-soft);font-size:14px}
+.hr-figure-add{margin-left:8px;font-size:12px;color:var(--vp-c-brand-1)}::highlight(hermes-review){background:#f5d66d;color:#172033}
+@media(max-width:600px){.hr-bar{left:12px;right:12px;bottom:12px;padding:8px;gap:8px;max-width:none}.hr-local{display:none}#hr-status{flex:1;max-width:none;font-size:12px}.hr-panel{padding:20px}.hr-editor{padding:20px}.hr-editor footer{flex-wrap:wrap}.hr-editor footer .hr-primary{margin-left:auto}}
