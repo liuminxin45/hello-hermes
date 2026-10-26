@@ -3,7 +3,6 @@ title: 09 经验怎样成为可复用的方法
 description: 沿技能的发现加载执行验证与维护，理解经验复用为何不同于模型训练。
 evidenceDisplay: internal
 editLink: false
-next: false
 ---
 
 # 第九章：经验怎样成为可复用的方法

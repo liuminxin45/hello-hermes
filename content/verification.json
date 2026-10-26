@@ -1,6 +1,81 @@
 {
   "schemaVersion": 1,
   "chapters": {
+    "10": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/developer-guide/provider-runtime.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-reading",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-3.md"
+    },
+    "11": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/developer-guide/gateway-internals.md",
+            "website/docs/user-guide/profiles.md",
+            "website/docs/user-guide/bot-mode.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-reading",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-3.md"
+    },
+    "12": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/developer-guide/cron-internals.md",
+            "website/docs/user-guide/features/cron.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-reading",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-3.md"
+    },
+    "13": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/user-guide/features/delegation.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-reading",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-3.md"
+    },
     "01": {
       "upstreams": {
         "hermes": {
@@ -307,6 +382,21 @@
     {
       "file": "/images/course/session-runs.webp",
       "promptId": "course-session-runs",
+      "reviewedAt": "2026-10-26"
+    },
+    {
+      "file": "/images/course/model-adapter.webp",
+      "promptId": "course-model-adapter",
+      "reviewedAt": "2026-10-26"
+    },
+    {
+      "file": "/images/course/job-lifecycle.webp",
+      "promptId": "course-job-lifecycle",
+      "reviewedAt": "2026-10-26"
+    },
+    {
+      "file": "/images/course/delegation-handoff.webp",
+      "promptId": "course-delegation-handoff",
       "reviewedAt": "2026-10-26"
     }
   ]

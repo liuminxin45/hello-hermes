@@ -184,5 +184,29 @@
     "styleReference": "assets/reference/three-approaches.png",
     "generator": "codex-built-in-imagegen",
     "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "course-model-adapter",
+    "file": "/images/course/model-adapter.webp",
+    "prompt": "Use case: scientific-educational. Original Chinese textbook infographic for hello-hermes. Attached image STYLE REFERENCE ONLY. Match off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue #eaf1ff, flat thin rounded boxes, large crisp Chinese sans-serif, generous whitespace. Landscape 3:2. No gradients, robots, logos, code, citations, decorative icons or invented wording. Exact labels and arrow directions.\nTitle “换模型，要穿过适配层”. Subtitle “教学视图：共同职责不等于所有接口都一样”. Three wide panels in one row. Left panel header “核心运行” and rows “目标与历史” “工具调用与反馈”. Middle panel header “适配与归一” and rows “请求格式与工具约定” “响应、错误与用量”. Right panel header “选定的模型服务” and rows “具体接口与身份凭据” “模型能力与上下文范围”. One right arrow between left and middle, one right arrow between middle and right, both above center. One left arrow between right and middle, one left arrow between middle and left, both below center, making request and response explicit without crossing. Label above arrows “发送请求”, label below arrows “接收响应”. Footer “格式相容不代表能力相同；任务质量仍需重新检查”. Do not show adapter executing business tools.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "course-job-lifecycle",
+    "file": "/images/course/job-lifecycle.webp",
+    "prompt": "Use case: scientific-educational. Original Chinese textbook infographic for hello-hermes. Attached image STYLE REFERENCE ONLY. Match off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue #eaf1ff, flat thin rounded boxes, large crisp Chinese sans-serif, generous whitespace. Landscape 3:2. No gradients, robots, logos, code, citations, decorative icons or invented wording. Exact labels and arrow directions.\nTitle “定时触发，只是任务的开始”. Subtitle “教学示意：生成成功和投递成功分别记录”. Five large numbered rows connected by downward arrows at far left. Each row has a label panel and a separate result panel connected rightwards. 1 “到达计划时间” → “选中任务与所属配置”. 2 “执行前检查” → “确认模型、技能与工作位置可用”. 3 “启动新运行” → “组织输入，完成工具与模型循环”. 4 “保存本次产物” → “记录草稿、结果与未完成项”. 5 “按目标投递” → “记录目标与投递结果”. Footer “电脑或网关未运行、配置缺失、任务失败、投递失败，需要分别处理”. Only chronological arrows; do not imply every step always succeeds or every schedule requires a model.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "course-delegation-handoff",
+    "file": "/images/course/delegation-handoff.webp",
+    "prompt": "Use case: scientific-educational. Original Chinese textbook infographic for hello-hermes. Attached image STYLE REFERENCE ONLY. Match off-white #fdfdfb, ink #172033, blue #1d4ed8, pale-blue #eaf1ff, flat thin rounded boxes, large crisp Chinese sans-serif, generous whitespace. Landscape 3:2. No gradients, robots, logos, code, citations, decorative icons or invented wording. Exact labels and arrow directions.\nTitle “委托的核心，是交接清楚”. Subtitle “教学示意：子任务有新上下文，不自动继承整段聊天”. Three spacious vertical panels left to right. Left header “父任务发出” with rows “明确目标与材料” “范围、预算与禁止事项” “要求证据和返回格式”. Middle header “子任务执行” with rows “独立上下文” “模型与工具循环” “完成或说明缺口”. Right header “父任务验收” with rows “核对结果与证据” “处理冲突与遗漏” “决定最终交付”. One arrow left-to-middle labeled “任务包”, one arrow middle-to-right labeled “结果包”. Footer “子任务完成，不等于父任务完成；共享文件也不会自动避免冲突”. No arrows to any external send destination.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
   }
 ]

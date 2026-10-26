@@ -182,7 +182,7 @@
     "question": "能力、服务协议与运行程序如何分工？",
     "slug": "10-model-adapters",
     "path": "learn/10-model-adapters",
-    "status": "planned",
+    "status": "published",
     "prerequisites": [
       "03",
       "04",
@@ -193,7 +193,8 @@
     "legacyChapters": [
       "08"
     ],
-    "kind": "core"
+    "kind": "core",
+    "publishedAt": "2026-10-26"
   },
   {
     "id": "11",
@@ -202,7 +203,7 @@
     "question": "入口、Profile、Bot 与会话路由怎样关联？",
     "slug": "11-entry-and-identity",
     "path": "learn/11-entry-and-identity",
-    "status": "planned",
+    "status": "published",
     "prerequisites": [
       "07",
       "08"
@@ -212,7 +213,8 @@
     "legacyChapters": [
       "09"
     ],
-    "kind": "core"
+    "kind": "core",
+    "publishedAt": "2026-10-26"
   },
   {
     "id": "12",
@@ -221,7 +223,7 @@
     "question": "没有新消息时，怎样开始和结束一次运行？",
     "slug": "12-scheduling",
     "path": "learn/12-scheduling",
-    "status": "planned",
+    "status": "published",
     "prerequisites": [
       "07",
       "09",
@@ -232,7 +234,8 @@
     "legacyChapters": [
       "10"
     ],
-    "kind": "core"
+    "kind": "core",
+    "publishedAt": "2026-10-26"
   },
   {
     "id": "13",
@@ -241,7 +244,7 @@
     "question": "何时值得委托，怎样协调依赖、上下文和资源？",
     "slug": "13-delegation",
     "path": "learn/13-delegation",
-    "status": "planned",
+    "status": "published",
     "prerequisites": [
       "05",
       "07",
@@ -252,7 +255,8 @@
     "legacyChapters": [
       "11"
     ],
-    "kind": "core"
+    "kind": "core",
+    "publishedAt": "2026-10-26"
   },
   {
     "id": "14",
