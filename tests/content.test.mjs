@@ -59,6 +59,22 @@ test('controlled observation records actual module execution without claiming a 
   assert.ok(report.steps[1].result.error && report.steps[2].result.error)
 })
 
+test('delivery observation preserves uncertainty and source provenance without claiming external receipt', () => {
+  const report = readJson('docs/public/observations/delivery-queue.json')
+  const lock = readJson('examples/news-brief/delivery-source-lock.json')
+  assert.deepEqual(report.upstream, lock)
+  assert.equal(lock.commit, readJson('content/verification.json').chapters['15'].upstreams.hermes.commit)
+  assert.equal(report.modelCalls, 0)
+  assert.equal(report.externalSends, 0)
+  assert.deepEqual(report.steps.map(s => s.status), ['pending', 'pending', 'delivering', 'unknown', 'unknown', 'delivered', 'failed'])
+  assert.equal(report.steps[0].firstContentPreserved, true)
+  assert.equal(report.steps[4].claimable, false)
+  assert.equal(report.steps[5].localCallbacks, 1)
+  assert.equal(report.steps[5].terminalContentPruned, true)
+  assert.ok(report.limitations.some(s => s.includes('not proof of external message delivery')))
+  assert.ok(lock.files.every(f => /^[a-f0-9]{64}$/.test(f.sha256)))
+})
+
 test('public evidence remains required by default and internal chapters cannot restore the citation banner', () => {
   const catalog = readJson('content/chapters.json').filter(chapter => chapter.id === '03').map(chapter => ({ ...chapter, prerequisites: [] }))
   const verification = readJson('content/verification.json')

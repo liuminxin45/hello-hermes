@@ -47,6 +47,8 @@ npm run docs:dev
 
 ## 内容与图解的约定
 
-写作前读仓库中的 `editorial/writing.md`，配图前读 `editorial/visuals.md`。每章回答一个问题，保留例子、推理、代价和来源。图文一起审核，避免改了机制却留下旧箭头。
+写作前读仓库中的 `editorial/writing.md`，配图前读 `editorial/visuals.md`。每章回答一个问题，保留例子、推理和代价；新版正文不放源码跳转，核对来源与版本保存在内部审核记录。图文一起审核，避免改了机制却留下旧箭头。
+
+新版章节由 `content/chapters.json` 的 `path` 决定，旧十四章与旧批注继续绑定原路径。不要按相同编号覆盖旧文，也不要把旧核对日期直接继承到新版。
 
 正文及原创图解采用 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)，站点代码、维护脚本和 skill 采用 MIT。第三方资料保持原链接与归属。

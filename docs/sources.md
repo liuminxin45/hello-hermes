@@ -16,14 +16,16 @@ next: false
 
 新版基础材料为自编教学资料。第四章包含固定版本工具注册表的真实受控执行，调用请求由固定驱动提供，模型调用数为零；结果与限制见[案例页](./casebook.md)。它不等于完整 Hermes 回放，也不代表模型会选对工具。当前没有声称完成真实模型调用或性能基准测试。
 
-旧版的核对记录另行保留。原有 OpenClaw 对照属于旧版，新版专题完成前不计作新版已核实内容。
+第十五章另有投递队列的真实受控执行，使用临时数据库、本地回调和注入的零等待预算；没有实际外发，也未覆盖完整调度或死进程探测。范围与原始记录见案例页。
+
+旧版的核对记录另行保留。新版 OpenClaw 对照重新核对 v2026.10.7，不继承旧版日期或完成状态。
 
 ## 一手资料
 
 - [Hermes 固定版本源码](https://github.com/NousResearch/hermes-agent/tree/bf0203a794a07aac3ff764972ab9087baa4e4f4e)
 - [Hermes 该版本官方文档源码](https://github.com/NousResearch/hermes-agent/tree/bf0203a794a07aac3ff764972ab9087baa4e4f4e/website/docs)
 - [Hermes 该版本测试目录](https://github.com/NousResearch/hermes-agent/tree/bf0203a794a07aac3ff764972ab9087baa4e4f4e/tests)
-- [OpenClaw 固定版本源码与文档](https://github.com/openclaw/openclaw/tree/fe06181dc5ecc01cf8904abbfc26925925efefbc)
+- [OpenClaw 固定版本源码与文档](https://github.com/openclaw/openclaw/tree/157d8c2bc3ea2fa183afdc11088e69690bf8e64e)
 - [Anthropic：Building effective agents](https://www.anthropic.com/research/building-effective-agents)，用于工作流与 Agent 的概念区分；这篇文章写于 2024 年，产品工具细节不作为当前版本依据。
 - [ReAct 论文](https://arxiv.org/abs/2210.03629)，用于理解推理与行动交替的研究背景；不将论文中的提示结构视为所有现代 Agent 的统一实现。
 - [MCP 规范](https://modelcontextprotocol.io/specification/2025-06-18)，用于理解协议与应用职责的边界。

@@ -76,6 +76,138 @@
       "pending": [],
       "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-3.md"
     },
+    "14": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/user-guide/security.md",
+            "website/docs/developer-guide/tools-runtime.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-reading",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-4.md"
+    },
+    "15": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/developer-guide/agent-loop.md",
+            "website/docs/developer-guide/gateway-internals.md",
+            "website/docs/developer-guide/cron-internals.md",
+            "cron/delivery_queue.py",
+            "cron/executions.py",
+            "cron/delivery_outcome.py"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-documentation-and-controlled-module-execution",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-4.md",
+      "controlledExperiments": [
+        {
+          "report": "docs/public/observations/delivery-queue.json",
+          "scope": "unmodified cron queue with temporary SQLite and local callbacks; injected zero wait; no liveness recovery or job-ledger write-back",
+          "modelCalls": 0,
+          "externalSends": 0
+        }
+      ]
+    },
+    "16": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/developer-guide/agent-loop.md",
+            "website/docs/developer-guide/session-storage.md",
+            "cron/delivery_queue.py"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-documentation-and-controlled-module-execution",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-4.md"
+    },
+    "17": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/developer-guide/architecture.md",
+            "website/docs/user-guide/security.md",
+            "website/docs/user-guide/features/cron.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-reading",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-4.md"
+    },
+    "18": {
+      "upstreams": {
+        "hermes": {
+          "repository": "NousResearch/hermes-agent",
+          "label": "Hermes",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "website/docs/developer-guide/architecture.md",
+            "website/docs/developer-guide/gateway-internals.md",
+            "website/docs/user-guide/profiles.md",
+            "website/docs/user-guide/features/memory.md",
+            "website/docs/user-guide/features/skills.md",
+            "website/docs/user-guide/features/curator.md",
+            "website/docs/developer-guide/cron-internals.md"
+          ]
+        },
+        "openclaw": {
+          "repository": "openclaw/openclaw",
+          "label": "OpenClaw",
+          "tag": "v2026.10.7",
+          "commit": "157d8c2bc3ea2fa183afdc11088e69690bf8e64e",
+          "verifiedAt": "2026-10-26",
+          "paths": [
+            "docs/concepts/architecture.md",
+            "docs/concepts/agent-loop.md",
+            "docs/concepts/multi-agent.md",
+            "docs/concepts/memory.md",
+            "docs/tools/skills.md",
+            "docs/tools/skill-workshop.md",
+            "docs/automation/cron-jobs.md",
+            "docs/automation/cron-jobs/payloads.md",
+            "docs/automation/cron-jobs/delivery.md"
+          ]
+        }
+      },
+      "reviewType": "fixed-version-official-documentation-reading",
+      "runtimeReplay": false,
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-curriculum-batch-4.md"
+    },
     "01": {
       "upstreams": {
         "hermes": {
@@ -397,6 +529,21 @@
     {
       "file": "/images/course/delegation-handoff.webp",
       "promptId": "course-delegation-handoff",
+      "reviewedAt": "2026-10-26"
+    },
+    {
+      "file": "/images/course/recovery-decision.webp",
+      "promptId": "course-recovery-decision",
+      "reviewedAt": "2026-10-26"
+    },
+    {
+      "file": "/images/course/capstone-design.webp",
+      "promptId": "course-capstone-design",
+      "reviewedAt": "2026-10-26"
+    },
+    {
+      "file": "/images/course/comparison-lenses.webp",
+      "promptId": "course-comparison-lenses",
       "reviewedAt": "2026-10-26"
     }
   ]

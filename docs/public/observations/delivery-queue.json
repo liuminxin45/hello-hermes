@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "kind": "controlled-official-module-execution",
+  "recordedAt": "2026-10-26T12:16:14.206424+00:00",
+  "upstream": {
+    "repository": "NousResearch/hermes-agent",
+    "tag": "v0.22.5",
+    "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+    "files": [
+      {
+        "path": "hermes_constants.py",
+        "sha256": "870ad9935a62968636d6a14d160c0269dfbefd8091ab3cb71be78b30bef6360f"
+      },
+      {
+        "path": "hermes_time.py",
+        "sha256": "9c8ba38f50bdf0b8d2a3a96dfe471f0c7b29ec3e83f96596624d258119a0b19e"
+      },
+      {
+        "path": "hermes_state_wal.py",
+        "sha256": "5fb152d748a373995093e253b10af3ab662f7331202ebd99d2897340d14b0e61"
+      },
+      {
+        "path": "hermes_state_errors.py",
+        "sha256": "05039e5c88ea1ce41792832743578b6facc582b89bebf2d68f3673d89515b47c"
+      },
+      {
+        "path": "agent/__init__.py",
+        "sha256": "21cdce89e9ffdb847634bf498b087410cd191a1e375db43928735846fb7ddc86"
+      },
+      {
+        "path": "agent/jiter_preload.py",
+        "sha256": "bb66461d6e52e54dd2368ad021304d74676824924c45df80f0a3e769c9e5fff3"
+      },
+      {
+        "path": "agent/secret_scope.py",
+        "sha256": "dce64ce99a6966836108e202e1db41c4be97bd3dad41a79e357f39b8d7e90dec"
+      },
+      {
+        "path": "agent/redact.py",
+        "sha256": "cea25df8139675b600eca448f70756bfa9ad22f537abf4f123d01bcbfc71e563"
+      },
+      {
+        "path": "agent/file_safety.py",
+        "sha256": "90515fb80bcf85c5b153370071f3d85bd945d838e0423d29e11e951f95833f6f"
+      },
+      {
+        "path": "hermes_cli/__init__.py",
+        "sha256": "6a4ab05b8621ec1cd66a5abbe30fa32ed5bddddea95903036da01f0af1af94ce"
+      },
+      {
+        "path": "hermes_cli/sqlite_util.py",
+        "sha256": "1ffde9d5e896dee3282514c81676d00d7535c833fc6d5ef9c43a42ae3778de79"
+      },
+      {
+        "path": "hermes_cli/sqlite_runtime.py",
+        "sha256": "b540a3f8e2de642188dd2a9ee91612b52b7fd39580fedf47e8f82dffc66c6877"
+      },
+      {
+        "path": "hermes_cli/observability/__init__.py",
+        "sha256": "ff9ef5f81f6533b011115b69ebcafe65fd3276877fa614b431385115681bb15b"
+      },
+      {
+        "path": "hermes_cli/observability/shared_metrics_gateway.py",
+        "sha256": "69fa0ca3f07ae7223e5623d2c0fefa26e7caab7a33cd9981a5b06f05a9ca01d4"
+      },
+      {
+        "path": "cron/constants.py",
+        "sha256": "79bc9f2135d008d76048d4f08384fe14d606755eff8edf87447cc8a636081d74"
+      },
+      {
+        "path": "cron/executions.py",
+        "sha256": "7ce68327ecff092b13f828f9b114d8c0730c686906daf90874672e24f5313337"
+      },
+      {
+        "path": "cron/delivery_queue.py",
+        "sha256": "6cf591b7cacff379de5d585fce85c4909bef892037b605ca9d2bbb6a3a86c5c7"
+      },
+      {
+        "path": "cron/delivery_outcome.py",
+        "sha256": "99b1bea1a81cc5cf79405788cb20663f93c2f8650c96c335f5b8758a38d71196"
+      }
+    ]
+  },
+  "python": "3.12.14",
+  "modelCalls": 0,
+  "externalSends": 0,
+  "requestOrigin": "fixed driver and local callback, not model decisions",
+  "scope": "Unmodified cron delivery queue with SQLite in a temporary directory; explicit package harness skips scheduler startup.",
+  "steps": [
+    {
+      "action": "enqueue same execution twice",
+      "status": "pending",
+      "firstContentPreserved": true
+    },
+    {
+      "action": "zero wait while never claimed",
+      "status": "pending",
+      "error": null
+    },
+    {
+      "action": "child claims and exits without send or outcome write",
+      "status": "delivering",
+      "childExitCode": 0
+    },
+    {
+      "action": "zero wait after claim",
+      "status": "unknown",
+      "error": "timed out while gateway delivery was in progress; outcome is unknown and was not retried"
+    },
+    {
+      "action": "enqueue same execution after uncertainty",
+      "status": "unknown",
+      "claimable": false
+    },
+    {
+      "action": "new execution through local success callback",
+      "status": "delivered",
+      "localCallbacks": 1,
+      "terminalContentPruned": true
+    },
+    {
+      "action": "new execution through local refused callback",
+      "status": "failed",
+      "error": "teaching transport refused"
+    }
+  ],
+  "limitations": [
+    "No model, scheduler loop, real gateway or platform transport was started.",
+    "The child deliberately exits before sending; the queue has no evidence of that fact and treats the claimed outcome as uncertain.",
+    "timeout=0 is fault injection, not a documented default.",
+    "Dead-owner liveness recovery and job/execution-ledger write-back were not exercised; jobs have no production job id.",
+    "A local callback returning success is not proof of external message delivery or human receipt."
+  ]
+}

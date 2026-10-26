@@ -265,7 +265,7 @@
     "question": "指令、材料、授权与执行环境怎样划界？",
     "slug": "14-permissions",
     "path": "learn/14-permissions",
-    "status": "planned",
+    "status": "published",
     "prerequisites": [
       "04",
       "07",
@@ -276,7 +276,8 @@
     "legacyChapters": [
       "12"
     ],
-    "kind": "core"
+    "kind": "core",
+    "publishedAt": "2026-10-26"
   },
   {
     "id": "15",
@@ -285,7 +286,7 @@
     "question": "重试、记录、并发和恢复怎样避免重复副作用？",
     "slug": "15-recovery",
     "path": "learn/15-recovery",
-    "status": "planned",
+    "status": "published",
     "prerequisites": [
       "05",
       "07",
@@ -298,7 +299,8 @@
       "03",
       "10"
     ],
-    "kind": "core"
+    "kind": "core",
+    "publishedAt": "2026-10-26"
   },
   {
     "id": "16",
@@ -307,7 +309,7 @@
     "question": "怎样用记录、证据、成本和反例验证结果？",
     "slug": "16-evaluation",
     "path": "learn/16-evaluation",
-    "status": "planned",
+    "status": "published",
     "prerequisites": [
       "13",
       "14",
@@ -318,7 +320,8 @@
     "legacyChapters": [
       "13"
     ],
-    "kind": "core"
+    "kind": "core",
+    "publishedAt": "2026-10-26"
   },
   {
     "id": "17",
@@ -327,7 +330,7 @@
     "question": "怎样选择必要模块，并解释省略与取舍？",
     "slug": "17-capstone",
     "path": "learn/17-capstone",
-    "status": "planned",
+    "status": "published",
     "prerequisites": [
       "08",
       "09",
@@ -336,7 +339,8 @@
     "outcome": "能完成需求、架构、状态、替代方案和验证设计。",
     "artifact": "毕业项目：一份有理由的 Agent 方案",
     "legacyChapters": [],
-    "kind": "core"
+    "kind": "core",
+    "publishedAt": "2026-10-26"
   },
   {
     "id": "18",
@@ -345,7 +349,7 @@
     "question": "面对同一个问题，两种系统作了哪些选择？",
     "slug": "18-openclaw",
     "path": "learn/18-openclaw",
-    "status": "planned",
+    "status": "published",
     "prerequisites": [
       "08",
       "09",
@@ -357,6 +361,7 @@
     "legacyChapters": [
       "14"
     ],
-    "kind": "comparison"
+    "kind": "comparison",
+    "publishedAt": "2026-10-26"
   }
 ]

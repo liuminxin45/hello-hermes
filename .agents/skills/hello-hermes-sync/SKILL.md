@@ -11,6 +11,8 @@ description: 在 hello-hermes 仓库中响应“跟上官方最新”“同步�
 
 确认当前仓库是 hello-hermes。读取根 `AGENTS.md`、`editorial/writing.md`、`editorial/visuals.md`、`content/chapters.json` 与 `content/verification.json`，不要根据文件时间推断核对完成。
 
+当前课程路径取 catalog 的 `path`，不要按编号猜旧版文件。新版在 `docs/learn/`，旧十四章与独立核对记录保存在 `docs/chapters/` 和 `content/archive/`；默认只维护当前目录中已发布单元，不把新版日期或意见套给同号旧章。课程重构或新单元写作需另有任务授权。
+
 运行 `npm run sync:check`，读取 `.cache/sync/report.json`。报告只收集事实，不修改核对记录。检查工作区修改、当前分支、现有 `codex/sync-upstream` PR 和每章独立基线。已有维护 PR 优先复用；不要修改其他人的未完成内容。需要隔离时先核对关联 worktree，复用合适的干净工作区，或从远端 main 建立独立维护 worktree；不 reset、clean 或覆盖用户文件。
 
 ## 判断影响，回到完整证据
@@ -25,6 +27,8 @@ GitHub compare 的文件/提交列表可能截断。报告 `complete: false`、�
 
 列出受影响章节、具体事实、依据和需要改变的图意，再修改。保持贯穿案例、首次术语解释、设计代价、章末要点与理解题。默认不代写规划中的新章节；发现大纲缺口时在 PR 提出依据。
 
+新版正文不恢复源码跳转、引用横幅或编辑入口；固定版本与核对范围写入内部 `reviewNotes`。更新方法或示例时，分别标明教学推演、受控模块执行与完整模型运行，不能改写原始观察来制造新版本实测。改图或改机制后检查案例的上下游产物是否仍相符。
+
 修改图意时读取 `editorial/figures.json` 和标准参考图，用当前可用的 imagegen 按统一风格重绘，逐项核对标签、箭头、分支和正文。只做格式压缩可用本地图片工具。缺少 imagegen 或生成失败时记录待补图，保留可继续的草稿，不把旧图当作已验收新图。
 
 只在事实与图解真正核对完成后更新对应章节的 `verifiedAt`、版本和完整提交号；不要批量刷新未审章节。图解信息同步维护 `editorial/figures.json` 与 verification 中的图解审核记录。可在 pending 记录尚未完成的事，发布检查会阻止带 pending 的章节上线。
@@ -32,6 +36,8 @@ GitHub compare 的文件/提交列表可能截断。报告 `complete: false`、�
 ## 验证与交付
 
 执行 `npm test`、`npm run docs:build`、`npm run check:links`。远程链接区分 404/410 与网络不可达；后者不能写成已经失效，也不能当作通过。图文或界面变化时检查手机与桌面、深浅主题、放大、导航和搜索；记录真正执行过的结果。
+
+公共构建必须通过批注隔离检查。本地微型服务代码可以随仓库提交，但 `.review/`、会话凭据和批注数据不能进入提交或部署产物；保留现有意见，不因换章号或内容过时自动核销。
 
 检查 `git diff`，确认只包含本次修订和必要来源记录。没有实质变化时报告已核对版本、范围、未发布跟踪项，不制造空提交或 PR。
 

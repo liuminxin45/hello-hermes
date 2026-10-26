@@ -208,5 +208,29 @@
     "styleReference": "assets/reference/three-approaches.png",
     "generator": "codex-built-in-imagegen",
     "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "course-recovery-decision",
+    "file": "/images/course/recovery-decision.webp",
+    "prompt": "Use case: scientific-educational. Original Chinese hello-hermes textbook infographic. Attached image STYLE REFERENCE ONLY. Off-white #fdfdfb, ink #172033, blue #1d4ed8, pale fill #eaf1ff, flat thin rounded boxes, crisp large Chinese sans-serif, generous whitespace. Landscape 3:2. No code, source references, gradients, logos, robots or decorative icons.\nTitle “没有回执，先判断动作到了哪里”. Subtitle “教学视图：发送相关状态不能合并成一个失败”. Three separate horizontal lanes, no arrows between lanes. Lane 1 left label “尚未领取”; boxes “待发送” → “继续排队等待” with right-pointing arrow; small note “可以确认还没有开始”. Lane 2 left label “领取后无回执”; boxes “发送结果未知” → “停止自动重发，先核对” with right-pointing arrow; small note “不能从超时推断未送达”. Lane 3 left label “取得明确结果”; boxes “已确认成功或拒绝” → “按结果记录并处理” with right-pointing arrow; small note “记录还要对应本次执行”. Footer “这是选择恢复路径的依据，不承诺任何系统都能恰好发送一次”. Labels exact. Do not use success ticks in unknown lane.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "course-capstone-design",
+    "file": "/images/course/capstone-design.webp",
+    "prompt": "Use case: scientific-educational. Original Chinese hello-hermes textbook infographic. Attached image STYLE REFERENCE ONLY. Off-white #fdfdfb, ink #172033, blue #1d4ed8, pale fill #eaf1ff, flat thin rounded boxes, crisp large Chinese sans-serif, generous whitespace. Landscape 3:2. No code, source references, gradients, logos, robots or decorative icons.\nTitle “先画清楚任务，再选择必要模块”. Subtitle “毕业项目的设计检查图，不是已经部署的系统”. Six large cards in two rows of three. No arrows anywhere: these cards are review dimensions, not a sequence. Card 1 “需求与完成标准” and smaller “什么输入，交付什么”. Card 2 “模型与工具” and smaller “谁判断，谁执行”. Card 3 “状态与材料” and smaller “谁保存，何时加载”. Card 4 “身份与授权” and smaller “谁可见，谁可操作”. Card 5 “生命周期” and smaller “怎样触发、恢复、停止”. Card 6 “证据与取舍” and smaller “怎样验收，为何省略”. Footer “每增加一个模块，都要说出它解决的问题与新增代价”. Calm spacious textbook composition.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "course-comparison-lenses",
+    "file": "/images/course/comparison-lenses.webp",
+    "prompt": "Use case: scientific-educational. Original Chinese hello-hermes textbook infographic. Attached image STYLE REFERENCE ONLY. Off-white #fdfdfb, ink #172033, blue #1d4ed8, pale fill #eaf1ff, flat thin rounded boxes, crisp large Chinese sans-serif, generous whitespace. Landscape 3:2. No code, source references, gradients, logos, robots or decorative icons.\nTitle “同一任务，用同一组问题比较”. Two equal columns with exact headings “Hermes v0.22.5” and “OpenClaw v2026.10.7”. Each column contains EXACTLY the same four rows in the same order: “入口与会话归属” “模型与工具循环” “记忆与技能维护” “调度、权限与恢复”. No arrows and no ratings, scores, trophies or checkmarks. Below both columns one common pale-blue box “固定目标、材料、模型条件与完成标准”. Footer “两者都具备多种机制；设计差异需要逐项解释”. Subtitle “教学对照框架，不是性能测试或优劣排名”. Only specified text.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
   }
 ]

@@ -45,8 +45,19 @@ npm run review
 
 `npm run sync:check` 只生成 `.cache/sync/report.json` 报告，不直接更改手册或核对记录。整个流程依靠当前 Codex 环境，不设置定时任务，不需要内容生成 API Key。详见 [.agents/skills/hello-hermes-sync/SKILL.md](.agents/skills/hello-hermes-sync/SKILL.md)。
 
+## 可选的受控模块观察
+
+普通读者无需运行。维护者可在 Python 3.11 或更新版本中复现两份局部观察：
+
+```sh
+python scripts/observe-tool-registry.py
+python scripts/observe-delivery-queue.py
+```
+
+脚本下载固定提交的必要模块，并用 `examples/news-brief/*-source-lock.json` 校验摘要。输出默认放在忽略的 `.cache/`。队列观察使用临时数据库、固定驱动和本地回调，不启动完整调度、模型或平台发送；详细范围写在原始报告中。
+
 ## 版本与许可
 
-新版本批依据 Hermes v0.22.5，维护者于 2026-10-26 查询稳定发布并重新核对相关内容。受控观察只执行固定版本的同步注册表路径，没有模型调用。旧版 OpenClaw v2026.10.6 对照保留在历史记录，新版专题另行审核。具体范围见[版本与来源](docs/sources.md)。
+新版依据 Hermes v0.22.5 与 OpenClaw v2026.10.7，维护者于 2026-10-26 查询稳定发布并核对相关内容。两份真实受控观察分别执行同步注册表和投递队列模块，没有模型调用或外部发送；不等于完整 Agent 基准。旧版 OpenClaw v2026.10.6 记录独立保留。具体范围见[版本与来源](docs/sources.md)。
 
 本项目是独立社区学习材料，非相关项目官方文档。正文和原创图解 [CC BY-SA 4.0](LICENSE-CONTENT.md)，站点代码、维护脚本及 skill [MIT](LICENSE)。
