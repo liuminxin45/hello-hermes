@@ -22,8 +22,17 @@ export function validateCatalog(catalog, verification, read = path => readFileSy
     for (const source of Object.values(record?.upstreams || {})) {
       if (!/^[\w.-]+\/[\w.-]+$/.test(source.repository) || !/^[a-f0-9]{40}$/.test(source.commit) || !source.tag || !/^\d{4}-\d{2}-\d{2}$/.test(source.verifiedAt) || !source.paths?.length) errors.push(`invalid evidence: ${chapter.id}`)
     }
-    if (!text.includes('## 本章要点') || (text.match(/::: details/g) || []).length < 2 || !text.includes('## 对照官方实现')) errors.push(`missing learning support: ${chapter.id}`)
-    if (!text.includes(`<ChapterVerification chapter="${chapter.id}"`)) errors.push(`missing rendered verification: ${chapter.id}`)
+    const frontmatter = text.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] || ''
+    const evidenceDisplay = frontmatter.match(/^evidenceDisplay:\s*(\S+)\s*$/m)?.[1] || 'public'
+    if (!['public', 'internal'].includes(evidenceDisplay)) errors.push(`invalid evidence display: ${chapter.id}`)
+    if (!text.includes('## 本章要点') || (text.match(/::: details/g) || []).length < 2) errors.push(`missing learning support: ${chapter.id}`)
+    if (evidenceDisplay === 'internal') {
+      if (!record?.reviewNotes || !exists(record.reviewNotes)) errors.push(`missing internal review notes: ${chapter.id}`)
+      if (text.includes('<ChapterVerification') || text.includes('## 对照官方实现')) errors.push(`unexpected public evidence: ${chapter.id}`)
+    } else {
+      if (!text.includes('## 对照官方实现')) errors.push(`missing public evidence: ${chapter.id}`)
+      if (!text.includes(`<ChapterVerification chapter="${chapter.id}"`)) errors.push(`missing rendered verification: ${chapter.id}`)
+    }
     const images = [...text.matchAll(/<TeachingFigure\s+src="([^"]+)"[^>]+alt="([^"]+)"/g)]
     if (images.length < 2) errors.push(`expected at least two teaching figures: ${chapter.id}`)
     for (const [, src, alt] of images) {

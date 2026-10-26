@@ -150,17 +150,24 @@
           "label": "Hermes",
           "tag": "v0.22.5",
           "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
-          "verifiedAt": "2026-10-23",
+          "verifiedAt": "2026-10-26",
           "paths": [
             "website/docs/developer-guide/agent-loop.md",
+            "agent/conversation_loop.py",
             "agent/iteration_budget.py",
-            "agent/interrupt_control.py"
+            "agent/interrupt_control.py",
+            "agent/turn_iteration_prep.py",
+            "agent/turn_api_error.py",
+            "agent/turn_final_response.py",
+            "agent/turn_tool_round.py",
+            "agent/turn_finalizer.py"
           ]
         }
       },
       "reviewType": "fixed-version-official-documentation-and-targeted-source-reading",
       "runtimeReplay": false,
-      "pending": []
+      "pending": [],
+      "reviewNotes": "editorial/reviews/2026-10-26-ch03.md"
     },
     "04": {
       "upstreams": {
@@ -360,6 +367,16 @@
       "file": "/images/shared/comparison.webp",
       "promptId": "14-comparison",
       "reviewedAt": "2026-10-23"
+    },
+    {
+      "file": "/images/ch03/task-trace.webp",
+      "promptId": "03-task-trace",
+      "reviewedAt": "2026-10-26"
+    },
+    {
+      "file": "/images/ch03/failure-handling.webp",
+      "promptId": "03-failure-handling",
+      "reviewedAt": "2026-10-26"
     }
   ]
 }

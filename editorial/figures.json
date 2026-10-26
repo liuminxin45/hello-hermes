@@ -118,5 +118,23 @@
     "reproductionSpec": "Two columns show official architecture reading perspectives. Hermes: CLI/Gateway/ACP entry points -> AIAgent action orchestration -> tools/context/state. OpenClaw: clients/message channels -> Gateway control/routing -> sessions/agent runtime/tools. Both have loops, sessions, memory and skills. Do not imply exclusivity. Use the standard style reference.",
     "styleReference": "assets/reference/three-approaches.png",
     "reviewedAt": "2026-10-23"
+  },
+  {
+    "id": "03-task-trace",
+    "file": "/images/ch03/task-trace.webp",
+    "description": "技术简报六轮教学轨迹，失败与换入口后缩小未知，第六轮直接答复。",
+    "prompt": "Use case: scientific-educational. Create one finished textbook infographic for the Chinese hello-hermes manual. Input image 1 is a STYLE REFERENCE ONLY: match its flat, quiet textbook style, off-white #fdfdfb background, dark ink #172033, blue #1d4ed8 arrows, pale blue #eaf1ff panels, thin rounded borders, clear bold Chinese sans-serif type, generous spacing. Landscape 3:2, high resolution. No textures, logos, code, footnotes, decorative icons or extra wording. Exact Chinese labels, visually correct arrow direction.\nTitle: “一次任务，六轮推进”\nSubtitle: “教学示意：轮数与重试次数不是默认配置”\nComposition: clear vertical timeline on the left, with six numbered rows. Two aligned columns titled “本轮行动” and “得到的结果”. Horizontal arrow from action to result within each row. A slim downward arrow on the far left connects row 1 to row 2 to row 3 to row 4 to row 5 to row 6, always forward. No backward arrows. Each row compact, spacious and readable, last row pale blue.\nRow 1: number “1”; action “读取发布说明”; result “确认版本与变更摘要”.\nRow 2: number “2”; action “读取行为细节”; result “页面超时，细节未知”.\nRow 3: number “3”; action “重试一次”; result “再次超时，没有新证据”.\nRow 4: number “4”; action “换一个官方入口”; result “读到说明，条件仍待核实”.\nRow 5: number “5”; action “核对适用条件”; result “已有足够材料形成简报”.\nRow 6: number “6”; action “输出最终答复”; result “交付已知结论与适用边界”.\nConstraints: six rows only, preserve order exactly. Arrow within row 6 represents producing an answer, not a tool call. Do not add success check marks on timeout rows. No fake terminal logs.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "03-failure-handling",
+    "file": "/images/ch03/failure-handling.webp",
+    "description": "区分模型服务请求失败的运行程序处理与工具错误返回后的模型选择。",
+    "prompt": "Use case: scientific-educational. Create a finished Chinese textbook infographic for hello-hermes. Input image 1 is a STYLE REFERENCE ONLY: match off-white #fdfdfb background, ink #172033, blue #1d4ed8, pale blue #eaf1ff panels, thin rounded borders, large clear Chinese sans-serif type, generous spacing. Landscape 3:2, high resolution, flat clean educational diagram.\nTitle exactly “失败之后，谁来处理？”\nTwo spacious horizontal lanes stacked vertically, separated with ample white space.\nUpper lane heading “还没有拿到模型响应”. Small example line “例如：连接超时、临时限流”. Main boxes left to right: “模型服务请求失败” → “运行程序按类型处理” → “重试成功后继续”. Two right-pointing arrows only. Below the middle box a separate small line “临时错误可有限重试；不可恢复则退出”.\nLower lane heading “已经执行了工具”. Small example line “例如：页面超时、参数错误”. Main boxes left to right: “工具返回错误结果” → “结果带回下一轮” → “模型选择后续行动”. Two right-pointing arrows only. Below the right box a separate small line “重试、修正、换方法、求助或停止”.\nFooter in a slim pale-blue box: “教学示意：工具内部也可能自带重试，图中画的是返回后的处理”.\nConstraints: do not connect the two lanes with any arrows; no loop arrow or error-to-success guarantee. There are exactly six main boxes and four arrows, all arrows point right. No logos, source citations, code, mascots, gradients, decorative icons, invented mechanisms or extra text. Text must be accurate, readable and not overlap.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "generator": "codex-built-in-imagegen",
+    "reviewedAt": "2026-10-26"
   }
 ]
