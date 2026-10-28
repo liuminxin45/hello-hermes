@@ -1,7 +1,8 @@
 ---
-layout: page
-title: 从 Hermes 理解 Agent
-description: 一本面向 Agent 学习者的中文图解手册，逐章解释 Hermes 的机制、取舍与 OpenClaw 的差异。
+layout: false
+title: Hermes Agent 工厂实习馆
+description: 带着一张订单，跟导师走进 Agent 工厂，参观、提问、生成实景报告并参加实习测试。
+search: false
 ---
 
-<ManualHome />
+<iframe src="/hello-hermes/factory/index.html" title="Hermes Agent 工厂实习馆" style="position:fixed;inset:0;width:100%;height:100svh;border:0" />

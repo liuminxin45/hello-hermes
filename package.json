@@ -6,7 +6,7 @@
   "engines": { "node": ">=22.12.0" },
   "scripts": {
     "docs:dev": "vitepress dev docs --host 127.0.0.1",
-    "docs:build": "node scripts/check-content.mjs && vitepress build docs && node scripts/check-public-output.mjs",
+    "docs:build": "node scripts/check-content.mjs && vitepress build docs && node scripts/build-factory.mjs && node scripts/check-public-output.mjs",
     "docs:preview": "vitepress preview docs --host 127.0.0.1",
     "check": "node scripts/check-content.mjs",
     "check:links": "node scripts/check-links.mjs",

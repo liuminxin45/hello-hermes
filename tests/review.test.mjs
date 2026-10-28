@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, realpathSync } from 'node:fs'
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, rmdirSync, realpathSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { resolve, dirname, basename } from 'node:path'
 import { randomUUID } from 'node:crypto'
@@ -93,6 +93,46 @@ test('editing a frozen comment blocks the whole batch; unrelated comments are no
   mutate(root, { operationId: randomUUID(), action: 'update', id: a.id, expectedVersion: 1, comment: '用户后来的要求' })
   assert.throws(() => resolveReview(root, result.path), /整批未核销/)
   assert.ok(readStore(root).annotations.every(a => a.status === 'open'))
+})
+
+test('resolved batches archive original comments and decisions without clearing later or blocked comments', t => {
+  const { root, add } = fixture(t), first = add('第一条意见'), blocked = add('仍待核实')
+  mutate(root, first); mutate(root, blocked)
+  const result = beginReview(root), later = add('批次开始后新加')
+  mutate(root, later)
+  const batch = decisions(root, result, ['addressed', 'blocked'])
+  assert.deepEqual(resolveReview(root, result.path), { resolved: 1, pending: 2 })
+  const archivePath = localPath(root, `archives/${batch.id}.json`), archive = readJson(archivePath)
+  assert.equal(archive.phase, 'archived')
+  assert.deepEqual(archive.annotations.map(a => a.id), [first.id])
+  assert.equal(archive.annotations[0].comment, '第一条意见')
+  assert.equal(archive.annotations[0].anchor.quote, first.anchor.quote)
+  assert.equal(archive.annotations[0].history.at(-1).action, 'resolve')
+  assert.equal(archive.annotations[0].resolution.outcome, 'addressed')
+  const archived = readFileSync(archivePath, 'utf8')
+  mutate(root, { operationId: randomUUID(), action: 'update', id: first.id, expectedVersion: 2, comment: '重新提出意见' })
+  resolveReview(root, result.path)
+  assert.equal(readFileSync(archivePath, 'utf8'), archived)
+  assert.equal(readStore(root).annotations.filter(a => a.status === 'open').length, 3)
+})
+
+test('archive preparation failures leave the active batch untouched and interrupted finalization can recover', t => {
+  const { root, add } = fixture(t), op = add()
+  mutate(root, op)
+  const result = beginReview(root), batch = decisions(root, result)
+  const archivePath = localPath(root, `archives/${batch.id}.json`)
+  mkdirSync(archivePath, { recursive: true })
+  const before = readFileSync(localPath(root, 'annotations.json'), 'utf8')
+  assert.throws(() => resolveReview(root, result.path))
+  assert.equal(readFileSync(localPath(root, 'annotations.json'), 'utf8'), before)
+  rmdirSync(archivePath)
+  resolveReview(root, result.path)
+  const archive = readJson(archivePath)
+  atomicJson(archivePath, { ...archive, phase: 'prepared' })
+  const resolvedVersion = readStore(root).annotations[0].version
+  assert.equal(resolveReview(root, result.path).alreadyApplied, true)
+  assert.equal(readJson(archivePath).phase, 'archived')
+  assert.equal(readStore(root).annotations[0].version, resolvedVersion)
 })
 test('resolution requires current validation and untampered frozen targets', t => {
   const { root, add } = fixture(t); mutate(root, add())

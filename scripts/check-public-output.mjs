@@ -11,7 +11,7 @@ export function checkPublicOutput(directory) {
       const file = resolve(path, entry.name), name = relative(directory, file).replaceAll('\\', '/')
       if (/^\.review(?:\/|$)|^__review(?:\/|$)|(?:^|\/)annotations\.json$/.test(name)) errors.push(`private review artifact in public output: ${name}`)
       if (entry.isDirectory()) walk(file)
-      else if (['.html', '.js', '.css'].includes(extname(file))) {
+      else if (['.html', '.js', '.mjs', '.css'].includes(extname(file))) {
         const text = readFileSync(file, 'utf8')
         if (/\/__review\/(?:api|client|session)|hh-review-root|X-Review-Token/.test(text)) errors.push(`local review runtime in public output: ${name}`)
       }

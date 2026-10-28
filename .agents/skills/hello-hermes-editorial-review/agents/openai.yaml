@@ -1,0 +1,4 @@
+interface:
+  display_name: "写作修订与审稿意见处理"
+  short_description: "阶段 A 批量优化并构建检查；阶段 C 逐项核实审稿意见，只修复确认问题"
+  default_prompt: "使用 $hello-hermes-editorial-review 执行阶段 A，批量优化当前已发布成稿，完成最小必要修订、自检、测试与构建并保存报告；不自动进入盲审，不提交、不推送、不发布。"

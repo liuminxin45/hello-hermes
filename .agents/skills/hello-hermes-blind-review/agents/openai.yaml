@@ -1,0 +1,4 @@
+interface:
+  display_name: "阶段 B：独立盲审"
+  short_description: "由不同模型在全新上下文盲审成稿，只输出分级问题与优先项，不修改文件"
+  default_prompt: "使用 $hello-hermes-blind-review 执行阶段 B，确认与写作方模型不同且上下文隔离，盲审当前新版全部已发布成稿，不读历史审稿或修订记录，只输出 P0/P1/P2 报告与优先五项问题，不修改文件。"

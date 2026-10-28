@@ -11,7 +11,7 @@ ui.innerHTML = `
   <dialog class="hr-panel" id="hr-panel" aria-labelledby="hr-panel-title">
     <header><div><h2 id="hr-panel-title">本地批注</h2><p id="hr-page-title"></p></div><button type="button" id="hr-close-panel">关闭</button></header>
     <div class="hr-panel-actions"><button type="button" id="hr-refresh">刷新列表</button><button type="button" id="hr-export">导出批注</button><button type="button" id="hr-prompt">复制给 Codex</button></div>
-    <div class="hr-filters"><label>范围<select id="hr-scope"><option value="page">当前页</option><option value="all">全书</option></select></label><label>状态<select id="hr-filter"><option value="open">待处理</option><option value="resolved">已处理</option></select></label></div>
+    <div class="hr-filters"><label>范围<select id="hr-scope"><option value="page">当前页</option><option value="all">全书</option></select></label><label>状态<select id="hr-filter"><option value="open">待处理</option><option value="resolved">本地历史</option></select></label></div>
     <p class="hr-hint">选中正文后点“批注选中文字”，也可按 Ctrl + Alt + M。标完后，在当前对话说“按批注修改手册”。</p>
     <div id="hr-pending"></div><p id="hr-panel-message" role="status" aria-live="polite"></p><div id="hr-list"></div>
   </dialog>
@@ -146,9 +146,14 @@ $('hr-form').onsubmit = async event => {
 const element = (tag, text, className) => { const el = document.createElement(tag); if (text !== undefined) el.textContent = text; if (className) el.className = className; return el }
 function button(text, action) { const el = element('button', text); el.type = 'button'; el.onclick = action; return el }
 function message(text) { $('hr-panel-message').textContent = text; status.textContent = text }
-async function refresh() {
-  state = await api('annotations'); renderList(); renderPending()
+async function refresh({ quiet = false } = {}) {
+  const next = await api('annotations')
+  const changed = JSON.stringify(next.annotations) !== JSON.stringify(state.annotations)
+  const previousOpen = state.annotations.filter(a => a.status === 'open').length
+  state = next
+  if (!quiet || changed) { renderList(); renderPending(); paintHighlights() }
   $('hr-open').textContent = `批注 · ${state.annotations.filter(a => a.status === 'open').length}`
+  if (quiet && changed && previousOpen && !state.annotations.some(a => a.status === 'open')) status.textContent = '本轮批注已处理并存档'
 }
 function renderPending() {
   const target = $('hr-pending'), entries = pending(); target.replaceChildren()
@@ -165,7 +170,7 @@ function renderPending() {
 function renderList() {
   const list = $('hr-list'); list.replaceChildren()
   const items = state.annotations.filter(a => a.status === $('hr-filter').value && ($('hr-scope').value === 'all' || a.pageId === page?.id))
-  if (!items.length) { list.append(element('p', '这里还没有批注。选中一段正文即可添加。', 'hr-empty')); return }
+  if (!items.length) { list.append(element('p', $('hr-filter').value === 'open' ? '没有待处理批注。已处理的意见可在“本地历史”中查看。' : '这里还没有已处理的批注。', 'hr-empty')); return }
   for (const item of items.slice().reverse()) {
     const card = element('article', undefined, 'hr-card')
     card.append(element('p', `${item.title} · ${item.status === 'open' ? '待处理' : '已处理'}`, 'hr-card-meta'))
@@ -183,6 +188,19 @@ function renderList() {
     for (const h of item.history) history.append(element('p', `${new Date(h.at).toLocaleString()} · v${h.version} · ${h.action}\n${h.comment || h.resolution?.summary || ''}`, 'hr-history'))
     card.append(actions, history); list.append(card)
   }
+}
+function paintHighlights() {
+  if (!globalThis.Highlight || !CSS.highlights) return
+  CSS.highlights.delete('hermes-review')
+  CSS.highlights.delete('hermes-review-open')
+  if (!page) return
+  const model = textModel(), ranges = []
+  for (const item of state.annotations.filter(a => a.pageId === page.id && a.status === 'open' && a.anchor.kind === 'text')) {
+    const found = locateText(model.text, item.anchor, page.revision, model.sections)
+    const range = found && rangeFor(model, found)
+    if (range) ranges.push(range)
+  }
+  if (ranges.length) CSS.highlights.set('hermes-review-open', new Highlight(...ranges))
 }
 function rangeFor(model, found) {
   const start = model.points[found.start], end = model.points[found.end - 1]
@@ -227,7 +245,7 @@ function augmentFigures() {
 }
 async function loadPage() {
   const pathname = location.pathname
-  if (loadingPath === pathname || pagePath === pathname) { augmentFigures(); return }
+  if (loadingPath === pathname || pagePath === pathname) { augmentFigures(); paintHighlights(); return }
   loadingPath = pathname; const id = ++loadId
   try {
     const next = await api('page?path=' + encodeURIComponent(pathname))
@@ -244,7 +262,7 @@ async function loadPage() {
     await refresh(); augmentFigures()
     const match = location.hash.match(/^#review=(.+)$/)
     if (match) { const item = state.annotations.find(a => a.id === decodeURIComponent(match[1])); if (item) setTimeout(() => locate(item), 200) }
-  } catch (error) { if (id === loadId) { page = null; pagePath = pathname; message(error.message) } }
+  } catch (error) { if (id === loadId) { page = null; pagePath = pathname; paintHighlights(); message(error.message) } }
   finally { if (id === loadId) loadingPath = '' }
 }
 $('hr-open').onclick = async () => { selected.hidden = true; panel.showModal(); try { await refresh() } catch (error) { message('后台未连接；未保存草稿仍可导出。'); renderPending() } }
@@ -265,4 +283,10 @@ try {
   let routeTimer
   new MutationObserver(() => { clearTimeout(routeTimer); routeTimer = setTimeout(loadPage, 120) }).observe(document.querySelector('#app'), { childList: true, subtree: true })
   window.addEventListener('popstate', loadPage)
+  let syncing = false
+  setInterval(async () => {
+    if (syncing || document.hidden || editor.open) return
+    syncing = true
+    try { await refresh({ quiet: true }) } catch {} finally { syncing = false }
+  }, 3000)
 } catch (error) { message('无法连接本地后台，请运行 node scripts/review.mjs start 后刷新。') }

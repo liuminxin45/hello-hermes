@@ -22,5 +22,5 @@ body.hh-review-local .VPDoc{padding-bottom:100px}
 #hr-comment{width:100%;min-height:140px;resize:vertical;padding:12px;border:1px solid var(--hr-border);border-radius:7px;background:var(--hr-bg);color:var(--hr-text);font:inherit;line-height:1.7}
 #hh-review-root footer{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px}.hr-primary{background:var(--hr-blue)!important;color:var(--hr-bg)!important}
 #hr-form-error:empty,#hr-panel-message:empty{display:none}#hr-form-error,#hr-panel-message{padding:10px 12px;border:1px solid var(--hr-border);border-radius:6px;background:var(--hr-soft);font-size:14px}
-.hr-figure-add{margin-left:8px;font-size:12px;color:var(--vp-c-brand-1)}::highlight(hermes-review){background:#f5d66d;color:#172033}
+.hr-figure-add{margin-left:8px;font-size:12px;color:var(--vp-c-brand-1)}::highlight(hermes-review),::highlight(hermes-review-open){background:#f5d66d;color:#172033}
 @media(max-width:600px){.hr-bar{left:12px;right:12px;bottom:12px;padding:8px;gap:8px;max-width:none}.hr-local{display:none}#hr-status{flex:1;max-width:none;font-size:12px}.hr-panel{padding:20px}.hr-editor{padding:20px}.hr-editor footer{flex-wrap:wrap}.hr-editor footer .hr-primary{margin-left:auto}}

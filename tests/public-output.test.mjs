@@ -24,3 +24,9 @@ test('public output rejects annotation controls and private review files', t => 
   assert.ok(errors.some(e => e.includes('local review runtime')))
   assert.ok(errors.some(e => e.includes('private review artifact')))
 })
+
+test('native modules in the factory are covered by the public isolation gate', t => {
+  const root = fixture(t)
+  writeFileSync(resolve(root, 'factory.mjs'), 'fetch("/__review/api/annotations")')
+  assert.ok(checkPublicOutput(root).some(e => e.includes('local review runtime')))
+})

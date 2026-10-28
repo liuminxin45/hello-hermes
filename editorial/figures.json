@@ -232,5 +232,14 @@
     "styleReference": "assets/reference/three-approaches.png",
     "generator": "codex-built-in-imagegen",
     "reviewedAt": "2026-10-26"
+  },
+  {
+    "id": "preface-agent-timeline",
+    "file": "/images/preface/agent-timeline.webp",
+    "semanticNotes": "editorial/reviews/2026-10-27-preface-timeline-design.md",
+    "prompt": "Create a calm Chinese textbook timeline infographic for hello-hermes. The attached image is ONLY a SERIES STYLE REFERENCE (off-white #fdfdfb, ink #172033, blue #1d4ed8, pale blue #eaf1ff, thin strokes, clean Chinese sans-serif); NOT an editing target and do not reuse its flowchart. Landscape 3:2. Very simple generous whitespace, no decoration, no gradients, no 3D, no robot. One single horizontal chronological line across the middle, left to right, with FOUR equally spaced milestone dots and years. Exact title '从模型对话，到 Agent 系统'. Four milestones, large text aligned below or alternating above/below with short straight tick connectors only. Exact text per milestone: first year '2022', name 'ReAct', description '结合判断与行动'; second year '2023', name 'AutoGen', description '组织多 Agent 协作'; third year '2024', name 'Computer use', description '观察并操作界面'; fourth year '2025', name 'Claude Code', description '参与软件开发任务'. Footer exactly '大语言模型 Agent 的部分公开节点'. No additional labels, quotes, numbered steps, capability rankings or logos. The line represents TIME ONLY, no suggestion these projects replace each other. Large crisp accurate Chinese and English. Make labels easy to read and keep no text overlapping the line or other labels.",
+    "styleReference": "assets/reference/three-approaches.png",
+    "reviewedAt": "2026-10-27",
+    "reviewNotes": "核对2022 ReAct、2023 AutoGen、2024 Computer use、2025 Claude Code节点、文字与时间方向；不表示完整历史或项目替代关系。"
   }
 ]

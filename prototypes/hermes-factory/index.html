@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Hermes 工厂 · 一次任务的内部旅行</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="./" aria-label="Hermes 工厂首页"><span class="brand-mark">H</span><span>hello hermes<span class="brand-sub">交互学习实验室 / 01</span></span></a>
+    <div class="head-right"><span class="simulation"><i></i>教学模拟 · 未连接真实模型</span><button id="theme" class="icon-button" aria-label="切换深浅主题">◐</button></div>
+  </header>
+  <main>
+    <section id="exhibit" aria-label="Hermes 架构三维参观区">
+      <div class="intro"><p class="eyebrow">A TASK, FROM THE INSIDE</p><h1>走进 Agent 工厂</h1><p>跟着一份材料，看一项任务怎样完成。</p></div>
+      <div id="world" tabindex="0" role="region" aria-label="三维工厂。拖动旋转，滚轮缩放；也可以用下方参观站点按钮导航。"></div>
+      <div id="labels" aria-hidden="true"></div>
+      <div id="webgl-fallback" hidden>这个浏览器暂时无法显示三维场景。你仍可以使用站点按钮和下方的逐步回放，了解同一条任务路径。</div>
+      <div class="view-tools" aria-label="视角控制"><button id="overview">↗ 全景</button><button id="tour">◎ 带我参观</button><button id="walk" aria-pressed="false">◇ 进入车间</button></div>
+      <div id="walk-pad" class="walk-pad" hidden aria-label="车间移动"><button data-move="KeyW" aria-label="向前走">↑</button><div><button data-move="KeyA" aria-label="向左走">←</button><button data-move="KeyS" aria-label="向后走">↓</button><button data-move="KeyD" aria-label="向右走">→</button></div></div>
+      <aside id="inspector" class="inspector" aria-label="当前观察点">
+        <div class="inspector-top"><span id="station-number" class="eyebrow">参观指南</span><button id="close-inspector" class="icon-button" aria-label="收起观察点">×</button></div>
+        <h2 id="station-name">让工作自己流转</h2><p id="station-summary">点击下方「开始任务」，看材料卡沿着传送带前进。点击工厂里的建筑，可以走近观察。</p>
+        <dl id="station-io"><div><dt>这次任务</dt><dd>三份材料 → 消息简报草稿</dd></div><div><dt>留意</dt><dd>工具执行后，为什么还要回到模型？</dd></div></dl>
+        <details id="mechanism"><summary>再看一层：机制与取舍</summary><p id="station-detail">传送带表示信息的传递；空间距离不表示耗时。建筑表示职责，不等于 Hermes 的代码目录或实际部署位置。模型服务可以在工厂外部。这里的动作和判断由预设教学脚本驱动。</p></details>
+      </aside>
+      <button id="open-inspector" hidden>查看观察点</button>
+      <div class="scene-run"><button id="scene-play" class="primary">▶ 启动任务</button><p><span id="scene-count">等待启动</span><strong id="scene-event">三份材料 → 一份简报草稿</strong></p></div>
+      <div class="scene-footer"><span><i class="legend-data"></i>材料 / 请求 / 结果沿线路传递</span><span id="camera-hint">拖动旋转 · 滚轮缩放 · 双指平移</span></div>
+    </section>
+    <section class="console" aria-label="任务回放控制">
+      <nav id="stops" class="stops" aria-label="工厂参观站点"></nav>
+      <div class="playback">
+        <div class="task-copy"><span class="eyebrow">本次委托</span><h2>从三份材料，整理一份消息简报</h2><p>重复事件要合并；没有依据的说法不能当作事实。只写草稿，不发送。</p></div>
+        <div class="transport"><button id="play" class="primary">▶ 开始任务</button><button id="step">下一步 →</button><button id="reset" aria-label="重置任务">↺ 重置</button></div>
+        <label class="scenario">试着改变条件<select id="scenario"><option value="normal">正常取材</option><option value="failure">工具取材失败</option></select></label>
+      </div>
+      <div class="event-row" aria-live="polite" aria-atomic="true"><span id="event-index">00 / 11</span><div><h3 id="event-title">工厂已就绪，任务还没有开始</h3><p id="event-body">这是一组自编材料。播放后，只有当前步骤携带的材料卡会移动。</p></div><span id="event-kind" class="event-kind">等待开始</span></div>
+      <div id="progress" class="progress" aria-label="回放进度"></div>
+      <details class="record"><summary>打开这次任务的材料与运行记录 <span id="record-count">0 条记录</span></summary><div class="record-grid"><div><h3>固定教学材料</h3><p><b>A · 原公告</b> 笔记工具新增纯文本导出，暂不支持图片。</p><p><b>B · 二次转述</b> 同一更新，却声称可以完整迁移图片，未提供依据。</p><p><b>C · 原公告</b> 语音工具新增标点修正，没有宣布识别准确率提升。</p><p class="small">虚构材料，与全书简报案例一致；不代表真实产品。</p></div><div><h3>已经发生的步骤</h3><ol id="history"><li>等待任务开始。</li></ol><div id="result" hidden></div></div></div></details>
+    </section>
+    <footer class="page-footer">Hermes Architecture Lab · 原型 0.1 <span>建筑是职责的比喻；回放是教学示意，不是 Hermes 实测轨迹。</span></footer>
+  </main>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>

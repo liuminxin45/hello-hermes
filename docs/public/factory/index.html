@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark"><meta name="theme-color" content="#edf2ed">
+  <meta name="description" content="带着订单走进 Hermes Agent 工厂。跟随导师参观、观察上下文与派工、拍摄报告、参加实习测试。无需编程或安装。">
+  <title>Hermes Agent 工厂实习馆 · hello-hermes</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+</head>
+<body data-phase="arrival">
+  <a class="skip-link" href="#main-action">跳到当前操作</a>
+  <div id="world" tabindex="0" role="region" aria-label="Hermes 三维教学工厂"></div>
+  <div id="webgl-fallback" hidden><h2>使用文字参观模式</h2><p>当前设备没有可用的三维显示。订单、导师、实验与测试仍可使用；报告将如实注明没有三维照片。</p></div>
+  <header class="site-header"><a class="brand" href="../" target="_top"><span class="brand-symbol">H</span><span>HERMES<span>Agent 工厂实习馆</span></span></a><nav aria-label="全站导航"><button id="report-open">参观档案<span id="saved-dot" hidden></span></button><a href="../library.html" target="_top">图文资料</a><a class="github-link" href="https://github.com/liuminxin45/hello-hermes" target="_blank" rel="noreferrer">GitHub ↗</a><button id="theme-toggle" class="icon-button" aria-label="切换深浅主题">◐</button></nav></header>
+  <main id="main-action" tabindex="-1">
+    <section id="arrival" class="arrival">
+      <p class="eyebrow">HELLO, FUTURE AGENT EXPLORER</p><h1>一张订单，<br>走进 Agent 内部。</h1><p class="arrival-description">从原料到礼盒，从目标到行动。<br>跟着导师小赫，参观一座正在工作的教学工厂。</p>
+      <div class="arrival-actions"><button class="primary large" id="order-open">填写第一张订单 <span>↗</span></button><button id="resume" hidden>继续上次实习 →</button><button class="text-button" id="look-around">先看看工厂</button></div>
+      <div class="visit-info"><span>约 20–25 分钟</span><span>8 个观察站</span><span>无需代码基础</span></div>
+      <div class="arrival-caption"><span class="status-light"></span>实体物流在楼下，工作资料在楼上。<br><small>这是有状态的教学工厂，没有连接真实模型或物流。</small></div>
+    </section>
+    <section id="tour-hud" hidden>
+      <div class="tour-topline"><div><span class="eyebrow" id="tour-section">跟随导师 / 01</span><h1 id="tour-title">方案室与调度台</h1><p id="tour-subtitle">目标如何变成下一步</p></div><button id="order-receipt" class="receipt"><span>本次订单</span><b id="order-summary"></b><small id="order-status"></small></button></div>
+      <nav id="station-nav" class="station-nav" aria-label="参观站点"></nav>
+      <div class="view-controls"><button id="overview">↗ 全景</button><button id="follow">◎ 跟上导师</button><button id="free-walk" aria-pressed="false">进入车间</button><button id="take-photo">拍张实景</button></div>
+      <div id="move-pad" class="move-pad" hidden aria-label="车间移动"><button data-move="KeyW" aria-label="向前走">↑</button><div><button data-move="KeyA" aria-label="向左走">←</button><button data-move="KeyS" aria-label="向后走">↓</button><button data-move="KeyD" aria-label="向右走">→</button></div></div>
+      <div id="station-actions" class="station-actions"></div>
+      <section class="mentor" aria-label="导师讲解"><div class="mentor-reading-progress"><i id="reading-progress"></i></div><div class="mentor-content"><div class="mentor-avatar" aria-hidden="true"><span>赫</span></div><div class="mentor-copy"><div class="mentor-name">导师小赫 <span id="line-index">01 / 03</span></div><p id="mentor-line" aria-live="polite"></p></div></div><div class="mentor-actions"><button id="question-open">问问导师 <span id="question-badge"></span></button><div class="guide-playback"><button id="pause" aria-pressed="false">暂停</button><label><span class="sr-only">导览速度</span><select id="speed"><option value="1">1×</option><option value="2">2×</option><option value="4">4×</option></select></label><button id="next" class="primary">下一段 →</button></div></div></section>
+      <div class="scene-legend"><span><i></i>工作资料</span><span><i></i>原料与工件</span><b id="simulation-label">教学运行</b></div>
+    </section>
+    <aside id="context-lab" class="context-lab" hidden aria-label="长订单上下文实验"><div class="panel-title"><span class="eyebrow">独立教学分支</span><button id="lab-close" class="icon-button" aria-label="关闭上下文实验">×</button></div><h2>当沟通变得很长</h2><p>同一笔订单经过多轮比较和查询，工作台逐渐装满。原订单的生产不受此实验影响。</p><div class="capacity"><strong id="capacity-number">75 <small>/ 100 格</small></strong><span id="capacity-state">超过 70 格整理线</span><div class="capacity-bar"><i id="capacity-used"></i><em></em><span></span></div><small>输出预留 20 格 · 示例阈值 70 格</small></div><div id="context-parts"></div><div class="lab-buttons"><button id="compress" class="primary">整理中部记录</button><button id="context-before" hidden>前后对照</button><button id="bad-summary">如果摘要丢了条件？</button></div><p class="lab-note" id="lab-note">信息格与比例都是展馆参数，不等同于真实 token 或 Hermes 默认配置。</p></aside>
+  </main>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <footer class="scene-credit"><span>HELLO-HERMES / FIELD VISIT 01</span><button id="about-open">关于这座工厂</button><span id="save-status">进度保存在本机</span></footer>
+
+  <dialog id="order-dialog" class="sheet"><div class="dialog-head"><span class="eyebrow">ORDER RECEPTION</span><button data-close class="icon-button" aria-label="关闭订单">×</button></div><h2>把目标交给工厂。</h2><p class="dialog-intro">做一批同款欢迎礼盒，先验收，不发货。名字和欢迎语会真的出现在你的成品上。</p><form id="order-form"><div class="form-grid"><label>访客昵称<input name="nickname" maxlength="24" value="见习工程师" autocomplete="off"></label><label>礼盒数量<select name="quantity"><option value="1">1 份</option><option value="3" selected>3 份</option><option value="6">6 份</option></select></label><label>每份预算（元）<input name="budget" type="number" min="1" max="10000" value="120" required></label><label>主题色<select name="color"><option value="blue">蓝色系</option><option value="green">绿色系</option></select></label></div><label>收件人昵称 <small>一行一位；留空使用虚构称呼</small><textarea name="names" rows="2" placeholder="小林&#10;阿青&#10;小夏" maxlength="150"></textarea></label><label>欢迎卡文字<input name="welcome" maxlength="90" value="欢迎加入，一起把好事做成。"></label><label class="check-label"><input type="checkbox" name="snack"> 加一份点心（每盒增加 12 元）</label><div class="order-fixed"><b>基础内容</b> 笔记本、签字笔、欢迎卡；整批同款。<br><b>交付边界</b> 默认不放食品；勾选点心才加入。只制作和验收。</div><p id="order-error" class="form-error" role="alert"></p><button class="primary large" type="submit">提交订单，去见导师 →</button><p class="form-note">价格与库存为虚构教学数据。重新下单会把上一份实习保留在本机档案中。</p></form></dialog>
+  <dialog id="welcome-dialog" class="small-dialog"><div class="dialog-head"><span class="eyebrow">你的导师已就位</span><button data-close class="icon-button" aria-label="关闭接待">×</button></div><div class="welcome-avatar">H</div><h2>你好，我是小赫。</h2><p>订单已经进厂。我会带你从入口往里走，看看一份要求怎样变成工人的具体工作。</p><p>你随时可以暂停、环顾、拍照，或者问我问题。走完以后，我们再写一份参观报告。</p><button id="start-tour" class="primary large">领取访客牌，跟上导师 →</button></dialog>
+  <dialog id="question-dialog" class="question-dialog"><div class="dialog-head"><span class="eyebrow">和导师聊一会儿</span><button data-close class="icon-button" aria-label="关闭提问">×</button></div><h2 id="question-title"></h2><div id="question-list"></div><div id="question-answer" hidden></div><p class="form-note">本馆采用预先编辑的问答，不会把固定回答伪装成实时模型推理。</p></dialog>
+  <dialog id="info-dialog" class="info-dialog"><div class="dialog-head"><span class="eyebrow" id="info-eyebrow">工厂记录</span><button data-close class="icon-button" aria-label="关闭详情">×</button></div><h2 id="info-title"></h2><div id="info-content"></div></dialog>
+  <dialog id="report-dialog" class="report-dialog"><div class="dialog-head sticky"><span class="eyebrow">FIELD REPORT / 参观档案</span><div><button id="history-open">历次实习</button><button id="download-report">下载 HTML</button><button id="print-report">打印 / PDF</button><button id="report-certificate" hidden>查看证明</button><button id="exam-open" class="primary">参加实习测试 →</button><button data-close class="icon-button" aria-label="关闭报告">×</button></div></div><div id="report-content"></div></dialog>
+  <dialog id="exam-dialog" class="exam-dialog"><div class="dialog-head"><span class="eyebrow">INTERNSHIP ASSESSMENT</span><button data-close class="icon-button" aria-label="关闭测试">×</button></div><h2>把见过的事情，想明白。</h2><p class="dialog-intro">10 道情境题，每题 10 分，80 分通过。没有倒计时，答案会在本机保存。</p><form id="exam-form"><div id="exam-questions"></div><p id="exam-error" class="form-error" role="alert"></p><button type="submit" class="primary large">提交本次测试</button></form><div id="exam-result" hidden></div></dialog>
+  <dialog id="certificate-dialog" class="certificate-dialog"><div class="dialog-head"><span class="eyebrow">A LITTLE CEREMONY</span><button data-close class="icon-button" aria-label="关闭证明">×</button></div><img id="certificate-image" alt="工厂实习完成证明"><div class="certificate-actions"><button id="download-certificate">保存证明 PNG</button><button id="goodbye" class="primary">谢谢导师，我准备离开了 →</button></div><p class="form-note">互动学习纪念。本机生成，不代表官方职业资格。</p></dialog>
+  <script type="module" src="./app.mjs"></script>
+</body></html>

@@ -156,7 +156,20 @@ export function resolveReview(root, path) {
     const statePath = localPath(root, 'annotations.json'), store = readJson(statePath)
     if (store.projectId !== batch.projectId) throw new ReviewError('批次不属于这个项目。', 409)
     const batchHash = hash(canonical(batch)), old = store.operations.find(o => o.id === `resolve_${batch.id}`)
-    if (old) { if (old.fingerprint !== batchHash) throw new ReviewError('该批次已核销，不能更换决定后重复核销。', 409); return { resolved: 0, previouslyResolved: old.result.resolved, pending: store.annotations.filter(a => a.status === 'open').length, alreadyApplied: true } }
+    function archive(phase) {
+      const annotations = frozen.targets.flatMap(target => {
+        const item = store.annotations.find(a => a.id === target.id)
+        const event = item?.history.find(h => h.action === 'resolve' && h.resolution?.batchId === batch.id)
+        return event ? [{ ...target, status: 'resolved', version: event.version, updatedAt: event.at, resolution: event.resolution, history: [...target.history, event] }] : []
+      })
+      if (!annotations.length) return
+      atomicJson(localPath(root, `archives/${batch.id}.json`), { schemaVersion: 1, projectId: batch.projectId, batchId: batch.id, phase, inputDigest: readJson(receiptPath).inputDigest, annotations })
+    }
+    if (old) {
+      if (old.fingerprint !== batchHash) throw new ReviewError('该批次已核销，不能更换决定后重复核销。', 409)
+      archive('archived')
+      return { resolved: 0, previouslyResolved: old.result.resolved, pending: store.annotations.filter(a => a.status === 'open').length, alreadyApplied: true }
+    }
     for (const target of frozen.targets) {
       const current = store.annotations.find(a => a.id === target.id)
       if (!current || current.version !== target.version || current.status !== 'open') throw new ReviewError('处理期间有原批注被修改、删除或重新打开；整批未核销，请重新读取。', 409)
@@ -170,6 +183,9 @@ export function resolveReview(root, path) {
     }
     const result = { resolved: decisions.filter(d => d.outcome !== 'blocked').length, pending: store.annotations.filter(a => a.status === 'open').length }
     store.operations.push({ id: `resolve_${batch.id}`, fingerprint: batchHash, result })
-    atomicJson(statePath, store); return result
+    archive('prepared')
+    atomicJson(statePath, store)
+    archive('archived')
+    return result
   })
 }
