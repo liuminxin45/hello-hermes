@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createVisit,requestSources,retrieveSources,verifySources,deliverDraft,observeEvent} from '../docs/public/factory/engine.mjs';
+import {reportBody,reportHTML} from '../docs/public/factory/report.mjs';
+
+function visit(){const s=createVisit();for(const action of [requestSources,retrieveSources,verifySources,deliverDraft])for(const event of action(s))observeEvent(s,event.id);return s;}
+const summary=html=>html.match(/<p class="muted presentation-evidence">([^<]+)<\/p>/)?.[1];
+const entry=(html,id)=>html.split('<li>').find(value=>value.includes(id+' · session-'));
+
+test('the visible appendix line and each observed event distinguish complete, keyframes, skipped and unknown',()=>{const s=visit(),events=s.task.events;s.learning.presentationRecords=events.slice(0,3).map((event,i)=>({eventId:event.id,clipId:'clip-'+i,watched:['complete','keyframes','skipped'][i]}));const html=reportBody(s);assert.equal(summary(html),'呈现方式：完整播放 1 · 手动关键帧 1 · 直接看结果 1 · 未记录呈现方式 1。');for(const [i,label]of ['完整播放','手动关键帧','直接看结果','未记录呈现方式'].entries())assert.ok(entry(html,events[i].id).includes('已观察 · '+label));assert.ok(html.indexOf('presentation-evidence')<html.indexOf('<details><summary>全部事件与资料流'));assert.doesNotMatch(summary(html),/已掌握|全部看完/);});
+
+test('duplicate replay or loop records cannot increase counts or replace the first valid presentation method',()=>{const s=createVisit(),event=requestSources(s)[0];observeEvent(s,event.id);s.learning.presentationRecords=[{eventId:event.id,watched:'skipped'},...Array.from({length:3},(_,i)=>({eventId:event.id,watched:'complete',clipId:'same-source-repeat-'+i,replay:true}))];const before=structuredClone(s),html=reportBody(s);assert.equal(summary(html),'呈现方式：完整播放 0 · 手动关键帧 0 · 直接看结果 1 · 未记录呈现方式 0。');assert.ok(entry(html,event.id).includes('已观察 · 直接看结果'));assert.deepEqual(s,before);});
+
+test('records from another visit, virtual demonstrations and events not observed in this visit are not counted',()=>{const s=createVisit(),own=requestSources(s)[0],other=requestSources(createVisit())[0];observeEvent(s,own.id);const pending=retrieveSources(s)[0];s.learning.presentationRecords=[{eventId:own.id,watched:'keyframes'},{eventId:other.id,watched:'complete'},{eventId:s.id+':context-replay',watched:'complete'},{eventId:pending.id,watched:'complete'}];const html=reportBody(s);assert.equal(summary(html),'呈现方式：完整播放 0 · 手动关键帧 1 · 直接看结果 0 · 未记录呈现方式 0。');assert.ok(entry(html,pending.id).includes('尚未观察'));assert.ok(!entry(html,pending.id).includes('已观察 · 完整播放'));});
+
+test('old v3 records without the optional field remain compatible and never invent a playback method',()=>{for(const value of [undefined,null,[],{},'old-format']){const s=visit();if(value!==undefined)s.learning.presentationRecords=value;const before=structuredClone(s),html=reportHTML(s);assert.equal(summary(html),'呈现方式：完整播放 0 · 手动关键帧 0 · 直接看结果 0 · 未记录呈现方式 4。');assert.deepEqual(s,before);for(const event of s.task.events)assert.ok(entry(html,event.id).includes('已观察 · 未记录呈现方式'));}});
+
+test('malformed or unknown methods are ignored and do not prevent a later valid record for that event',()=>{const s=createVisit(),event=requestSources(s)[0];observeEvent(s,event.id);s.learning.presentationRecords=[null,17,[],{}, {eventId:event.id}, {eventId:event.id,watched:'all-seen'}, {eventId:event.id,watched:'toString'}, {eventId:event.id,watched:{toString:null}}, {eventId:17,watched:'complete'}, {eventId:event.id,watched:'complete'}];assert.equal(summary(reportBody(s)),'呈现方式：完整播放 1 · 手动关键帧 0 · 直接看结果 0 · 未记录呈现方式 0。');});
+
+test('untrusted presentation metadata is not emitted as executable report markup',()=>{const s=createVisit(),event=requestSources(s)[0],attack='<script>alert(1)</script>';observeEvent(s,event.id);s.learning.presentationRecords=[{eventId:event.id,watched:attack,clipId:attack,at:attack},{eventId:event.id,watched:'keyframes',clipId:attack,at:attack}];const html=reportHTML(s);assert.doesNotMatch(html,/<script|alert\(1\)/);assert.equal(summary(html),'呈现方式：完整播放 0 · 手动关键帧 1 · 直接看结果 0 · 未记录呈现方式 0。');});
