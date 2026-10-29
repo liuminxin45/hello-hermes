@@ -21,8 +21,8 @@ export const CONTEXT_DEMO={id:'context-long-v2',capacity:100,threshold:70,reserv
  {id:'append3',start:6,end:8,from:45,to:55,cue:'比对过程继续加入，资料占用逐步增加。',action:'receive'},
  {id:'append4',start:8,end:10,from:55,to:65,cue:'新的工具结果到达，最近交接再次更新。',action:'receive'},
  {id:'threshold',start:10,end:12,from:65,to:70,cue:'还没装满，但下一次回执和输出需要预留空间。',action:'receive'},
- {id:'protect',start:12,end:15,from:70,to:70,cue:'这一次先保护规则、起始要求与完整的最近交接。',action:'select'},
- {id:'summarize',start:15,end:20,from:70,to:70,cue:'整理员读中间过程，写出保留条件、来源与待办的新摘要。',action:'summarize'},
+ {id:'protect',start:12,end:15,from:70,to:70,cue:'再加入一批，接下来放哪里？先为下一轮回执和输出留出空间。',action:'select'},
+ {id:'summarize',start:15,end:20,from:70,to:70,cue:'摘要过程读中间过程，写出保留条件、来源与待办的新摘要。',action:'summarize'},
  {id:'replace',start:20,end:23,from:70,to:35,cue:'新摘要返回工作台，替换这一次选中的中间过程。',action:'return'},
  {id:'result',start:23,end:26,from:35,to:35,cue:'70格变成35格。原始档案还在，摘要仍可能漏掉细节。',action:'hold',marker:'compression-replaced'}
 ]};
@@ -56,20 +56,20 @@ export function sampleContextDemo(time,config={}){
  return {id:CONTEXT_DEMO.id,phaseId:stage.id,time:t,duration:26,progress,units,capacity:100,threshold:70,reserved:20,thresholdReached:units>=70,protectedIds,tailIds,archiveIds:RAW_PACKETS.map(x=>x.id),packets,summary,occupancyBefore:70,occupancyAfter:35,freed:replaced?35:0,stageFrom:stage.from,stageTo:stage.to,rawFragments:['Atlas：仍需申请审核','Delta：PDF / Markdown','仅草稿，不发布'],cue:loss&&t>=15?'这份坏摘要省掉了申请审核与格式条件；来源没有改变。':stage.cue,actor:{role:'organizer',action:stage.action,progress},captureMarker:stage.marker||null,teachingOnly:true,finished:t>=26};
 }
 const descriptors={
- tool:{focus:'tools',phases:six('tools','工人查看目录，再读取这次请求对应的原始材料。','tool-result',{prepareFlows:['tool-call'],prepareNodes:['loop','tools'],result:'回执留在调度台；读取成功仍需判断是否适用。',marker:'tool-result-visible'})},
- toolRequest:{focus:'tools',phases:six('tools','工人接到请求，读取动作还没有完成。','tool-call',{prepareNodes:['loop'],result:'请求已经提出，下一步才是真正取资料。',handoff:'请求卡交到工具入口，等待执行。',action:'receive'})},
- toolResult:{focus:'tools',phases:six('tools','工人根据请求读取公告，再检查返回的来源编号。','tool-result',{prepareFlows:['tool-call'],prepareNodes:['loop','tools'],result:'原文留在这里；还要核对它能否支持本次草稿。',marker:'tool-result-visible'})},
- toolError:{focus:'tools',phases:six('tools','读取停在失败或不适用的位置，没有取得可用的新依据。','tool-error',{result:'错误回执保留，不能把它写成成功交付。',handoff:'工人交回错误回执，而不是成功来源卡。',action:'stop'})},
- memory:{focus:'memory',phases:six('memory','档案员打开偏好抽屉，只取本轮实际读取的条目。','memory-read',{result:'偏好已读入；当前明确要求仍然优先。',marker:'reuse-loaded',action:'open-drawer'})},
- skill:{focus:'memory',phases:six('memory','档案员翻开核查手册，将方法步骤放到工作台旁。','skill-read',{result:'读到了方法，还需要选择并执行本次工具动作。',marker:'reuse-loaded',action:'open-book'})},
+ tool:{focus:'tools',phases:six('tools','工具查看目录，再读取这次请求对应的原始材料。','tool-result',{prepareFlows:['tool-call'],prepareNodes:['loop','tools'],result:'回执留在调度台；读取成功仍需判断是否适用。',marker:'tool-result-visible'})},
+ toolRequest:{focus:'tools',phases:six('tools','工具接到请求，读取动作还没有完成。','tool-call',{prepareNodes:['loop'],result:'请求已经提出，下一步才是真正取资料。',handoff:'请求卡交到工具入口，等待执行。',action:'receive'})},
+ toolResult:{focus:'tools',phases:six('tools','工具根据请求读取公告，再检查返回的来源编号。','tool-result',{prepareFlows:['tool-call'],prepareNodes:['loop','tools'],result:'原文留在这里；还要核对它能否支持本次草稿。',marker:'tool-result-visible'})},
+ toolError:{focus:'tools',phases:six('tools','读取停在失败或不适用的位置，没有取得可用的新依据。','tool-error',{result:'错误回执保留，不能把它写成成功交付。',handoff:'工具交回错误回执，而不是成功来源卡。',action:'stop'})},
+ memory:{focus:'memory',phases:six('memory','已保存的偏好便签随会话开始的系统提示快照进入本轮输入。','memory-read',{result:'偏好已读入；当前明确要求仍然优先。',marker:'reuse-loaded',action:'open-drawer'})},
+ skill:{focus:'memory',phases:six('memory','按本次需要展开核查步骤卡；方法已读入，工具仍需要真正执行。','skill-read',{result:'读到了方法，还需要选择并执行本次工具动作。',marker:'reuse-loaded',action:'open-book'})},
  history:{focus:'archive',phases:six('archive','先查索引命中，再按编号取回相关原始记录。','history-result',{prepareFlows:['history-query'],prepareNodes:['loop','archive'],result:'只带回相关旧结论；它仍须重新核实。',marker:'reuse-loaded',action:'index'})},
- historyWrite:{focus:'archive',phases:six('archive','档案员把已发生的会话过程登记到档案柜。','history-write',{result:'过程已留档，但没有自动读进下一次会话。',action:'write'})},
+ historyWrite:{focus:'archive',phases:six('archive','已发生的会话过程保存为可检索的记录。','history-write',{result:'过程已留档，但没有自动读进下一次会话。',action:'write'})},
  memoryWrite:{focus:'memory',phases:six('memory','按已经确认的选择登记条目，不代替用户同意。','memory-write',{result:'资料保存完成；没有改变模型权重。',action:'write'})},
  input:{focus:'intake',phases:six('intake','三张线索登记到同一个带编号的任务夹。','intake-loop',{result:'线索已经收下，尚未核实，也还没有成稿。',handoffNodes:['intake','loop'],action:'register'})},
  planning:{focus:'loop',phases:six('loop','调度台依据当前要求，准备下一次可观察动作。','loop-analysis',{result:'下一步由当前要求与已有反馈决定。',handoffNodes:['loop','analysis'],action:'arrange'})},
  analysis:{focus:'analysis',phases:six('analysis','同源转述合并，夸大的主张依据原文改写。','analysis-loop',{result:'反馈改变了下一步，而不是照原计划机械成稿。',action:'compare'})},
  delivery:{focus:'delivery',phases:six('delivery','两份草稿逐页展开，留下依据和未确认项。','deliver',{result:'有来源的草稿已经交付；没有获得发布授权。',handoffNodes:['loop','delivery'],action:'deliver'})},
- newSession:{focus:'context',phases:six('context','清空旧整段聊天，只把新委托摆到工作台。','intake-loop',{result:'新会话开始。旧资料还在，但尚未自动读入。',action:'clear'})},
+ newSession:{focus:'context',phases:six('context','清空旧整段聊天，只把新委托摆到工作台。','intake-loop',{result:'新会话开始：旧整段聊天退出，接着分别看快照与按需读取。',action:'clear'})},
  review:{focus:'review',phases:six('review','记录台展示已发生的事件，训练设备保持关闭。','trace-delivery',{result:'轨迹记录不是模型训练。',handoffNodes:['delivery','review'],action:'write'})},
  decision:{focus:'memory',phases:six('memory','保存门保留你刚才的选择，不自动补选条目。',null,{result:'选择已记录；未选中的长期条目不会凭空出现。',action:'point'}).map(phase=>({...phase,nodes:[],flows:[]}))},
  compress:{focus:'context',phases:CONTEXT_DEMO.stages.map(stage=>({...stage,nodes:['base','protect','result'].includes(stage.id)?[]:['context'],flows:stage.id.startsWith('append')||stage.id==='threshold'?['context-feed']:stage.id==='replace'?['context-input']:[],marker:stage.marker}))}

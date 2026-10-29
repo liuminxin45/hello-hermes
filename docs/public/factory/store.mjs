@@ -1,4 +1,5 @@
 import {restoreVisit,SCENARIO_VERSION} from './engine.mjs';
+import {restoreNewsVisit,NEWS_ACTIVE} from './news-lesson.mjs';
 let dbPromise,queue=Promise.resolve();
 export const ACTIVE_KEY='factory-v3-active',LIBRARY_KEY='factory-v3-library';
 const ARCHIVE_PREFIX='factory-readonly-archive:';
@@ -43,10 +44,10 @@ export function writeBatch(entries){
   tx.oncomplete=()=>resolve({writtenKeys:copies.map(x=>x[0]),archived:archives[0]||null,archives});tx.onerror=()=>reject(tx.error||Error('本机存档写入失败。'));tx.onabort=()=>reject(tx.error||Error('本机存档事务已回滚。'));
   const fail=error=>{try{tx.abort();}catch{}reject(error);};
   const putAll=()=>{try{for(const [key,value] of copies)store.put(value,key);}catch(error){fail(error);}};
-  const protectedKeys=[...new Set(copies.map(x=>x[0]).filter(k=>k===ACTIVE_KEY||k===LIBRARY_KEY))];
+  const protectedKeys=[...new Set(copies.map(x=>x[0]).filter(k=>k===ACTIVE_KEY||k===LIBRARY_KEY||k===NEWS_ACTIVE))];
   const protect=(index=0)=>{if(index>=protectedKeys.length){putAll();return;}
    const originalKey=protectedKeys[index],req=store.get(originalKey);req.onerror=()=>fail(req.error);req.onsuccess=()=>{
-    const old=req.result,compatible=originalKey===ACTIVE_KEY?compatibleVisit(old):validLibrary(old);if(old===undefined||compatible){protect(index+1);return;}
+    const old=req.result,compatible=originalKey===NEWS_ACTIVE?restoreNewsVisit(old):originalKey===ACTIVE_KEY?compatibleVisit(old):validLibrary(old);if(old===undefined||compatible){protect(index+1);return;}
     const base=archiveKeyFor(old,originalKey),text=serialized(old),archivedAt=new Date().toISOString();
     const reserve=(suffix=0)=>{const key=base+(suffix?':collision-'+suffix:''),existing=store.get(key);existing.onerror=()=>fail(existing.error);existing.onsuccess=()=>{
      if(existing.result!==undefined){if(!archived(existing.result)||serialized(existing.result.record)!==text){reserve(suffix+1);return;}archives.push({key,...legacyMetadata(key,existing.result.record,existing.result),created:false});protect(index+1);return;}

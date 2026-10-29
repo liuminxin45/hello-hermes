@@ -74,7 +74,7 @@ export const QUESTIONS=[
  question('fts-vector','FTS5 与向量检索有什么区别？','前者提供按词项等条件的全文查询，向量检索通常按数值表示的相近程度找候选。','用“Atlas”可做词项检索，换一种说法可能需要不同的召回方法。','两者都不能保证取回的资料正确或足够；具体分词、向量模型与排序会影响结果。','先检查本次命中了什么原文，不把检索方式当真实性证明。','hermes','archive','index',['G-search','H-history'],['context','reuse']),
  question('wal','WAL 解决什么问题？','它是数据库提交、读写并发与检查点机制的一种方案。','档案区把写入与查询分开演示，不把它画成调度员的大脑。','SQLite的WAL仍有单写入者及其他条件；本馆浏览器存档并没有实际运行SQLite。','回到历史记录的保存与读取职责。','hermes','archive','sqlite',['G-database','H-history'],['retain','reuse']),
  question('trajectory-training','过程轨迹会自动变成强化学习吗？','不会，记录、评测、训练数据整理与训练是不同流程。','本次轨迹只记录可观察的请求、工具回执和保存/读取。','不展示或推测隐藏思维链，也不以一次成功声称权重更新。','回到你实际观察到的经验复用。','boundary','review','core',['G-reuse','H-history'],['retain','reuse']),
- question('mcp','MCP、子 Agent 和定时任务在哪里？','它们可以作为系统扩展，本条短委托不必经过所有机制。','主线只用本次需要的读取工具、历史与资料复用。','场景里的多个工具工人不默认表示多个独立Agent；本馆没有后台定时通知。','先把这次任务的必要链路讲清，再按需求选扩展。','hermes','tools','core',['G-route','S-materials'],['receive','reuse'])
+ question('mcp','MCP、子 Agent 和定时任务在哪里？','它们可以作为系统扩展，本条短委托不必经过所有机制。','主线只用本次需要的读取工具、历史与资料复用。','多个工具入口不默认表示多个独立Agent；本演示没有后台定时通知。','先把这次任务的必要链路讲清，再按需求选扩展。','hermes','tools','core',['G-route','S-materials'],['receive','reuse'])
 ];
 QUESTIONS.push(
  question('hermes-memory-read','Hermes怎样把资料带进新会话？','项目固定版本的官方文档描述：MEMORY.md与USER.md在会话开始时作为快照进入系统输入，记忆工具可把条目写回磁盘。','眼前的保存条目与新会话读取记录，分别演示持久化和新输入来源。','快照不会因为中途写入就自动替换当前前缀；本馆的确认按钮是教学交互，不是所有写入的默认弹窗。','回到新会话，核对真正读入了哪些内容。','hermes','memory','preference',['H-memory','S-write-choice'],['retain','reuse']),
@@ -187,7 +187,7 @@ export function reusePresentation(readings={}, {enabled=true,started=false,settl
  return {branch,shortTitle,cue,result:{title:parts.length?'本轮实际读入':'没有跨会话读取结果',detail:parts.join(' · ')||'偏好0 · 方法0 · 历史0'},conclusion:GUIDE_CHAPTERS.reuse.conclusion,counts};
 }
 export const GUIDE_EVENT_COPY={
- 'request-created':{cue:'模型把要查的材料写成请求。这还不是原文，接下来需要调度把请求交给工具。',result:{title:'读取请求已提出',detail:'请求已记录，尚未取得原文。'}},
+ 'request-created':{cue:'模型把要查的材料写成请求。这还不是原文，接下来需要调度把请求交给工具。',result:{title:'读取请求已提出',detail:'请求已记录，尚未取得原文。这是教学停顿，不是逐次工具审批。'}},
  'tool-result':{cue:'工具按请求读取原文，再把带来源编号的回执交回来。拿到原文以后，还要核对说法。',result:{title:'原文已返回',detail:'材料可核对，不等于草稿已完成。'}},
  'source-verified':{cue:'两份转述被合并，夸大的范围被改写。返回的新依据，正在改变下一步该做什么。',result:{title:'工作结论已修正',detail:'同源合并，保留适用范围与未知。'}},
  'context-selected':{cue:'完整资料仍留在档案里。这轮工作只选入需要的部分，存着与本轮看着是两件事。',result:{title:'工作台与档案分开',detail:'当前输入按需要选取。'}},
@@ -207,7 +207,7 @@ export const GUIDE_EVENT_COPY={
 // Before the result beat, describe the operation without revealing its queued outcome.
 export const GUIDE_EVENT_PREPARATION={
  'request-created':'先把要查的材料写成读取请求。请求会交给工具，模型本身并没有因此拿到原文。',
- 'tool-result':'工具工人接过请求，去取原始公告。等它带回回执，再看读到了哪些可核对的内容。',
+ 'tool-result':'工具接过请求，去取原始公告。等它带回回执，再看读到了哪些可核对的内容。',
  'source-verified':'把转述与原文放在一起，核对来源和适用范围。结论需要跟着依据调整，不能只换一种说法。',
  'context-selected':'这轮工作需要哪些资料？先看档案里保留的原文，再看哪些内容会选进当前工作台。',
  'draft-delivered':'把草稿与来源逐条对照，保留限制和未知项。交付会停在草稿，不会替你发布或通知。',

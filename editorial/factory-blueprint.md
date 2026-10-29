@@ -1,8 +1,10 @@
+> 历史蓝图：2026-10-29 的可交互讲解改造已替代本文的默认视觉、导航、人物与播放要求。当前合同见 [交互讲解蓝图](playable-explainer-blueprint.md)，旧实现记录保留用于追溯。
+
 # Hermes Agent 工厂实习馆：五章观察蓝图
 
 本轮重构更新于2026-10-29。定位是让会用聊天 AI 的读者，通过一份委托的处理过程理解 Agent 的系统关系，再用一次新会话观察经验复用。无需代码、安装或模型密钥；保留可旋转的工厂、导师、追问、实景照片、报告、自测与纪念证明。原十八章图文资料继续由 `library.html` 进入，原 URL 保留。
 
-本文件记录当前产品合同。五章重构见 [重构实施清单](redesign-implementation.md) 和 [用户报告快照](reviews/2026-10-29-redesign-source.md)。本轮视觉与动态教学优化按 [逐项清单](visual-interaction-implementation.md) 和 [优化指导原件](reviews/2026-10-29-visual-interaction-source.md) 推进。代码已实现、浏览器可用、真人理解及实体设备性能是四种不同证据，不相互替代。
+本文件记录工厂阶段的产品合同。五章重构见 [重构实施清单](redesign-implementation.md) 和 [用户报告快照](reviews/2026-10-29-redesign-source.md)。本轮视觉与动态教学优化按 [逐项清单](visual-interaction-implementation.md) 和 [优化指导原件](reviews/2026-10-29-visual-interaction-source.md) 推进。代码已实现、浏览器可用、真人理解及实体设备性能是四种不同证据，不相互替代。
 
 ## 委托与材料
 

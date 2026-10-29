@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createVisit,emptyLibrary,requestSources,retrieveSources,verifySources,deliverDraft,saveExperience} from '../docs/public/factory/engine.mjs';
 import {ACTIVE_KEY,LIBRARY_KEY,compatibleVisit,validLibrary,selectVisits,selectLegacy,archiveKeyFor,write,writeBatch,read,listVisits,listLegacy,flush} from '../docs/public/factory/store.mjs';
+import {createNewsVisit,NEWS_ACTIVE,NEWS_VERSION} from '../docs/public/factory/news-lesson.mjs';
 
 const visit=(id='current')=>createVisit({nickname:'调查员'},emptyLibrary(),id);
 
@@ -122,5 +123,16 @@ test('incompatible active/library are atomically archived before replacement, wi
   assert.equal(saved.archives.length,2);
   assert.deepEqual(fake.records.get(archiveKeyFor(badLibrary,LIBRARY_KEY)).record,badLibrary);
   assert.deepEqual(fake.records.get(archiveKeyFor(badVisit)).record,badVisit);
+ });
+ await t.test('new scenario protects corrupt active data atomically without touching legacy active or library',async()=>{
+  const corrupt={version:3,schemaVersion:3,scenarioVersion:NEWS_VERSION,id:'damaged-news',learning:{mainComplete:true}};
+  const next=createNewsVisit('new-news'),legacyActive=structuredClone(fake.records.get(ACTIVE_KEY)),legacyLibrary=structuredClone(fake.records.get(LIBRARY_KEY));
+  fake.records.set(NEWS_ACTIVE,corrupt);const historyKey='newsroom-v1-history:'+next.id;
+  fake.failNextPut(historyKey);const keysBefore=[...fake.records.keys()].sort();
+  await assert.rejects(writeBatch([[NEWS_ACTIVE,next],[historyKey,next]]));
+  assert.deepEqual(fake.records.get(NEWS_ACTIVE),corrupt);assert.deepEqual([...fake.records.keys()].sort(),keysBefore);
+  const saved=await writeBatch([[NEWS_ACTIVE,next],[historyKey,next]]);
+  assert.equal(saved.archived.originalKey,NEWS_ACTIVE);assert.deepEqual(fake.records.get(archiveKeyFor(corrupt,NEWS_ACTIVE)).record,corrupt);
+  assert.deepEqual(fake.records.get(ACTIVE_KEY),legacyActive);assert.deepEqual(fake.records.get(LIBRARY_KEY),legacyLibrary);assert.deepEqual(fake.records.get(historyKey),next);
  });
 });
