@@ -1,80 +1,61 @@
-// A deterministic, executable teaching world. No model, purchasing, or shipping API.
-export const VERSION=1;
-export const CATALOG={
-  blueBox:{name:'蓝色包装盒',price:18,stock:2,kind:'package'},greenBox:{name:'绿色包装盒',price:18,stock:6,kind:'package'},
-  whiteBox:{name:'白色包装盒',price:12,stock:6,kind:'package'},blueBand:{name:'蓝色腰封',price:3,stock:6,kind:'wrap'},
-  greenBand:{name:'绿色腰封',price:3,stock:6,kind:'wrap'},notebook:{name:'笔记本',price:24,stock:6,kind:'item'},
-  pen:{name:'签字笔',price:8,stock:6,kind:'item'},card:{name:'欢迎卡',price:2,stock:6,kind:'card'},snack:{name:'点心',price:12,stock:6,kind:'food'}
-};
-export function planOrder(order,stock){
-  const primary=order.color==='green'?'greenBox':'blueBox';
-  const pack=stock[primary]>=order.quantity?[primary]:['whiteBox',order.color==='green'?'greenBand':'blueBand'];
-  const items=[...pack,'notebook','pen','card',...(order.snack?['snack']:[])];
-  const unitCost=items.reduce((sum,id)=>sum+CATALOG[id].price,0);
-  return {items,unitCost,total:unitCost*order.quantity,substituted:!pack.includes(primary),available:items.every(id=>stock[id]>=order.quantity),withinBudget:unitCost<=order.budget};
+export const VERSION=3,SCHEMA_VERSION=3,SCENARIO_VERSION='intel-reuse-v1';
+export const SOURCES=[
+ {id:'S1',kind:'线索',event:'atlas',title:'资讯号：Atlas接口测试有变化',text:'听说Atlas工具接口进入新的测试阶段，尚未提供公告全文。'},
+ {id:'S2',kind:'转载',event:'atlas',title:'社区转发：Atlas接口有更新',text:'转载S1，未给出独立的原始依据。'},
+ {id:'S3',kind:'摘要',event:'mixed',title:'周报摘要：全面开放与检索更新',text:'摘要称“Atlas已全面开放，Delta新增文档检索”，没有说明申请条件、支持范围或原始出处。'},
+ {id:'A1',kind:'原始公告',event:'atlas',title:'Atlas开发者预览公告',text:'Atlas接口进入开发者预览，开放申请，仍需审核后获得使用权限，不是人人已经可用。'},
+ {id:'A2',kind:'使用说明',event:'atlas',title:'Atlas申请条件说明',text:'申请需填写用途，通过审核后获得权限。未公布完整地区名单，也未承诺普遍性能提升。'},
+ {id:'D1',kind:'原始说明',event:'delta',title:'Delta文档检索更新说明',text:'Delta新增PDF和Markdown文档检索。没有承诺支持全部格式，也不保证每次都找到所有相关材料。'},
+ {id:'A3',kind:'最新原始公告',event:'atlas',title:'Atlas后续预览说明',text:'Atlas预览增加审计日志与只读权限配置。仍需申请审核；未宣布全面开放，地区范围仍未给出完整清单。'}
+];
+export const SAMPLE_DRAFT=[{title:'Atlas开放开发者预览申请',claim:'仍需审核，不能写成人人可用。',sources:['A1','A2'],unknown:'完整地区名单未公布。'},{title:'Delta新增两类文档检索',claim:'覆盖PDF与Markdown，不能外推为全部格式或完美召回。',sources:['D1'],unknown:'实际效果需按资料与需求验证。'}];
+const copy=x=>structuredClone(x);const now=()=>new Date().toISOString();
+export const emptyLibrary=()=>({schemaVersion:3,preferences:[],skills:[],history:[]});
+function session(number,audience){return {id:'session-'+number,number,request:number===1?'核对原始来源，合并重复消息，写不超过三条的简报。区分已确认与未知，只做草稿，不发布。':'这周继续。给研发同事看，多一些技术细节；核查上次申请试用的Atlas现在有什么变化，仍只做草稿。',audience:number===1?audience:'technical',explicitAudience:true,phase:'clues',evidenceIds:number===1?['S1','S2','S3']:[],requestCreated:false,toolSucceeded:false,verified:false,delivered:false,draft:[],corrections:[],experienceDecision:null,reuseLoaded:false,readings:{memoryIds:[],skillIds:[],historyIds:[]},context:{instructions:'使用证据；未知须说明；不得外发。',toolDefinitions:[{name:'read_source',input:'来源编号与版本',output:'原文、来源编号、读取状态',boundary:'只读馆内自编材料，不会发布或联网。'}],head:number===1?'核查两项消息，最多三条，只交草稿。':'研发受众，核查最新变化，只交草稿。',sourceIds:[],memoryIds:[],skillIds:[],historyIds:[],middle:[],tail:[],units:25}};}
+export function currentSession(s){return s.task.sessions[s.task.sessionIndex];}
+export function createVisit(raw={},library=emptyLibrary(),id){const s={version:3,schemaVersion:3,scenarioVersion:SCENARIO_VERSION,id:id||crypto.randomUUID(),startedAt:now(),profile:{nickname:String(raw.nickname||'见习调查员').trim().slice(0,24)},task:{sessions:[session(1,raw.audience==='technical'?'technical':'business')],sessionIndex:0,events:[],applied:[],library:copy(library?.schemaVersion===3?library:emptyLibrary()),published:false},tour:{chapter:0,line:0,mode:'guided',paused:false,eventId:null,replay:null},learning:{observedEventIds:[],completedChapters:[],experiments:[],questions:[],photos:[],photoFailures:[],attempts:[],answers:{},reflection:'',selfAssessment:null,elapsedSeconds:0,notes:[]}};return s;}
+export function addEvent(s,type,title,detail,{nodeId='loop',operation=null,input={},result={},evidenceIds=[],objectiveIds=[]}={}){const ev={id:s.id+':E'+(s.task.events.length+1),seq:s.task.events.length+1,type,kind:type,sessionId:currentSession(s).id,at:now(),nodeId,operation,title,detail,input:copy(input),result:copy(result),evidenceIds:[...evidenceIds],objectiveIds:[...objectiveIds]};s.task.events.push(ev);return ev;}
+function once(s,key,fn){const id=currentSession(s).id+':'+key;if(s.task.applied.includes(id))return [];const start=s.task.events.length;fn();s.task.applied.push(id);return s.task.events.slice(start);}
+export function requestSources(s){return once(s,'request',()=>{const a=currentSession(s);a.requestCreated=true;a.phase='requested';addEvent(s,'request-created','模型提出读取原始来源','请求已生成，还没有执行。',{nodeId:'loop',operation:'planning',input:{sourceIds:a.evidenceIds},result:{requestedIds:a.number===1?['A1','A2','D1']:['A3']},objectiveIds:['O1']});});}
+export function retrieveSources(s,{fail=false,wrongVersion=false}={}){const a=currentSession(s);if(!a.requestCreated)throw Error('先生成读取请求，工具才能执行。');if(a.toolSucceeded)return [];if(fail||wrongVersion){return [addEvent(s,fail?'tool-failed':'tool-wrong-version',fail?'读取失败：没有取得原文':'读取成功，但版本不对',fail?'请求保留，可以重试；未添加成功证据。':'返回旧版A1，不能回答本周的新变化。',{nodeId:'tools',operation:'tool',input:{request:'原始来源'},result:{ok:!fail,usable:false},evidenceIds:wrongVersion?['A1']:[],objectiveIds:['O1','O2']})];}
+ return once(s,'retrieve',()=>{const ids=a.number===1?['A1','A2','D1']:['A3'];a.evidenceIds=[...new Set([...a.evidenceIds,...ids])];a.context.sourceIds=[...ids];a.context.middle=ids.map(id=>({sourceId:id,text:SOURCES.find(x=>x.id===id).text}));a.context.tail=[{role:'tool-result',sourceIds:ids}];a.context.units=40;a.toolSucceeded=true;a.phase='retrieved';addEvent(s,'tool-result','工具取回原始材料','这些原文进入档案，同时选取与当前任务有关的部分放到工作台。',{nodeId:'tools',operation:'tool',input:{requestedIds:ids},result:{ok:true,usable:true},evidenceIds:ids,objectiveIds:['O1','O2','O3']});});}
+export function verifySources(s){const a=currentSession(s);if(!a.toolSucceeded)throw Error('没有可用原始依据，不能确认消息。');return once(s,'verify',()=>{a.verified=true;a.phase='verified';a.corrections=a.number===1?[{id:'merge-atlas',from:['S1','S2'],to:'A1',reason:'转载同一事件，不是两件事'},{id:'correct-open',from:['S3'],to:'A1',reason:'全面开放应改成申请预览且需审核'},{id:'limit-delta',from:['S3'],to:'D1',reason:'支持PDF/Markdown，不是所有格式'}]:[{id:'refresh-atlas',from:['A1'],to:'A3',reason:'新增审计日志和只读权限；仍需审核，旧事实须重新核实'}];addEvent(s,'source-verified','反馈改变了工作结论',a.number===1?'合并两份同源转述，修正全面开放的夸大，得到两条独立消息。':'旧消息只作线索，最新结论由A3支持。',{nodeId:'analysis',operation:'analysis',input:{sourceIds:a.evidenceIds},result:{corrections:a.corrections,independentMessages:a.number===1?2:1},evidenceIds:a.number===1?['A1','A2','D1']:['A3'],objectiveIds:['O2','O6']});});}
+export function deliverDraft(s){const a=currentSession(s);if(!a.verified)throw Error('来源未核实，不能交付成功草稿。');return once(s,'deliver',()=>{a.draft=a.number===1?copy(SAMPLE_DRAFT):[{title:'Atlas预览新增审计与权限配置',claim:'新增审计日志和只读权限；仍须申请审核，不能沿用全面开放的说法。',sources:['A3'],unknown:'完整地区范围未公布。'}];for(const item of a.draft)item.emphasis=a.audience==='technical'?'技术侧重点：接口范围、权限配置与验证条件。':'业务侧重点：先确认准入条件，再评估是否适合当前需求。';a.delivered=true;a.phase='draft';addEvent(s,'draft-delivered','有来源的草稿已完成','尚未发布，没有发送消息，也没有建立后台监控。',{nodeId:'delivery',operation:'delivery',result:{draft:a.draft,published:false},evidenceIds:a.draft.flatMap(x=>x.sources),objectiveIds:['O2','O6']});});}
+export function saveExperience(s,{preference=false,skill=false}={}){const a=currentSession(s);if(a.number!==1||!a.delivered)throw Error('先完成第一次草稿，再决定留下什么。');return once(s,'experience',()=>{const lib=s.task.library;a.experienceDecision={preference:!!preference,skill:!!skill,at:now()};
+ const history={id:s.id+':history-1',sourceVisitId:s.id,sessionId:a.id,request:a.request,draft:copy(a.draft),evidenceIds:[...a.evidenceIds],eventIds:s.task.events.filter(e=>e.sessionId===a.id).map(e=>e.id)};lib.history.push(history);addEvent(s,'history-written','会话过程已留在档案','历史记录与自愿保存的偏好、方法分开。',{nodeId:'archive',operation:'history',result:{historyId:history.id},evidenceIds:a.evidenceIds,objectiveIds:['O3','O5']});
+ if(preference){const item={id:s.id+':preference',kind:'audience',value:a.audience,sourceSessionId:a.id,sourceVisitId:s.id,at:now()};lib.preferences=lib.preferences.filter(x=>x.kind!=='audience');lib.preferences.push(item);const ev=addEvent(s,'preference-written','保存受众偏好','这是可读取的资料，没有更新模型权重。',{nodeId:'memory',operation:'memoryWrite',result:{entry:item},objectiveIds:['O3','O5']});item.sourceEventId=ev.id;}
+ if(skill){const item={id:s.id+':skill',name:'来源核验与简报',steps:['追原始来源与版本','合并同源转述','保留范围与未知','交付前核对授权'],sourceSessionId:a.id,sourceVisitId:s.id,at:now()};lib.skills=lib.skills.filter(x=>x.name!==item.name);lib.skills.push(item);const ev=addEvent(s,'skill-written','保存可检查的核查手册','手册提供做法，读取后仍须选择和执行工具。',{nodeId:'memory',operation:'memoryWrite',result:{entry:item},objectiveIds:['O3','O5']});item.sourceEventId=ev.id;}
+ addEvent(s,'experience-decision',preference||skill?'经验保存选择已记录':'本次不保存长期偏好与方法','是否保存可检查；拒绝保存不产生相应条目。',{nodeId:'memory',result:{...a.experienceDecision},objectiveIds:['O3','O5']});});}
+export function reviseSkill(s,id,steps){const item=s.task.library.skills.find(x=>x.id===id);if(!item)throw Error('没有这份已保存手册。');if(!Array.isArray(steps)||!steps.length||steps.length>10||steps.some(x=>typeof x!=='string'||!x.trim()||x.trim().length>200))throw Error('请写1–10条非空步骤，每条不超过200字。');const next=steps.map(x=>x.trim());if(JSON.stringify(next)===JSON.stringify(item.steps))return [];const before=copy(item);item.steps=next;item.revision=(item.revision||1)+1;item.at=now();const ev=addEvent(s,'skill-revised','核查手册已修订','修订的是可读取的做法，没有执行手册，也没有训练模型。',{nodeId:'memory',operation:'memoryWrite',input:{entryId:id,previous:before},result:{entry:copy(item)},objectiveIds:['O3','O5']});item.sourceEventId=ev.id;return [ev];}
+export function startNewSession(s){const first=s.task.sessions[0];if(!first.delivered||!first.experienceDecision)throw Error('先交付草稿，并决定是否保存经验。');if(s.task.sessions.length>1){s.task.sessionIndex=1;return [];}s.task.sessions.push(session(2,'technical'));s.task.sessionIndex=1;return [addEvent(s,'session-started','新的会话，旧整段上下文退出','本轮只有新委托和常驻规则；旧档案仍可查，但未自动读入。',{nodeId:'context',operation:'input',result:{context:copy(currentSession(s).context)},objectiveIds:['O3','O5']})];}
+export function loadReuse(s,{enabled=true}={}){const a=currentSession(s);if(a.number!==2)throw Error('先开启新会话。');return once(s,'load-reuse',()=>{const lib=s.task.library;a.reuseLoaded=true;a.reuseEnabled=enabled;
+ if(enabled){const pref=lib.preferences.find(x=>x.kind==='audience');if(pref){a.readings.memoryIds.push(pref.id);a.context.memoryIds.push(pref.id);addEvent(s,'memory-read','读取已保存的受众偏好','该偏好可见，但不覆盖这次明确的研发受众要求。',{nodeId:'memory',operation:'memory',input:{entryId:pref.id},result:{entry:pref},objectiveIds:['O3','O5']});}
+ const skill=lib.skills.find(x=>x.name==='来源核验与简报');if(skill){a.readings.skillIds.push(skill.id);a.context.skillIds.push(skill.id);addEvent(s,'skill-read','按需读取核查手册','复用做法，未自动完成当前操作。',{nodeId:'memory',operation:'memory',input:{entryId:skill.id},result:{entry:skill},objectiveIds:['O3','O5']});}
+ const hist=[...lib.history].reverse().find(x=>x.draft.some(d=>d.sources.includes('A1')));if(hist){a.readings.historyIds.push(hist.id);a.context.historyIds.push(hist.id);addEvent(s,'history-read','检索上次关于Atlas的记录','只取相关旧结论作线索，不携带旧整段聊天；仍需读取最新公告。',{nodeId:'archive',operation:'history',input:{query:'Atlas申请预览'},result:{historyId:hist.id,excerpt:hist.draft.find(d=>d.sources.includes('A1'))},objectiveIds:['O3','O5']});}}
+ addEvent(s,'requirements-applied','本次明确要求优先',enabled?'实际读取的资料列在当前输入中；技术细节要求优先于旧偏好。':'最小工具型Agent基线：未配置跨会话资料；它仍然可以执行工具与反馈循环。',{nodeId:'loop',result:{audience:'technical',baseline:!enabled,readings:copy(a.readings)},objectiveIds:['O3','O5','O6']});});}
+export function chapterObservation(s,index=s.tour.chapter){const a=index===4?currentSession(s):s.task.sessions[0],types=[['request-created'],['request-created','tool-result','source-verified','tool-failed','tool-wrong-version'],[],['draft-delivered','history-written','preference-written','skill-written','skill-revised','experience-decision'],null][index];if(index===2){const exp=s.learning.experiments.find(x=>x.kind==='context-compare');return exp?{id:s.id+':context-selected',virtual:true,type:'context-selected',sessionId:a.id,nodeId:'context',title:'存档与当前输入分开',detail:'档案中有'+a.evidenceIds.length+'份线索与原文；当前输入选择'+a.context.sourceIds.length+'份相关原文。短任务不强制压缩。',evidenceIds:[...a.context.sourceIds]}:null;}return [...s.task.events].reverse().find(ev=>ev.sessionId===a.id&&s.learning.observedEventIds.includes(ev.id)&&(!types||types.includes(ev.type)))||null;}
+export function setChapter(s,index){if(!Number.isInteger(index)||index<0||index>4)throw Error('未知观察章节');s.tour.chapter=index;s.tour.line=0;s.tour.eventId=chapterObservation(s,index)?.id||null;}
+export function eventById(s,id){return s.task.events.find(e=>e.id===id);}
+export function observeEvent(s,id){const ev=eventById(s,id);if(!ev)throw Error('没有这条已发生的事件');s.tour.eventId=id;if(!s.learning.observedEventIds.includes(id))s.learning.observedEventIds.push(id);return ev;}
+export function inspectContext(s){if(!currentSession(s).verified)throw Error('先核实来源再对照当前输入。');if(!s.learning.experiments.some(x=>x.kind==='context-compare'))s.learning.experiments.push({id:s.id+':context-compare',kind:'context-compare',at:now(),before:{archiveIds:[...currentSession(s).evidenceIds]},after:{currentIds:[...currentSession(s).context.sourceIds]},detail:'档案保留全部线索与原文，当前输入只选用相关证据。短任务没有被强制压缩。'});}
+export function contextReplay(s,{loss=false}={}){const before=[{kind:'rules',units:5,text:'保留证据、范围和草稿权限'},{kind:'head',units:10,text:'核查原始来源，最多三条，不发布'},{kind:'middle',units:45,text:'长过程回放：省略重复检索与中间比对，共70个示意格'},{kind:'tail',units:10,text:'Atlas仍需申请审核；Delta限PDF/Markdown'}];const after=before.map(x=>x.kind==='middle'?{...x,units:10,text:loss?'Atlas开放了，Delta能检索文档。':'A1/A2：Atlas需申请审核，地区未知；D1：支持PDF/Markdown。草稿待交付，不发布。'}:copy(x));return {scope:'长过程教学回放，不是当前短任务已经耗尽窗口',load:70,units:35,view:'after',status:'compressed',before,after,viewing:true,loss};}
+export function recordReplay(s,kind){if(!s.learning.experiments.some(x=>x.kind===kind))s.learning.experiments.push({id:s.id+':'+kind,kind,at:now(),detail:kind==='summary-loss'?'对照短摘要，发现申请审核、格式和权限条件被遗漏；回查原始依据。':'观看长过程缩比整理；原始档案没有删除。'});s.tour.replay={kind,position:0};}
+const observedType=(s,type,sessionId)=>s.task.events.some(e=>e.type===type&&(!sessionId||e.sessionId===sessionId)&&s.learning.observedEventIds.includes(e.id));
+export function chapterReady(s,index){const a=currentSession(s);return [()=>observedType(s,'request-created','session-1'),()=>observedType(s,'source-verified','session-1'),()=>s.learning.experiments.some(x=>x.kind==='context-compare'),()=>s.task.sessions[0].delivered&&!!s.task.sessions[0].experienceDecision&&observedType(s,'draft-delivered','session-1')&&observedType(s,'experience-decision','session-1'),()=>a.number===2&&a.delivered&&observedType(s,'requirements-applied','session-2')&&observedType(s,'draft-delivered','session-2')][index]?.()||false;}
+export function completeChapter(s,index){if(!chapterReady(s,index))throw Error('先观察本章的关键变化，再继续。');if(!s.learning.completedChapters.includes(index))s.learning.completedChapters.push(index);}
+export function askQuestion(s,item){if(!s.learning.questions.some(x=>x.id===item.id))s.learning.questions.push({id:item.id,question:item.q,answer:typeof item.a==='string'?item.a:JSON.stringify(item.a),chapter:s.tour.chapter,eventId:s.tour.eventId,at:now(),claimIds:item.claimIds||[]});}
+export function scoreQuiz(s,bank,answers,{review=false}={}){if(bank.some(q=>!Number.isInteger(answers[q.id])||!q.options[answers[q.id]]))throw Error('请完成所有核心题目。');const details=bank.map(q=>({id:q.id,selected:answers[q.id],correct:answers[q.id]===q.answer,objectiveIds:q.objectiveIds}));const attempt={id:s.id+':attempt-'+(s.learning.attempts.length+1),at:now(),review,score:Math.round(details.filter(x=>x.correct).length/bank.length*100),details};s.learning.attempts.push(attempt);return attempt;}
+export const firstScore=s=>s.learning.attempts[0]?.score??null;
+export const bestScore=s=>Math.max(0,...s.learning.attempts.map(a=>a.score));
+export const isGraduate=s=>s.learning.completedChapters.length===5&&bestScore(s)>=80;
+export function restoreVisit(v){
+ if(v?.schemaVersion!==3||v.version!==3||v.scenarioVersion!==SCENARIO_VERSION||typeof v.id!=='string'||!v.profile||!v.task||!v.tour||!v.learning)return null;
+ if(!Number.isInteger(v.tour.chapter)||v.tour.chapter<0||v.tour.chapter>4)return null;
+ if(!Array.isArray(v.task.sessions)||!v.task.sessions.length||!Number.isInteger(v.task.sessionIndex)||!v.task.sessions[v.task.sessionIndex])return null;
+ if(!['events','applied'].every(k=>Array.isArray(v.task[k]))||!['observedEventIds','completedChapters','experiments','questions','photos','photoFailures','attempts'].every(k=>Array.isArray(v.learning[k])))return null;
+ if(v.task.library?.schemaVersion!==3||!['preferences','skills','history'].every(k=>Array.isArray(v.task.library[k])))return null;
+ if(!v.learning.completedChapters.every(x=>Number.isInteger(x)&&x>=0&&x<5)||new Set(v.learning.completedChapters).size!==v.learning.completedChapters.length)return null;
+ if(!v.task.sessions.every(a=>a&&a.id&&a.context&&['sourceIds','memoryIds','skillIds','historyIds','middle','tail'].every(k=>Array.isArray(a.context[k]))&&Array.isArray(a.evidenceIds)&&Array.isArray(a.draft)&&a.readings&&['memoryIds','skillIds','historyIds'].every(k=>Array.isArray(a.readings[k]))))return null;
+ return v;
 }
-export function normalizeOrder(raw={}){
-  const quantity=Number(raw.quantity??3),budget=Number(raw.budget??120);
-  if(!Number.isInteger(quantity)||quantity<1||quantity>6)throw Error('这座教学工厂一次接待 1–6 份礼盒。');
-  if(!Number.isFinite(budget)||budget<=0||budget>10000)throw Error('请填写有效的每份预算。');
-  const names=String(raw.names??'').split(/[\n,，]/u).map(s=>s.trim().slice(0,16)).filter(Boolean);
-  const order={quantity,budget,color:raw.color==='green'?'green':'blue',snack:raw.snack===true,names:Array.from({length:quantity},(_,i)=>names[i]||`新同事 ${i+1}`),welcome:String(raw.welcome||'欢迎加入，一起把好事做成。').trim().slice(0,90),nickname:String(raw.nickname||'见习工程师').trim().slice(0,24)};
-  const stock=Object.fromEntries(Object.entries(CATALOG).map(([id,item])=>[id,item.stock]));
-  const plan=planOrder(order,stock);
-  if(!plan.withinBudget)throw Error(`按这张订单，当前可用方案每份需要 ${plan.unitCost} 元。请调整预算或点心选项。`);
-  return order;
-}
-export function addEvent(s,kind,title,detail,extra={}){
-  const e={seq:s.events.length+1,at:new Date().toISOString(),kind,title,detail,...extra};s.events.push(e);return e;
-}
-export function createVisit(raw={},id){
-  const order=normalizeOrder(raw),s={version:VERSION,id:id||globalThis.crypto.randomUUID(),startedAt:new Date().toISOString(),phase:'briefing',elapsedSeconds:0,station:0,line:0,order,stock:Object.fromEntries(Object.entries(CATALOG).map(([k,v])=>[k,v.stock])),events:[],visited:[],entered:[],questions:[],photos:[],experiments:[],attempts:[],quizAnswers:{},gifts:[],plan:null,reserved:false,cardFault:false,quality:null,accepted:false,preferenceSaved:false,context:null,certificateAt:null};
-  addEvent(s,'order','收到欢迎礼盒订单',`${order.quantity} 份 · 每份预算 ${order.budget} 元 · ${order.color==='blue'?'蓝':'绿'}色系 · 先验收，不发货`);return s;
-}
-export function enterStation(s,index){
-  if(!Number.isInteger(index)||index<0||index>7)throw Error('未知的参观站点。');
-  s.station=index;s.line=0;s.phase='tour';
-  if(s.entered.includes(index))return;
-  // A guide may revisit any completed area, but cannot produce out of order.
-  if(index>0&&!s.entered.includes(index-1))throw Error('请先完成前面的订单交接。');
-  if(index===0)addEvent(s,'request','方案室提出库存查询请求','运行调度将请求交给仓库工人；请求本身没有执行领料。');
-  if(index===1){s.plan=planOrder(s.order,s.stock);if(!s.plan.available||!s.plan.withinBudget)throw Error('当前方案无法满足订单，请调整订单。');addEvent(s,'tool','仓库返回实际库存',s.plan.substituted?'主色包装盒不足，改用白盒与同色腰封，维持整批同款要求。':'主色包装盒足够，直接采用同色盒体。');addEvent(s,'plan','根据反馈形成可执行方案',`每份 ${s.plan.unitCost} 元，合计 ${s.plan.total} 元；不超过单份预算。`);}
-  if(index===2)addEvent(s,'observe','查看调度室当前工作资料','这笔简单订单不强制压缩；长订单实验独立于实际生产。');
-  if(index===3)addEvent(s,'archive','回看会话档案','保留已经发生的请求、库存结果与安排；档案不等于当前全部输入。');
-  if(index===4)addEvent(s,'skill','读取欢迎礼盒装配手册','按顺序核对物料、打印欢迎卡、装盒、检查。不预设任何个人长期偏好。');
-  if(index===5){
-    if(!s.plan)throw Error('尚未形成领料方案。');
-    if(!s.reserved){for(const id of s.plan.items){if(s.stock[id]<s.order.quantity)throw Error('库存发生变化，需要重新安排。');}for(const id of s.plan.items)s.stock[id]-=s.order.quantity;s.reserved=true;addEvent(s,'execution','工人完成领料',`实际扣减 ${s.order.quantity} 套原料。重复参观不重复领料。`);}
-    s.gifts=s.order.names.map((name,i)=>({id:`gift-${i+1}`,name,items:[...s.plan.items],card:s.cardFault&&i===0?null:{name,text:s.order.welcome},color:s.order.color}));
-    addEvent(s,'execution','欢迎礼盒完成装配',`${s.gifts.length} 份实物模型，欢迎卡使用这张订单的名字与文字。`);
-  }
-  if(index===6){s.quality=checkQuality(s);addEvent(s,'quality',s.quality.ok?'质检通过':'质检发现需要补做',s.quality.checks.filter(c=>!c.ok).map(c=>c.name).join('、')||'数量、内容、配色、卡片和预算符合本单要求。');}
-  if(index===7){if(!checkQuality(s).ok)throw Error('先补做缺失部分，再把礼盒交到验收台。');addEvent(s,'delivery','礼盒进入验收台','本次制作已完成，等待客户验收；没有执行发货。');}
-  s.entered.push(index);
-}
-export function completeStation(s,index){if(!s.entered.includes(index))throw Error('尚未进入该站。');if(!s.visited.includes(index))s.visited.push(index);}
-export function checkQuality(s){
-  const gifts=s.gifts,plan=s.plan;
-  const checks=[
-    {name:'数量与订单一致',ok:gifts.length===s.order.quantity},
-    {name:'包含笔记本与笔',ok:gifts.length>0&&gifts.every(g=>g.items.includes('notebook')&&g.items.includes('pen'))},
-    {name:'排除项得到遵守',ok:gifts.length>0&&gifts.every(g=>s.order.snack||!g.items.includes('snack'))},
-    {name:'主题色与同款要求',ok:gifts.length>0&&gifts.every(g=>g.color===s.order.color&&g.items.join('|')===gifts[0].items.join('|'))},
-    {name:'欢迎卡完整且内容正确',ok:gifts.length>0&&gifts.every((g,i)=>g.card&&g.card.name===s.order.names[i]&&g.card.text===s.order.welcome)},
-    {name:'费用在单份预算内',ok:!!plan&&plan.unitCost<=s.order.budget}
-  ];return {ok:checks.every(c=>c.ok),checks};
-}
-export function injectCardFault(s){if(!s.gifts.length)throw Error('先看到装配完成的礼盒，再注入故障。');if(s.accepted)throw Error('验收后的订单不再注入故障，请新建一次实习。');s.gifts[0].card=null;s.cardFault=true;s.quality=checkQuality(s);addEvent(s,'experiment','教学故障：第一张欢迎卡缺失','仅影响本单的卡片；其他已完成部分保留。');}
-export function repairCards(s){if(!s.gifts.length)throw Error('尚未生产礼盒。');s.gifts.forEach((g,i)=>g.card={name:s.order.names[i],text:s.order.welcome});s.cardFault=false;s.quality=checkQuality(s);addEvent(s,'execution','仅补印缺失的欢迎卡','原料库存没有再次扣减，礼盒没有重复装配。');}
-export function acceptOrder(s){if(!s.entered.includes(7)||!checkQuality(s).ok)throw Error('请先完成生产并查看验收台。');if(!s.accepted){s.accepted=true;addEvent(s,'acceptance','客户确认验收','只完成验收；发货仍未获授权。');}}
-export function askQuestion(s,station,q){if(!s.questions.some(x=>x.id===q.id))s.questions.push({id:q.id,station,question:q.q,answer:q.a,at:new Date().toISOString()});}
-export function startContextLab(s){
-  if(!s.context){s.context={scope:'同一订单经过多轮沟通的独立教学分支',status:'expanded',before:[{id:'rules',kind:'rules',units:10,text:'常驻规则和工具说明。'},{id:'head',kind:'head',units:10,text:`${s.order.quantity} 份同款礼盒；每份不超过 ${s.order.budget} 元；${s.order.color==='blue'?'蓝':'绿'}色系；${s.order.snack?'包含点心':'不放食品'}；先验收，不发货。`},{id:'middle',kind:'middle',units:40,text:'长订单实验追加：多轮包装比较、重复库存说明、被淘汰方案；记录包装方案与费用依据，尚未验收。'},{id:'tail',kind:'tail',units:15,text:'最新一组交接：工人返回包装信息，调度确认接收；保留完整请求与结果。'}],after:null};s.experiments.push({id:'context-long',title:'长订单上下文实验',detail:'在独立教学分支追加工作资料；原订单的生产和档案保持原状。',at:new Date().toISOString()});}
-  return s.context;
-}
-export function compressContext(s){const c=startContextLab(s);if(!c.after)c.after=c.before.map(x=>x.kind==='middle'?{...x,units:10,text:`保留工作摘要：本单采用${s.plan?.substituted?'白盒搭配主题色腰封':'主题色包装盒'}；费用依据为库存报价；维持订单约束；仍需完成后续执行与验收。`}:{...x});c.status='compressed';return c;}
-export function badSummary(s){startContextLab(s);if(!s.experiments.some(x=>x.id==='context-loss'))s.experiments.push({id:'context-loss',title:'摘要丢失条件的对照',detail:'“包装已安排”没有说明材料、费用依据和未完成事项，不能据此认定任务完成。',at:new Date().toISOString()});}
-export function scoreQuiz(s,bank,answers){const details=bank.map(q=>({id:q.id,selected:answers[q.id]??null,correct:answers[q.id]===q.answer}));const score=details.filter(x=>x.correct).length*10;const attempt={at:new Date().toISOString(),score,details};s.attempts.push(attempt);s.quizAnswers={...answers};if(s.visited.length===8&&score>=80&&!s.certificateAt)s.certificateAt=attempt.at;return attempt;}
-export function bestScore(s){return Math.max(0,...s.attempts.map(x=>x.score));}
-export function isGraduate(s){return s.visited.length===8&&bestScore(s)>=80;}
-export function restoreVisit(value){if(!value||value.version!==VERSION||!Array.isArray(value.events)||!Array.isArray(value.visited)||!Array.isArray(value.entered)||!Array.isArray(value.attempts)||!Array.isArray(value.gifts)||!Array.isArray(value.questions)||!Array.isArray(value.experiments)||!value.stock||!value.order||!Array.isArray(value.photos))return null;try{normalizeOrder(value.order);return value;}catch{return null;}}
+export function sceneModel(s){const a=currentSession(s);return {id:s.id,events:s.task.events,context:s.tour.replay?{...contextReplay(s,{loss:s.tour.replay.kind==='summary-loss'}),view:s.tour.replay.view||'before'}:null,entered:[0,1,2,3,4,5,6,7,8],officialRead:a.toolSucceeded,accepted:a.delivered,findings:a.draft,station:0};}

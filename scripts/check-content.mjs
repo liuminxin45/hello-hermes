@@ -1,6 +1,7 @@
 import { readFileSync, existsSync, readdirSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { checkFactory } from './check-factory.mjs'
 
 export const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 export const readJson = path => JSON.parse(readFileSync(resolve(root, path), 'utf8'))
@@ -67,7 +68,7 @@ export function checkLocalLinks() {
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const errors = [...validateCatalog(readJson('content/chapters.json'), readJson('content/verification.json')), ...checkLocalLinks()]
+  const errors = [...validateCatalog(readJson('content/chapters.json'), readJson('content/verification.json')), ...checkLocalLinks(), ...await checkFactory(root)]
   if (errors.length) { console.error(errors.join('\n')); process.exitCode = 1 }
-  else console.log(`Content OK: ${publishedChapters(readJson('content/chapters.json')).length} published chapters; evidence, learning support, figures and local links verified.`)
+  else console.log(`Content OK: ${publishedChapters(readJson('content/chapters.json')).length} published chapters; evidence, learning support, figures, local links and factory course references verified.`)
 }

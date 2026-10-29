@@ -1,0 +1,910 @@
+{
+  "schemaVersion": 1,
+  "scenarioVersion": "intel-reuse-v1",
+  "notice": "Internal versioned claim inventory. The review dates apply only to the scope recorded here; no course-learning outcome is claimed.",
+  "claims": [
+    {
+      "claimId": "G-loop",
+      "type": "general",
+      "statement": "模型请求、运行时调度、工具执行和结果反馈是不同责任。",
+      "version": null,
+      "source": [
+        {
+          "kind": "fixed-version-official-documentation-reading",
+          "repository": "NousResearch/hermes-agent",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "path": "website/docs/developer-guide/agent-loop.md",
+          "blobSha": "17bc53ea47ac56ec54ab55ee2f1a9fa11868d442",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/bf0203a794a07aac3ff764972ab9087baa4e4f4e/website/docs/developer-guide/agent-loop.md",
+          "scope": "Read core orchestration responsibilities and model/tool loop overview; no runtime replay.",
+          "runtimeTested": false
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "receive",
+        "verify",
+        "context",
+        "retain"
+      ],
+      "questionIds": [
+        "who-executes",
+        "model-agent",
+        "tools-permission",
+        "feedback-next",
+        "tool-success",
+        "fixed-flow",
+        "failed-tool",
+        "skill-tool",
+        "resident-tool-descriptions"
+      ],
+      "quizIds": [
+        "Q1",
+        "Q2",
+        "R1",
+        "R2"
+      ],
+      "experimentIds": [
+        "tool-result-boundary"
+      ],
+      "limits": "Conceptual scope only; teaching effectiveness still requires reader testing."
+    },
+    {
+      "claimId": "G-evidence",
+      "type": "general",
+      "statement": "同源转载不增加独立事件数；结论应受原始依据、时间和适用范围约束。",
+      "version": null,
+      "source": [
+        {
+          "kind": "authored-teaching-contract",
+          "path": "editorial/factory-blueprint.md",
+          "runtimeTested": false,
+          "scope": "Illustrative contract; actual task assertions must be covered by engine tests."
+        },
+        {
+          "kind": "user-provided-design-report",
+          "path": "editorial/reviews/2026-10-29-redesign-source.md",
+          "runtimeTested": false,
+          "scope": "Design rationale, not empirical evidence of learning outcomes."
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "receive",
+        "verify",
+        "retain",
+        "reuse"
+      ],
+      "questionIds": [
+        "why-not-write",
+        "feedback-next",
+        "tool-success",
+        "duplicate-source",
+        "wrong-version",
+        "how-complete",
+        "reuse-not-copy",
+        "retry-policy"
+      ],
+      "quizIds": [
+        "Q2",
+        "Q6",
+        "X1"
+      ],
+      "experimentIds": [
+        "retrieval-match",
+        "tool-result-boundary"
+      ],
+      "limits": "Conceptual scope only; teaching effectiveness still requires reader testing."
+    },
+    {
+      "claimId": "G-authorization",
+      "type": "general",
+      "statement": "内容生成与外部发布分别检查授权；数量上限不要求机械凑满。",
+      "version": null,
+      "source": [
+        {
+          "kind": "authored-teaching-contract",
+          "path": "editorial/factory-blueprint.md",
+          "runtimeTested": false,
+          "scope": "Illustrative contract; actual task assertions must be covered by engine tests."
+        },
+        {
+          "kind": "user-provided-design-report",
+          "path": "editorial/reviews/2026-10-29-redesign-source.md",
+          "runtimeTested": false,
+          "scope": "Design rationale, not empirical evidence of learning outcomes."
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "receive",
+        "verify",
+        "retain",
+        "reuse"
+      ],
+      "questionIds": [
+        "why-not-write",
+        "tools-permission",
+        "how-complete",
+        "history-side-effect",
+        "tool-schema",
+        "sandbox-approval",
+        "idempotent-recovery"
+      ],
+      "quizIds": [
+        "Q6",
+        "R6"
+      ],
+      "experimentIds": [],
+      "limits": "Conceptual scope only; teaching effectiveness still requires reader testing."
+    },
+    {
+      "claimId": "G-information-stores",
+      "type": "general",
+      "statement": "当前输入、持久历史、用户资料与程序性方法有不同职责和读取时机。",
+      "version": null,
+      "source": [
+        {
+          "kind": "fixed-version-official-documentation-reading",
+          "repository": "NousResearch/hermes-agent",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "path": "website/docs/user-guide/features/memory.md",
+          "blobSha": "83f672120e2f647c093deaad04755e4748ee736e",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/bf0203a794a07aac3ff764972ab9087baa4e4f4e/website/docs/user-guide/features/memory.md",
+          "scope": "Read bounded memory, MEMORY.md/USER.md, frozen snapshot at session start, actual write evidence and session boundary sections. No default numeric limits exposed in course.",
+          "runtimeTested": false
+        },
+        {
+          "kind": "fixed-version-official-documentation-reading",
+          "repository": "NousResearch/hermes-agent",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "path": "website/docs/user-guide/features/skills.md",
+          "blobSha": "4ecbd750b5a31c79535a2c333e7a69a0813d2078",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/bf0203a794a07aac3ff764972ab9087baa4e4f4e/website/docs/user-guide/features/skills.md",
+          "scope": "Read on-demand knowledge/progressive disclosure, writable skill directory, and skill_view loading descriptions. No full feature inventory verification.",
+          "runtimeTested": false
+        },
+        {
+          "kind": "fixed-version-official-documentation-reading",
+          "repository": "NousResearch/hermes-agent",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "path": "website/docs/developer-guide/session-storage.md",
+          "blobSha": "d3a6c86141a2791464d963df151d4fcf90a432ea",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/bf0203a794a07aac3ff764972ab9087baa4e4f4e/website/docs/developer-guide/session-storage.md",
+          "scope": "Read SQLite/WAL storage, FTS5 tables, search role and separate trajectory/RL storage boundary. No database executed.",
+          "runtimeTested": false
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "receive",
+        "context",
+        "retain",
+        "reuse"
+      ],
+      "questionIds": [
+        "context-history",
+        "memory-skill",
+        "stored-not-read",
+        "file-layout",
+        "resident-tool-descriptions"
+      ],
+      "quizIds": [
+        "Q3",
+        "R3"
+      ],
+      "experimentIds": [],
+      "limits": "Conceptual scope only; teaching effectiveness still requires reader testing."
+    },
+    {
+      "claimId": "G-summary-loss",
+      "type": "general",
+      "statement": "摘要可能遗漏条件、来源和进度；存档存在不代表下一轮已回查。",
+      "version": null,
+      "source": [
+        {
+          "kind": "fixed-version-official-documentation-reading",
+          "repository": "NousResearch/hermes-agent",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "path": "website/docs/developer-guide/context-compression-and-caching.md",
+          "blobSha": "1a27aa0f42e31c9935c2ae1852b3810d8b60fa93",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/bf0203a794a07aac3ff764972ab9087baa4e4f4e/website/docs/developer-guide/context-compression-and-caching.md",
+          "scope": "Read configurable threshold/gateway-vs-agent gate descriptions, in-place archived history, tail retention and orphaned tool-pair cleanup. No universal/default percentage adopted.",
+          "runtimeTested": false
+        },
+        {
+          "kind": "authored-teaching-contract",
+          "path": "editorial/factory-blueprint.md",
+          "runtimeTested": false,
+          "scope": "Illustrative contract; actual task assertions must be covered by engine tests."
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "context"
+      ],
+      "questionIds": [
+        "summary-risk",
+        "recover-original",
+        "recompress"
+      ],
+      "quizIds": [
+        "Q4",
+        "R4"
+      ],
+      "experimentIds": [
+        "context-compare",
+        "summary-loss"
+      ],
+      "limits": "Conceptual scope only; teaching effectiveness still requires reader testing."
+    },
+    {
+      "claimId": "G-reuse",
+      "type": "general",
+      "statement": "资料/技能的保存、读取与适用性判断不等于模型权重训练，也不保证每次改进。",
+      "version": null,
+      "source": [
+        {
+          "kind": "fixed-version-official-documentation-reading",
+          "repository": "NousResearch/hermes-agent",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "path": "website/docs/user-guide/features/memory.md",
+          "blobSha": "83f672120e2f647c093deaad04755e4748ee736e",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/bf0203a794a07aac3ff764972ab9087baa4e4f4e/website/docs/user-guide/features/memory.md",
+          "scope": "Read bounded memory, MEMORY.md/USER.md, frozen snapshot at session start, actual write evidence and session boundary sections. No default numeric limits exposed in course.",
+          "runtimeTested": false
+        },
+        {
+          "kind": "fixed-version-official-documentation-reading",
+          "repository": "NousResearch/hermes-agent",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "path": "website/docs/user-guide/features/skills.md",
+          "blobSha": "4ecbd750b5a31c79535a2c333e7a69a0813d2078",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/bf0203a794a07aac3ff764972ab9087baa4e4f4e/website/docs/user-guide/features/skills.md",
+          "scope": "Read on-demand knowledge/progressive disclosure, writable skill directory, and skill_view loading descriptions. No full feature inventory verification.",
+          "runtimeTested": false
+        },
+        {
+          "kind": "authored-teaching-contract",
+          "path": "editorial/factory-blueprint.md",
+          "runtimeTested": false,
+          "scope": "Illustrative contract; actual task assertions must be covered by engine tests."
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "retain",
+        "reuse"
+      ],
+      "questionIds": [
+        "is-training",
+        "reuse-not-copy",
+        "stored-not-read",
+        "current-wins",
+        "skills-not-guarantee",
+        "trajectory-training",
+        "sft-training",
+        "skill-revision"
+      ],
+      "quizIds": [
+        "Q3",
+        "Q5",
+        "R5",
+        "X2"
+      ],
+      "experimentIds": [],
+      "limits": "Conceptual scope only; teaching effectiveness still requires reader testing."
+    },
+    {
+      "claimId": "G-baseline",
+      "type": "simulation",
+      "statement": "比较基线只关闭跨会话资料，保留模型、工具和反馈循环，不代表其他产品的能力上限。",
+      "version": {
+        "scenarioVersion": "intel-reuse-v1"
+      },
+      "source": [
+        {
+          "kind": "authored-teaching-contract",
+          "path": "editorial/factory-blueprint.md",
+          "runtimeTested": false,
+          "scope": "Illustrative contract; actual task assertions must be covered by engine tests."
+        },
+        {
+          "kind": "user-provided-design-report",
+          "path": "editorial/reviews/2026-10-29-redesign-source.md",
+          "runtimeTested": false,
+          "scope": "Design rationale, not empirical evidence of learning outcomes."
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "verify",
+        "reuse"
+      ],
+      "questionIds": [
+        "fixed-flow",
+        "others-memory"
+      ],
+      "quizIds": [],
+      "experimentIds": [
+        "reuse-without-long-term"
+      ],
+      "limits": "Authored educational rule, not a product default or experimental learning outcome."
+    },
+    {
+      "claimId": "G-route",
+      "type": "simulation",
+      "statement": "五章是观察顺序；回访和追问不应再次执行业务动作。",
+      "version": {
+        "scenarioVersion": "intel-reuse-v1"
+      },
+      "source": [
+        {
+          "kind": "authored-teaching-contract",
+          "path": "editorial/factory-blueprint.md",
+          "runtimeTested": false,
+          "scope": "Illustrative contract; actual task assertions must be covered by engine tests."
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "receive",
+        "retain",
+        "reuse"
+      ],
+      "questionIds": [
+        "scenario-route",
+        "history-side-effect",
+        "mcp",
+        "idempotent-recovery"
+      ],
+      "quizIds": [],
+      "experimentIds": [],
+      "limits": "Authored educational rule, not a product default or experimental learning outcome."
+    },
+    {
+      "claimId": "G-search",
+      "type": "general",
+      "statement": "全文词项查询与向量相似搜索是不同召回方式，结果都需要相关性与真实性检查。",
+      "version": null,
+      "source": [
+        {
+          "kind": "official-documentation-reading",
+          "url": "https://www.sqlite.org/fts5.html",
+          "scope": "Read FTS5 overview and query/tokenizer structure; not a Hermes default claim."
+        },
+        {
+          "kind": "primary-project-documentation-reading",
+          "url": "https://github.com/pgvector/pgvector",
+          "scope": "Read vector similarity, distance and nearest-neighbor overview; not a project dependency recommendation."
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "context",
+        "reuse"
+      ],
+      "questionIds": [
+        "fts-vector"
+      ],
+      "quizIds": [],
+      "experimentIds": [
+        "retrieval-match"
+      ],
+      "limits": "Conceptual scope only; teaching effectiveness still requires reader testing."
+    },
+    {
+      "claimId": "G-database",
+      "type": "general",
+      "statement": "WAL涉及数据库提交与读写并发，不能当作Agent调度或无条件并发写入。",
+      "version": null,
+      "source": [
+        {
+          "kind": "official-documentation-reading",
+          "url": "https://www.sqlite.org/wal.html",
+          "scope": "Read WAL overview, concurrency and checkpointing. No device-specific performance claim."
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "retain",
+        "reuse"
+      ],
+      "questionIds": [
+        "wal"
+      ],
+      "quizIds": [],
+      "experimentIds": [],
+      "limits": "Conceptual scope only; teaching effectiveness still requires reader testing."
+    },
+    {
+      "claimId": "H-memory",
+      "type": "implementation",
+      "statement": "固定版本文档描述有限持久记忆，MEMORY.md/USER.md在会话开始形成系统输入快照，实际写入持久化后才可供后续会话读取。",
+      "version": {
+        "tag": "v0.22.5",
+        "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e"
+      },
+      "source": [
+        {
+          "kind": "fixed-version-official-documentation-reading",
+          "repository": "NousResearch/hermes-agent",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "path": "website/docs/user-guide/features/memory.md",
+          "blobSha": "83f672120e2f647c093deaad04755e4748ee736e",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/bf0203a794a07aac3ff764972ab9087baa4e4f4e/website/docs/user-guide/features/memory.md",
+          "scope": "Read bounded memory, MEMORY.md/USER.md, frozen snapshot at session start, actual write evidence and session boundary sections. No default numeric limits exposed in course.",
+          "runtimeTested": false
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "retain",
+        "reuse"
+      ],
+      "questionIds": [
+        "is-training",
+        "memory-skill",
+        "save-evidence",
+        "new-session",
+        "hermes-memory-read"
+      ],
+      "quizIds": [
+        "Q5",
+        "X2"
+      ],
+      "experimentIds": [],
+      "limits": "Official fixed-document reading only. Does not update content/verification.json, assert a full source audit, or represent a real Hermes execution."
+    },
+    {
+      "claimId": "H-skills",
+      "type": "implementation",
+      "statement": "固定版本文档将Skills描述为按需加载的知识文档，可维护方法资料，并使用渐进呈现。",
+      "version": {
+        "tag": "v0.22.5",
+        "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e"
+      },
+      "source": [
+        {
+          "kind": "fixed-version-official-documentation-reading",
+          "repository": "NousResearch/hermes-agent",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "path": "website/docs/user-guide/features/skills.md",
+          "blobSha": "4ecbd750b5a31c79535a2c333e7a69a0813d2078",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/bf0203a794a07aac3ff764972ab9087baa4e4f4e/website/docs/user-guide/features/skills.md",
+          "scope": "Read on-demand knowledge/progressive disclosure, writable skill directory, and skill_view loading descriptions. No full feature inventory verification. Re-read the same fixed document statement that the agent can modify or delete any skill; no runtime revision was tested by this content review.",
+          "runtimeTested": false
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "retain",
+        "reuse"
+      ],
+      "questionIds": [
+        "is-training",
+        "memory-skill",
+        "skill-tool",
+        "new-session",
+        "skills-not-guarantee",
+        "hermes-skill-loading",
+        "skill-revision"
+      ],
+      "quizIds": [
+        "Q5",
+        "R5"
+      ],
+      "experimentIds": [],
+      "limits": "Official fixed-document reading only. Does not update content/verification.json, assert a full source audit, or represent a real Hermes execution."
+    },
+    {
+      "claimId": "H-history",
+      "type": "implementation",
+      "statement": "固定版本文档区分SQLite会话持久化、FTS5全文检索与独立的轨迹/训练系统；不表示模型每轮看全部历史。",
+      "version": {
+        "tag": "v0.22.5",
+        "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e"
+      },
+      "source": [
+        {
+          "kind": "fixed-version-official-documentation-reading",
+          "repository": "NousResearch/hermes-agent",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "path": "website/docs/developer-guide/session-storage.md",
+          "blobSha": "d3a6c86141a2791464d963df151d4fcf90a432ea",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/bf0203a794a07aac3ff764972ab9087baa4e4f4e/website/docs/developer-guide/session-storage.md",
+          "scope": "Read SQLite/WAL storage, FTS5 tables, search role and separate trajectory/RL storage boundary. No database executed.",
+          "runtimeTested": false
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "verify",
+        "context",
+        "retain",
+        "reuse"
+      ],
+      "questionIds": [
+        "wrong-version",
+        "recover-original",
+        "new-session",
+        "fts-vector",
+        "wal",
+        "trajectory-training",
+        "hermes-history-search"
+      ],
+      "quizIds": [
+        "X1"
+      ],
+      "experimentIds": [],
+      "limits": "Official fixed-document reading only. Does not update content/verification.json, assert a full source audit, or represent a real Hermes execution."
+    },
+    {
+      "claimId": "H-context",
+      "type": "implementation",
+      "statement": "固定版本存在配置相关阈值、保留近期交接、摘要重组与工具配对清理；本馆参数不是官方默认值。",
+      "version": {
+        "tag": "v0.22.5",
+        "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e"
+      },
+      "source": [
+        {
+          "kind": "fixed-version-official-documentation-reading",
+          "repository": "NousResearch/hermes-agent",
+          "tag": "v0.22.5",
+          "commit": "bf0203a794a07aac3ff764972ab9087baa4e4f4e",
+          "path": "website/docs/developer-guide/context-compression-and-caching.md",
+          "blobSha": "1a27aa0f42e31c9935c2ae1852b3810d8b60fa93",
+          "url": "https://github.com/NousResearch/hermes-agent/blob/bf0203a794a07aac3ff764972ab9087baa4e4f4e/website/docs/developer-guide/context-compression-and-caching.md",
+          "scope": "Read configurable threshold/gateway-vs-agent gate descriptions, in-place archived history, tail retention and orphaned tool-pair cleanup. No universal/default percentage adopted.",
+          "runtimeTested": false
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "context"
+      ],
+      "questionIds": [
+        "head-tail",
+        "threshold",
+        "context-tools-pair"
+      ],
+      "quizIds": [],
+      "experimentIds": [],
+      "limits": "Official fixed-document reading only. Does not update content/verification.json, assert a full source audit, or represent a real Hermes execution."
+    },
+    {
+      "claimId": "S-materials",
+      "type": "simulation",
+      "statement": "Atlas/Delta及全部线索公告为自编虚构教材；不实时搜索、不代表真实新闻或模型运行。",
+      "version": {
+        "scenarioVersion": "intel-reuse-v1"
+      },
+      "source": [
+        {
+          "kind": "authored-teaching-contract",
+          "path": "editorial/factory-blueprint.md",
+          "runtimeTested": false,
+          "scope": "Illustrative contract; actual task assertions must be covered by engine tests."
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "receive",
+        "verify",
+        "reuse"
+      ],
+      "questionIds": [
+        "scenario-route",
+        "failed-tool",
+        "mcp"
+      ],
+      "quizIds": [],
+      "experimentIds": [
+        "tool-result-boundary"
+      ],
+      "limits": "Authored educational rule, not a product default or experimental learning outcome."
+    },
+    {
+      "claimId": "S-context",
+      "type": "simulation",
+      "statement": "可选长过程回放采用缩比信息格；本次保护首尾，不将短任务强制挤满真实窗口。",
+      "version": {
+        "scenarioVersion": "intel-reuse-v1"
+      },
+      "source": [
+        {
+          "kind": "authored-teaching-contract",
+          "path": "editorial/factory-blueprint.md",
+          "runtimeTested": false,
+          "scope": "Illustrative contract; actual task assertions must be covered by engine tests."
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "context"
+      ],
+      "questionIds": [
+        "head-tail",
+        "threshold",
+        "recover-original",
+        "recompress"
+      ],
+      "quizIds": [],
+      "experimentIds": [
+        "context-compare",
+        "summary-loss",
+        "context-budget"
+      ],
+      "limits": "Authored educational rule, not a product default or experimental learning outcome."
+    },
+    {
+      "claimId": "S-write-choice",
+      "type": "simulation",
+      "statement": "本馆显式决定是否保存，写入与拒绝都要有记录；不声称这是所有Hermes写入的默认审批方式。",
+      "version": {
+        "scenarioVersion": "intel-reuse-v1"
+      },
+      "source": [
+        {
+          "kind": "authored-teaching-contract",
+          "path": "editorial/factory-blueprint.md",
+          "runtimeTested": false,
+          "scope": "Illustrative contract; actual task assertions must be covered by engine tests."
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "retain",
+        "reuse"
+      ],
+      "questionIds": [
+        "save-evidence",
+        "hermes-memory-read",
+        "file-layout",
+        "skill-revision"
+      ],
+      "quizIds": [],
+      "experimentIds": [],
+      "limits": "Authored educational rule, not a product default or experimental learning outcome."
+    },
+    {
+      "claimId": "S-session-boundary",
+      "type": "simulation",
+      "statement": "第二委托是新会话，不整体继承旧上下文；保存的条目必须实际读取，新指令优先，当前事实重新核实。",
+      "version": {
+        "scenarioVersion": "intel-reuse-v1"
+      },
+      "source": [
+        {
+          "kind": "authored-teaching-contract",
+          "path": "editorial/factory-blueprint.md",
+          "runtimeTested": false,
+          "scope": "Illustrative contract; actual task assertions must be covered by engine tests."
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-in-stated-scope",
+      "chapterIds": [
+        "reuse"
+      ],
+      "questionIds": [
+        "current-wins",
+        "new-session",
+        "hermes-history-search"
+      ],
+      "quizIds": [],
+      "experimentIds": [
+        "reuse-without-long-term"
+      ],
+      "limits": "Authored educational rule, not a product default or experimental learning outcome."
+    },
+    {
+      "claimId": "S-controlled-experiments",
+      "type": "simulation",
+      "statement": "预算分配、简化词项匹配、预编语义候选以及工具回执三种结果为可选受控教学对照，不调用真实服务，不改变委托或成绩。",
+      "version": {
+        "scenarioVersion": "intel-reuse-v1"
+      },
+      "source": [
+        {
+          "kind": "authored-controlled-experiment",
+          "path": "docs/public/factory/learning-experiments.mjs",
+          "scope": "Deterministic teaching fixtures with unit checks; no real FTS5, embedding, model, tool service or learning-outcome experiment.",
+          "runtimeTested": false
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-authored-simulation",
+      "chapterIds": [
+        "verify",
+        "context",
+        "reuse"
+      ],
+      "questionIds": [],
+      "quizIds": [],
+      "experimentIds": [
+        "context-budget",
+        "retrieval-match",
+        "tool-result-boundary"
+      ],
+      "limits": "Only the authored comparisons are checked. Preset semantic scores and capacity units are illustrative; no retrieval benchmark or Hermes default is claimed."
+    },
+    {
+      "claimId": "G-tool-schema",
+      "type": "general",
+      "statement": "输入Schema可以描述字段类型、必填项与允许值；验证结构不等于验证事实、授权或任务完成。",
+      "version": null,
+      "source": [
+        {
+          "kind": "primary-official-documentation-reading",
+          "url": "https://json-schema.org/understanding-json-schema/reference/object",
+          "scope": "Read object properties, types and required properties; authorization and truth checks remain separate responsibilities.",
+          "runtimeTested": false
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-general-concept",
+      "chapterIds": [
+        "receive",
+        "verify",
+        "context"
+      ],
+      "questionIds": [
+        "tool-schema",
+        "resident-tool-descriptions"
+      ],
+      "quizIds": [],
+      "experimentIds": [],
+      "limits": "General mechanism or design choice only. No fixed-version Hermes source-code, production runtime, performance or learning-outcome verification is claimed."
+    },
+    {
+      "claimId": "G-object-wiring",
+      "type": "general",
+      "statement": "模块级对象共享与显式依赖传入是可选的对象组织方法，需考虑状态隔离、测试和生命周期。",
+      "version": null,
+      "source": [
+        {
+          "kind": "primary-official-documentation-reading",
+          "url": "https://docs.python.org/3/reference/import.html",
+          "scope": "Read module cache lookup and invalidation; not evidence of Hermes singleton implementation.",
+          "runtimeTested": false
+        },
+        {
+          "kind": "primary-official-documentation-reading",
+          "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection/overview",
+          "scope": "Read dependency abstraction, external construction and replacement for testing; general interpretation, not a .NET requirement for Agent systems.",
+          "runtimeTested": false
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-general-concept",
+      "chapterIds": [
+        "receive",
+        "verify"
+      ],
+      "questionIds": [
+        "shared-instance",
+        "dependency-injection"
+      ],
+      "quizIds": [],
+      "experimentIds": [],
+      "limits": "General mechanism or design choice only. No fixed-version Hermes source-code, production runtime, performance or learning-outcome verification is claimed."
+    },
+    {
+      "claimId": "G-scheduling",
+      "type": "general",
+      "statement": "等待、并发、超时和重试需要区分动作依赖、取消、结果归属及副作用；异步不必然更快，失败不应无限重试。",
+      "version": null,
+      "source": [
+        {
+          "kind": "primary-official-documentation-reading",
+          "url": "https://docs.python.org/3/library/asyncio-task.html",
+          "scope": "Read coroutine scheduling, concurrent tasks, cancellation and timeout concepts; no Hermes scheduling-path verification.",
+          "runtimeTested": false
+        },
+        {
+          "kind": "primary-official-documentation-reading",
+          "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/retry",
+          "scope": "Read transient failures, cancellation, delay and bounded retry strategies; used as general design principles.",
+          "runtimeTested": false
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-general-concept",
+      "chapterIds": [
+        "verify",
+        "retain",
+        "reuse"
+      ],
+      "questionIds": [
+        "sync-async",
+        "retry-policy",
+        "parallel-tools",
+        "idempotent-recovery"
+      ],
+      "quizIds": [],
+      "experimentIds": [],
+      "limits": "General mechanism or design choice only. No fixed-version Hermes source-code, production runtime, performance or learning-outcome verification is claimed."
+    },
+    {
+      "claimId": "G-training-process",
+      "type": "general",
+      "statement": "SFT是使用训练样本进行监督微调的模型训练流程，与保存或修订方法文档不同。",
+      "version": null,
+      "source": [
+        {
+          "kind": "primary-official-documentation-reading",
+          "url": "https://huggingface.co/docs/trl/en/sft_trainer",
+          "scope": "Read overview and input-output supervised-training method; no trainer use, data upload or actual model training occurred.",
+          "runtimeTested": false
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-general-concept",
+      "chapterIds": [
+        "retain",
+        "reuse"
+      ],
+      "questionIds": [
+        "sft-training"
+      ],
+      "quizIds": [],
+      "experimentIds": [],
+      "limits": "General mechanism or design choice only. No fixed-version Hermes source-code, production runtime, performance or learning-outcome verification is claimed."
+    },
+    {
+      "claimId": "G-sandbox",
+      "type": "general",
+      "statement": "沙箱通过隔离与限制执行能力降低风险，动作审批另行检查本次授权；两者不能相互替代。",
+      "version": null,
+      "source": [
+        {
+          "kind": "primary-official-documentation-reading",
+          "url": "https://chromium.googlesource.com/chromium/src/+/HEAD/sandbox/README.md",
+          "scope": "Read sandbox separation and privilege restriction overview; approval distinction is a general application-design interpretation, not verification of Hermes or this museum sandbox.",
+          "runtimeTested": false
+        }
+      ],
+      "reviewedAt": "2026-10-29",
+      "reviewStatus": "reviewed-general-concept",
+      "chapterIds": [
+        "receive",
+        "retain"
+      ],
+      "questionIds": [
+        "sandbox-approval"
+      ],
+      "quizIds": [],
+      "experimentIds": [],
+      "limits": "General mechanism or design choice only. No fixed-version Hermes source-code, production runtime, performance or learning-outcome verification is claimed."
+    }
+  ]
+}
