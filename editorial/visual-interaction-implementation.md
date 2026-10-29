@@ -156,11 +156,11 @@
 | V02 | 真实录像：上下文增长到压缩 | 已编码并完整解码核验 | .cache/visual-interaction-qa/02-context-growth.mp4；实际CDP156源帧/29.251304s→H264 1100×618、30fps、29.266667s、515764字节；无空间拉伸。 |
 | V03 | 真实录像：折叠/暂停/地图/连问返回 | 已编码并完整解码核验 | .cache/visual-interaction-qa/03-guide-controls-complete.mp4；实际CDP69源帧/36.916704s→H264 1100×618、30fps、36.933333s、484934字节；完整交互录屏，旧03-guide-controls失败录制不交付。 |
 | X01 | 改动文件、F对应、保留与未改范围 | 已整理 | 17项F均列代码实施模块与验收范围；本轮简报editorial/reviews/2026-10-29-visual-interaction-review.md；保留engine/store/固定来源和原18章。 |
-| X02 | npm test、docs:build及新增测试实际命令/结果/失败修复 | 最终门禁通过 | 根执行方最终node --test dot：141项exit0；docs:build完整与公共输出隔离exit0，assets1d616801ed69aa50；43链接全部通过，无missing/unavailable。代码已冻结，部署另列X06。 |
+| X02 | npm test、docs:build及新增测试实际命令/结果/失败修复 | 最终门禁通过 | 根执行方最终node --test dot：141项exit0；docs:build完整与公共输出隔离exit0，assetsc7aa3792ab78494d；43链接全部通过，无missing/unavailable。代码已冻结，部署另列X06。 |
 | X03 | 真实硬件、视口、质量档、帧率/长帧和20次往返资源计数 | 已采有界实测数据 | 180可见RAF mean16.8517ms与机器条件见P01；20轮同条件资源/相机压力各delta0见resource-20-cycles.json。不同预热/资产基线不直接横比；长期/真机帧率和长帧分布仍未测。 |
 | X04 | 数据兼容与报告/照片行为 | 已验证主线/报告下载，兼容边界保留 | 三维0/0/1与文字1/1/1完整五章、实际HTML系统下载和播放方式记录；3槽真实照片；engine/store/schema未重构，旧记录读取保护保留。刷新/损坏/配额等全部浏览器组合不作已验。 |
 | X05 | 明确未测实体设备/无障碍/性能范围及剩余优先级 | 已列范围与后续优先级 | 实体手机/触控性能、屏幕阅读器、原生200%浏览器zoom、产品loss自动文字E2E、全部异常存档/截图失败/后台阶段等尚未覆盖。683×384等效空间和scene恢复按各自证据记录，不冒认上述范围。 |
-| X06 | 提交SHA、GitHub CI与部署结果、线上工厂实际检查 | 待验/待交付 | 未保存前不填写路径 |
+| X06 | 提交SHA、GitHub CI与部署结果、线上工厂实际检查 | 已验 | 代码c7e0f50126b9，Actions40830024120 verify/deploy成功；首页HTTP200/meta/资源/WebGL以及桌面、390×844手机实景通过，见本轮报告。 |
 | X07 | 真实截图/录屏文件均存在；不以静态图或测试源码冒充运行 | 全部要求画面文件已存在并核验 | S01–08所列PNG、3段MP4、actual-export-report.html及JSON证据均已核存在；3段ffprobe/完整decode成功。原始资料和临时验证仅在.cache忽略目录，不纳入公共构建。 |
 
 录像必须来自实际浏览器的连续渲染过程。CDP Page.startScreencast实时捕获、附时间戳的连续帧再编码为视频，是可复核的真实浏览器录屏；编码不改变其来源真实性。禁止把离散静态截图、概念动画或伪造状态拼成视频冒充连续操作。若工具或权限不具备，保留未交付并解释条件。录屏采样帧率不等于设备实际渲染帧率。默认照片不得包含遮挡设备的大教学面板。临时录像与用户资料放忽略目录，不纳入公共构建。
@@ -185,7 +185,7 @@
 | cycles-baseline.json | 新资产预热、未capture：154geo、46tex、384mat、9labels、0callbacks；glass base/current .17/.17；focus1、related.6、background.18；inspectionDepth0 | 与早先采样场景/资产不同，不能直接把材料数差异叫泄漏；20次往返后才可比较同条件 |
 | 浏览器响应式 | 390×844：stage高457.03（58%）/rail330.97，折叠canvas高788；320×568：scrollWidth320/button底561.98；844×390：scrollWidth844/button底384 | 视口模拟不是实体触控/性能，也不是实际浏览器200%缩放或屏幕阅读器测试 |
 
-上述135项为中途结果。最终141项自动测试exit0、43条链接无missing/unavailable、完整docs:build与公共隔离exit0，资源hash1d616801ed69aa50。技能读取、文字全链、报告下载、恢复harness与有界20轮已补证据；仅线上部署结果由根执行方补。
+上述135项为中途结果。最终141项自动测试exit0、43条链接无missing/unavailable、完整docs:build与公共隔离exit0，资源hashc7aa3792ab78494d。技能读取、文字全链、报告下载、恢复harness与有界20轮已补证据；仅线上部署结果由根执行方补。
 
 ## 收尾补验
 
@@ -195,4 +195,6 @@ webgl-lost.json/restored.json/recovery-events.json证明scene真实WEBGL_lose_co
 
 根执行方已通过系统下载实际保存actual-export-report.html，包含完整播放2、手动关键帧15、直接看结果0、未知0。生成PNG证明与系统下载PNG、打印仍是不同验证。最新简明交付报告见[本轮报告](reviews/2026-10-29-visual-interaction-review.md)。线上发布SHA/CI/页面检查留由根执行方填写。
 
-最终冻结：根执行方141项自动测试exit0，docs:build完整及公共输出隔离exit0，assets1d616801ed69aa50；43外链全部通过。CDP683×384等效空间已保存zoom-equivalent-683.png，scrollWidth683、主按钮bottom380、stage180.39；这不是实际浏览器200%缩放。地图archive经键盘Enter显示职责；减少动态保留3D且手动下一拍cue推进，未用覆盖3D的大文字块降级。代码不再变更，线上SHA/CI/页面验收待根执行方实际记录。
+最终冻结：根执行方141项自动测试exit0，docs:build完整及公共输出隔离exit0，assetsc7aa3792ab78494d；43外链全部通过。CDP683×384等效空间已保存zoom-equivalent-683.png，scrollWidth683、主按钮bottom380、stage180.39；这不是实际浏览器200%缩放。地图archive经键盘Enter显示职责；减少动态保留3D且手动下一拍cue推进，未用覆盖3D的大文字块降级。代码不再变更，线上SHA/CI/页面验收待根执行方实际记录。
+
+线上代码最终发布：`c7e0f50126b9b6138786745331e75622d319e158`，[Actions](https://github.com/liuminxin45/hello-hermes/actions/runs/40830024120) verify/deploy均成功；真实页面meta与资源hash`c7aa3792ab78494d`一致。最终手机完整页面PNG与桌面PNG已保存；镜头背面和深色章名对比问题在回看中修复并二次发布。本条验收文档不改变前端资源。

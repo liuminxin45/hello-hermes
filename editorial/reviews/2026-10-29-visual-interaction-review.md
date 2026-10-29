@@ -33,7 +33,7 @@
 | 短时性能 | UHD630/i5-9400、balanced、1366×768，180个可见移动RAF样本mean16.8517ms，见`performance-before.json`。不是全流程稳定60fps。 |
 | 有界资源与镜头压力 | 预热1轮加20轮真实scene replay/seek/3次inspect/1次restore，每步3 RAF；六类资源delta0，cameraError0、inspectionDepth0，见`resource-20-cycles.json`。不是20次实时完整影片；不同资产/预热基线不横比泄漏。 |
 | 恢复 | `webgl-lost.json`、`webgl-restored.json`、`webgl-recovery-events.json`记录真实WEBGL_lose_context丢失/恢复；软件getContext阻断实际触发初始化失败，解除后重新init成功。 |
-| 最终门禁 | `node --test --test-reporter=dot tests/*.test.mjs`：141项、exit0；完整docs:build与公共输出隔离exit0，资源hash `1d616801ed69aa50`；43条远程链接无missing/unavailable。 |
+| 最终门禁 | `node --test --test-reporter=dot tests/*.test.mjs`：141项、exit0；完整docs:build与公共输出隔离exit0，资源hash `c7aa3792ab78494d`；43条远程链接无missing/unavailable。 |
 
 录像是实际浏览器连续渲染，不是静态图伪造。30fps为按真实timestamp保持节奏的编码格式，不是渲染帧率。原帧、时间戳、concat与编码清单均保留在各录屏目录。
 
@@ -45,10 +45,14 @@ P03实测是scene真实恢复；产品文字全链有独立证据，两者不能
 
 下一轮P1优先真实触控/大字号/屏幕阅读器、产品中途loss接续与异常存档路径；P2补跨设备持续性能和其余浏览器组合。真人形成性测试、无提示迁移与延迟复测继续等待真实读者。
 
-## 线上发布（根执行方填写）
+## 线上发布实测
 
 | 项目 | 实际结果 |
 |---|---|
-| 提交SHA与GitHub推送 | 待根执行方填 |
-| GitHub Actions部署 | 待根执行方填实际run URL与状态 |
-| 线上页面、资源及手机检查 | 待根执行方填实际结果 |
+| 代码提交与GitHub推送 | 主实现 `83aa2a4`、线上回看修正 `c7e0f50126b9b6138786745331e75622d319e158` 均已推送main。本记录随后作为纯验收文档归档，前端资源不变。 |
+| GitHub Actions部署 | [最终代码运行](https://github.com/liuminxin45/hello-hermes/actions/runs/40830024120) 的verify/deploy均success；首次运行40828445092也success。远端实际执行npm ci、npm test、npm run docs:build和Pages部署。 |
+| 线上页面、资源及手机检查 | 首页HTTP200，提交标识`c7e0f50126b9`、资源`c7aa3792ab78494d`，WebGL ready；已实际恢复旧记录打开导览。线上390×844视口scrollWidth390，完整手机画面`online-c7e0f50-mobile-page.png`、桌面`online-c7e0f50-desktop.png`已保存，临时视口已恢复。 |
+
+线上回看另外发现：避让背景时镜头绕到工具柜背面；已限制正面设备的观察方向，并排除实体内机位。浅色地面上的深色主题章名也增加底衬；`tool-front-and-dark-hud.png`与最终线上手机图确认抽屉、交接台和标题可见。首个工具柜背面截图保留为问题证据，不作为最终通过截图。最终手机首次缩略图不作为验收，以完整页面PNG为准；取证重试没有伪装成产品测试失败。
+
+发布原始记录另存忽略目录`.cache/visual-interaction-qa/deployment-code.json`。源指导快照保留原始Markdown硬换行的两个尾空格，以维持已核SHA256。
