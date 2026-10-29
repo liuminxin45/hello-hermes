@@ -65,3 +65,9 @@ body[data-phase=arrival] #world:after{inset:0 45% 0 0;background:linear-gradient
 
 body[data-phase=arrival].arrival-panel .study-shell{grid-template-columns:minmax(0,1fr) 360px}body[data-phase=arrival].arrival-panel #mentor-panel{display:none}@media(max-width:759px){body[data-phase=arrival].arrival-panel .study-shell{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,45fr) minmax(0,55fr)}}
 body.panel-visible .study-mentor{display:none}.guide-scroll :is(input,button,textarea,select,summary){scroll-margin-top:115px;scroll-margin-bottom:18px}.guide-scroll #question-answer{scroll-margin-top:115px}
+
+/* Keep chapter text readable against both the lit floor and the distant background. */
+.chapter-heading{width:fit-content;max-width:calc(100% - 210px);right:auto;padding:9px 12px;background:color-mix(in srgb,var(--paper) 94%,transparent);border:1px solid var(--line);border-radius:7px}
+.chapter-heading h1{max-width:none}
+@media(max-width:759px){.chapter-heading{max-width:calc(100% - 100px);padding:6px 8px}.chapter-heading h1{max-width:none}.chapter-heading .eyebrow{margin-bottom:4px}}
+@media(max-height:520px) and (min-width:760px){.chapter-heading{max-width:calc(100% - 45px);padding:6px 9px}}

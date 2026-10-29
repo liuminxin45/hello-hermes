@@ -8,6 +8,7 @@ const clamp=(n,min=0,max=1)=>Math.max(min,Math.min(max,n));
 const smooth=n=>{n=clamp(n);return n*n*(3-2*n);};
 const v3=p=>new THREE.Vector3(...p);
 const NODE_FOR={input:0,newSession:6,planning:1,analysis:2,tool:3,toolRequest:3,toolResult:3,toolError:3,history:4,historyWrite:4,memory:5,memoryWrite:5,skill:5,decision:5,compress:6,delivery:7,review:8};
+const FRONT_FACING_NODES=new Set(['intake','loop','analysis','tools','archive','memory','delivery','review']);
 
 export function createFactory(host,onSelect=()=>{},onMoment=()=>{},onSceneState=()=>{}){
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -128,16 +129,24 @@ export function createFactory(host,onSelect=()=>{},onMoment=()=>{},onSceneState=
   const keySet=new Set();
   let viewport={width:1,height:1};
   function fitDistance(index,aspect=camera.aspect,detail=false){const b=new THREE.Box3().setFromObject(groups[index]),size=b.getSize(new THREE.Vector3());const vertical=Math.tan(THREE.MathUtils.degToRad(camera.fov)/2),horizontal=vertical*aspect;return Math.max(size.y/vertical,size.x/horizontal,size.z/horizontal)*(detail?.58:.72)+3;}
-  function cameraFor(index,detail=false){const p=v3(STATIONS[index].position),target=p.clone().add(new THREE.Vector3(index===6?.25:0,1.8,0)),direction=new THREE.Vector3(.6,.56,.84).normalize();return {target,eye:clearEye(target,direction.multiplyScalar(fitDistance(index,camera.aspect,detail)),target,NODES[index])};}
+  function cameraFor(index,detail=false){const p=v3(STATIONS[index].position),target=p.clone().add(new THREE.Vector3(index===6?.25:0,1.8,0)),direction=(FRONT_FACING_NODES.has(NODES[index])?new THREE.Vector3(.45,.55,.95):new THREE.Vector3(.6,.56,.84)).normalize();return {target,eye:clearEye(target,direction.multiplyScalar(fitDistance(index,camera.aspect,detail)),target,NODES[index])};}
   function resize(){const rect=host.getBoundingClientRect(),w=Math.max(1,Math.round(rect.width)),h=Math.max(1,Math.round(rect.height));viewport={width:w,height:h};camera.aspect=w/h;camera.clearViewOffset();camera.updateProjectionMatrix();renderer.setSize(w,h,false);if(current>=0&&!director.state.manual&&!inspection.length){const view=cameraFor(current);if(fly){fly.to=view.eye;fly.target=view.target;}else{camera.position.copy(view.eye);controls.target.copy(view.target);}}}
   const resizeObserver=new ResizeObserver(resize);resizeObserver.observe(host);
   function flight(to,target,duration=1.65,delay=0){free=false;navWhilePaused=isPaused();const lift=Math.max(camera.position.y,to.y)+1;fly={from:camera.position.clone(),old:controls.target.clone(),to,target,duration,delay,t:0,lift};if(isReduced()){camera.position.copy(to);controls.target.copy(target);fly=null;director.state.tourTime=SETTLE_SECONDS;director.setStageReady();fade=1;}}
   function clearEye(origin,offset,target,node){
-    const candidates=[offset,offset.clone().multiply(new THREE.Vector3(-1,1,1)),offset.clone().multiply(new THREE.Vector3(1,1,-1)),offset.clone().multiply(new THREE.Vector3(-1,1,-1))];let best=null,score=Infinity;
-    for(const option of candidates){const eye=origin.clone().add(option),distance=eye.distanceTo(target),ray=new THREE.Ray(target.clone(),eye.clone().sub(target).normalize());let hits=0;
+    // Front drawers, displays and handoff points face +Z. Background platforms
+    // must never make an automatic shot cross to the back of these devices.
+    const front=FRONT_FACING_NODES.has(node),base=offset.clone();if(front)base.z=Math.max(.1,Math.abs(base.z));
+    const mirrored=base.clone().multiply(new THREE.Vector3(-1,1,1)),candidates=front?[base,mirrored,base.clone().add(new THREE.Vector3(0,2.5,0)),mirrored.clone().add(new THREE.Vector3(0,2.5,0))]:[base,mirrored,base.clone().multiply(new THREE.Vector3(1,1,-1)),base.clone().multiply(new THREE.Vector3(-1,1,-1))];let best=null,score=Infinity;
+    scene.updateMatrixWorld(true);
+    const solids=[];for(const group of groups)group.traverse(object=>{if(!object.isMesh||object.userData.label)return;const material=Array.isArray(object.material)?object.material:[object.material];if(material.every(value=>value.isMeshPhysicalMaterial))return;object.geometry.computeBoundingBox();solids.push(object.geometry.boundingBox.clone().applyMatrix4(object.matrixWorld));});
+    for(const [candidateIndex,option] of candidates.entries()){const eye=origin.clone().add(option),distance=eye.distanceTo(target),ray=new THREE.Ray(target.clone(),eye.clone().sub(target).normalize());if(solids.some(solid=>solid.containsPoint(eye)))continue;let hits=0;
       for(let i=0;i<groups.length;i++){if(NODES[i]===node)continue;const point=ray.intersectBox(new THREE.Box3().setFromObject(groups[i]),new THREE.Vector3());if(point&&point.distanceTo(target)<distance)hits++;}
-      if(hits<score){score=hits;best=eye;}if(hits===0)break;
-    }return best;
+      const cost=hits+candidateIndex*.15;if(cost<score){score=cost;best=eye;}if(hits===0)break;
+    }
+    if(best)return best;
+    // A raised front view remains outside solids even in a very narrow viewport.
+    const fallback=origin.clone().add(base);for(let step=0;step<30&&solids.some(solid=>solid.containsPoint(fallback));step++)fallback.y+=1;return fallback;
   }
   function arrival(){director.overview();phase='arrival';current=-1;free=false;resize();flight(new THREE.Vector3(29,26,43),new THREE.Vector3(0,1,6));moveMentor(new THREE.Vector3(-3,0,24));}
   function overview(){director.overview();phase='tour';resize();flight(new THREE.Vector3(35,32,43),new THREE.Vector3(0,1.8,3));}
