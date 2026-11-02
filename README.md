@@ -14,6 +14,14 @@
 
 Atlas、Delta与全部任务材料都是虚构教材，不连接真实模型、实时搜索或外部发布。教学容量格不是实际Token；阈值和保护范围不是所有Agent通用配置。新的呈现使用Canvas卡片舞台，无需新增依赖。源码目录保留 docs/public/factory/ 以兼容旧路径。[当前蓝图](editorial/playable-explainer-blueprint.md)、[本次逐项实施与验证](editorial/reviews/2026-10-29-stepwise-news-review.md)与[旧工厂记录](editorial/factory-blueprint.md)分别留档。
 
+hello-hermes is an independent Chinese learning resource with an interactive teaching simulation of agent tools, context, memory, and skills, plus illustrated reading material.
+
+## 从哪里开始
+
+初次接触 Agent，可以先进入交互讲解：发送新闻任务要求，观察模型请求工具、工具返回资料，以及这些资料怎样影响下一步。每步由你点击推进，也可停下来回看。
+
+想系统学习机制时，再打开图文资料目录。交互演示使用虚构材料，不连接真实模型、实时搜索或外部发布；无需安装 Agent 或提供 API Key。教学容量格不等于真实 Token 预算。
+
 ## 阅读方式
 
 正文不要求理解 API、安装 Hermes 或编程。新版按“全景 → 单次任务 → 信息与状态 → 完整运行 → 可靠性 → 综合迁移”逐批发布。正文不提供源码跳转，核对依据保留在内部。教学示意、受控模块观察与完整模型运行明确区分。
